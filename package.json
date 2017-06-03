@@ -1,0 +1,20 @@
+{
+  "name": "nw-fe-skeleton",
+  "version": "1.0.0",
+  "description": "nw fe skeleton",
+  "main": "index.js",
+  "dependencies": {
+    "nw-skeleton": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/jazziebgd/nw-fe-skeleton.git"
+  },
+  "author": "Dino Ivankov <dinoivankov@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/jazziebgd/nw-fe-skeleton#readme"
+}
