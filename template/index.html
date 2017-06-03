@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+    <body background-color:rgba(0,0,0,0); class="nw-body">
+        <div class="nw-app-wrapper">
+            <app-window ref="appWindow" v-bind:is-debug="false"></app-window>
+            <modal-dialog ref="modalDialog"></modal-dialog>
+        </div>
+        <script type="text/javascript">
+            var initialConfig = require('../config/config').config;
+            var nws = require('nw-skeleton');
+            var appWrapper;
+
+            async function _nwsInit(){
+                appWrapper = new nws.AppWrapper(initialConfig);
+                await appWrapper.initialize();
+            }
+            _nwsInit();
+        </script>
+    </body>
+</html>

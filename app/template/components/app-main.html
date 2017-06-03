@@ -1,0 +1,14 @@
+<div class="main">
+	<template v-if="appState.appError">
+		<app-error ref="appError"></app-error>
+	</template>
+	<template v-else-if="appState.appShuttingDown">
+		<app-loader ref="appShutdownLoader"></app-loader>
+	</template>
+	<template v-else-if="appState.appInitialized">
+		<app-start ref="appStart"></app-start>
+	</template>
+	<template v-else>
+		<app-loader ref="appMainLoader"></app-loader>
+	</template>
+</div>

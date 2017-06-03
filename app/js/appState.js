@@ -1,0 +1,8 @@
+exports.appState = {
+    appData: {
+
+    },
+    userData: {
+
+    }
+};

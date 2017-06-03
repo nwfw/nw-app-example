@@ -1,20 +1,47 @@
 {
-  "name": "nw-fe-skeleton",
-  "version": "1.0.0",
-  "description": "nw fe skeleton",
-  "main": "index.js",
-  "dependencies": {
-    "nw-skeleton": "^1.0.0"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@bitbucket.org/jazziebgd/nw-fe-skeleton.git"
-  },
-  "author": "Dino Ivankov <dinoivankov@gmail.com>",
-  "license": "MIT",
-  "homepage": "https://bitbucket.org/jazziebgd/nw-fe-skeleton#readme"
+    "name": "nw-fe-skeleton",
+    "version": "1.0.0",
+    "description": "nw fe skeleton",
+    "main": "template/index.html",
+    "chromium-args": "--mixed-context --enable-logging=stderr",
+    "_chromium-args": "--mixed-context",
+    "window": {
+        "title": "Presenter",
+        "position": "center",
+        "icon": "app/images/icon.png",
+        "transparent": true,
+        "show": true,
+        "kiosk": false,
+        "frame": false,
+        "fullscreen": false,
+        "width": 700,
+        "height": 400
+    },
+    "dependencies": {
+        "lodash": "^4.17.4",
+        "nw-skeleton": "^1.0.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@bitbucket.org/jazziebgd/nw-fe-skeleton.git"
+    },
+    "author": "Dino Ivankov <dinoivankov@gmail.com>",
+    "license": "MIT",
+    "homepage": "https://bitbucket.org/jazziebgd/nw-fe-skeleton#readme",
+    "nwjsBuilder": {
+        "productName": "Gooda web sync",
+        "productVersion": "1.0.0",
+        "fileDescription": "Gooda web sync",
+        "copyright": "2017 Jazzie Web",
+        "internalName": "gooda-sync",
+        "fileVersion": "1.0.0",
+        "comments": "",
+        "companyName": "Jazzie Web",
+        "legalTrademarks": "",
+        "originalFilename": "sync"
+    }
 }
