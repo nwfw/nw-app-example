@@ -21,19 +21,7 @@ exports.config = {
         debugCssFiles: [],
         debugJsFiles: [],
 
-        appComponentMapping: {
-            'app-main': {
-                components: [
-                    {
-                        name: 'app-start',
-                        components: []
-                    },
-                    {
-                        name: 'app-end'
-                    }
-                ]
-            }
-        },
+        appComponentMapping: {},
 
         mixinRoot: './app/js/mixin/',
         mixinExtensionRegex: /\.js$/,
@@ -158,6 +146,7 @@ exports.config = {
     },
 
     liveCss: true,
+    compileCss: true,
     hideDebug: false,
     debug: true,
     devTools: true,
@@ -179,7 +168,9 @@ exports.config = {
     windowReloadTimeoutDuration: 15000,
 
     forceDebug: {
+        App: false,
     },
     forceUserMessages: {
+        App: false,
     }
 };

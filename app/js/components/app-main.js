@@ -9,6 +9,12 @@ exports.component = {
     data: function () {
         return appState.mainData;
     },
+    methods: {
+        testMessage: function(e){
+            let type = e.target.getAttribute('data-type');
+            _appWrapper.getHelper('component').addUserMessage('message', type, [], false, true, true, true);
+        }
+    },
     computed: {
         appState: function(){
             return appState;

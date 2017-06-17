@@ -1,14 +1,21 @@
 <div class="main">
-	<template v-if="appState.appError">
-		<app-error ref="appError"></app-error>
-	</template>
-	<template v-else-if="appState.appShuttingDown">
-		<app-loader ref="appShutdownLoader"></app-loader>
-	</template>
-	<template v-else-if="appState.appInitialized">
-		<app-start ref="appStart"></app-start>
-	</template>
-	<template v-else>
-		<app-loader ref="appMainLoader"></app-loader>
-	</template>
+    <template v-if="appState.appError">
+        <app-error ref="appError"></app-error>
+    </template>
+    <template v-else-if="appState.appShuttingDown">
+        <app-loader ref="appShutdownLoader"></app-loader>
+    </template>
+    <template v-else-if="appState.appInitialized">
+        <div class="app-main-inner">
+            <h1>Default app-main view</h1>
+            <h2>Test user messages and debug</h2>
+            <input type="button" @click.prevent="testMessage" data-type="debug" value="debug" />
+            <input type="button" @click.prevent="testMessage" data-type="info" value="info" />
+            <input type="button" @click.prevent="testMessage" data-type="warning" value="warning" />
+            <input type="button" @click.prevent="testMessage" data-type="error" value="error" />
+        </div>
+    </template>
+    <template v-else>
+        <app-loader ref="appMainLoader"></app-loader>
+    </template>
 </div>

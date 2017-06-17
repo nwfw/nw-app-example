@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body background-color:rgba(0,0,0,0); class="nw-body nw-debug-body debug-window">
+        <div class="nw-app-wrapper">
+            <app-window ref="appWindow" v-bind:is-debug="true"></app-window>
+            <modal-dialog ref="modalDialog"></modal-dialog>
+        </div>
+        <script>
+            var initialConfig = require('../../../../config/config').config;
+            var nws = require('nw-skeleton');
+            var appWrapper;
+
+            initialConfig.isDebugWindow = true;
+
+            var _parentWrapper = window.opener.getAppWrapper();
+
+            async function _nwsInit(){
+                _parentWrapper.debugWindow = window;
+                await _parentWrapper.helpers.debugHelper.prepareDebugWindow.call(_parentWrapper.debugHelper);
+                appWrapper = new nws.AppWrapper(initialConfig);
+                await appWrapper.initialize();
+            }
+            _nwsInit();
+        </script>
+    </body>
+</html>

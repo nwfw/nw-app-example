@@ -267,6 +267,12 @@ exports.data = {
         "Debug messages cleared": "--Debug messages cleared--",
         "Choose theme": "--Choose theme--",
         "Killing mysql server '{1}'...": "--Killing mysql server '{1}'...--",
-        "Mysql server '{1}' killed successfully.": "--Mysql server '{1}' killed successfully.--"
+        "Mysql server '{1}' killed successfully.": "--Mysql server '{1}' killed successfully.--",
+        "Open debug configuration": "--Open debug configuration--",
+        "Debug config editor": "--Debug config editor--",
+        "Initializing app...": "--Initializing app...--",
+        "App initialized.": "--App initialized.--",
+        "Shutting app down...": "--Shutting app down...--",
+        "message": "--message--"
     }
 };

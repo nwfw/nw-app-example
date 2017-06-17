@@ -1,7 +1,5 @@
 exports.appState = {
-    appData: {
-
-    },
+    appData: require('../data/appData').appData,
     userData: {
 
     }

@@ -22,23 +22,17 @@ class App extends BaseClass {
     }
 
     async initialize () {
-
-        appUtil.addUserMessage('Initializing app', 'info', [], false,  false, this.forceUserMessages, this.forceDebug);
-
         await super.initialize();
-
+        this.addUserMessage('Initializing app...', 'info', [], false,  false);
         if (!appState.isDebugWindow){
             setTimeout(() => {
                 _appWrapper.resetAppStatus();
             }, 400);
         }
 
-        this.helpers = await _appWrapper.initializeHelpers(appUtil.getConfig('appConfig.helperDirectories'));
+        this.helpers = await _appWrapper.initializeHelpers(this.getConfig('appConfig.helperDirectories'));
         await appUtil.wait(appState.config.shortPauseDuration);
-
-        appUtil.addUserMessage('Initializing diff', 'info', [], false,  false, this.forceUserMessages, this.forceDebug);
-        await appUtil.wait(appState.config.shortPauseDuration);
-
+        this.addUserMessage('App initialized.', 'info', [], false,  false);
         return true;
     }
 
@@ -51,7 +45,6 @@ class App extends BaseClass {
             returnValue = true;
         }
         if (returnValue){
-            appUtil.addUserMessage('App initialized', 'info', [], false,  false, this.forceUserMessages, this.forceDebug);
             await appUtil.wait(appState.config.shortPauseDuration);
         }
         return returnValue;
@@ -59,9 +52,9 @@ class App extends BaseClass {
 
     async shutdown () {
         var returnValue = true;
-        appUtil.addUserMessage('Shutting app down', 'info', [], false,  false, this.forceUserMessages, this.forceDebug);
+        this.addUserMessage('Shutting app down...', 'info', [], false,  false);
         await appUtil.wait(appState.config.shortPauseDuration);
-        appUtil.addUserMessage('App shutdown complete.', 'info', [], false,  false, this.forceUserMessages, this.forceDebug);
+        this.addUserMessage('App shutdown complete.', 'info', [], false,  false);
         await appUtil.wait(appState.config.mediumPauseDuration);
         return returnValue;
     }
