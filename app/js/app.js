@@ -1,7 +1,6 @@
 var BaseClass = require('nw-skeleton').BaseClass;
 
 var _appWrapper;
-var appUtil;
 var appState;
 
 class App extends BaseClass {
@@ -9,9 +8,8 @@ class App extends BaseClass {
     constructor () {
         super();
 
-        _appWrapper = this.getAppWrapper();
-        appUtil = this.getAppUtil();
-        appState = this.getAppState();
+        _appWrapper = window.getAppWrapper();
+        appState = _appWrapper.getAppState();
 
         this.forceDebug = false;
         this.forceUserMessages = false;
@@ -31,13 +29,13 @@ class App extends BaseClass {
         }
 
         this.helpers = await _appWrapper.initializeHelpers(this.getConfig('appConfig.helperDirectories'));
-        await appUtil.wait(appState.config.shortPauseDuration);
+        await _appWrapper.wait(appState.config.shortPauseDuration);
         this.addUserMessage('App initialized.', 'info', [], false,  false);
         return true;
     }
 
     async finalize() {
-        await appUtil.nextTick();
+        await _appWrapper.nextTick();
         var returnValue = true;
         if (!appState.isDebugWindow){
             returnValue = true;
@@ -45,7 +43,7 @@ class App extends BaseClass {
             returnValue = true;
         }
         if (returnValue){
-            await appUtil.wait(appState.config.shortPauseDuration);
+            await _appWrapper.wait(appState.config.shortPauseDuration);
         }
         return returnValue;
     }
@@ -53,9 +51,9 @@ class App extends BaseClass {
     async shutdown () {
         var returnValue = true;
         this.addUserMessage('Shutting app down...', 'info', [], false,  false);
-        await appUtil.wait(appState.config.shortPauseDuration);
+        await _appWrapper.wait(appState.config.shortPauseDuration);
         this.addUserMessage('App shutdown complete.', 'info', [], false,  false);
-        await appUtil.wait(appState.config.mediumPauseDuration);
+        await _appWrapper.wait(appState.config.mediumPauseDuration);
         return returnValue;
     }
 }

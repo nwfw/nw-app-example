@@ -1,8 +1,7 @@
 var path = require('path');
 
 var _appWrapper = window.getAppWrapper();
-var appUtil = _appWrapper.getAppUtil();
-var appState = appUtil.getAppState();
+var appState = _appWrapper.getAppState();
 
 var MixinAppMethods  = {
     methods: {
