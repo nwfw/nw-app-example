@@ -3,7 +3,8 @@ exports.data = {
     'code': 'sr_RS',
     'locale': 'sr-rs',
     'translations': {
-        'Changing language to "{1}".': 'Promena jezika u "{1}".',
+        'Shutdown complete.': 'Aplikacija ugašena',
+        'Shutting down...': 'Gašenje aplikacije...',
         'Action is being executed in the background. Are you sure wou want to exit?': 'U toku je izvršavanje akcije. Da li ste sigurni da želite da zatvorite prozor?',
         'Active config file: \'{1}\'': 'Aktivni konfiguracioni fajl: \'{1}\'',
         'Adding articles': 'Unos proizvoda',
@@ -31,6 +32,7 @@ exports.data = {
         'Changing debug level to \'{1}\'.': 'Izmena debug nivoa na \'{1}\'.',
         'Changing language in debug window to \'{1}\'.': 'Promena jezika u debug prozoru u \'{1}\'.',
         'Changing language in main window to \'{1}\'.': 'Promena jezika u glavnom prozoru u \'{1}\'.',
+        'Changing language to "{1}".': 'Promena jezika u "{1}".',
         'Changing language to \'{1}\'.': 'Promena jezika u \'{1}\'.',
         'Check database connection availability': 'Check database connection availability',
         'Check for new or changed items': 'Provera',

@@ -3,7 +3,8 @@ exports.data = {
     'code': 'en_US',
     'locale': 'en-us',
     'translations': {
-        'Changing language to "{1}".': 'Changing language to "{1}".',
+        'Shutdown complete.': 'Shutdown complete.',
+        'Shutting down...': 'Shutting down...',
         'Action is being executed in the background. Are you sure wou want to exit?': 'Action is being executed in the background. Are you sure wou want to exit?',
         'Active config file: \'{1}\'': 'Active config file: \'{1}\'',
         'Adding articles': 'Adding articles',
@@ -31,6 +32,7 @@ exports.data = {
         'Changing debug level to \'{1}\'.': 'Changing debug level to \'{1}\'.',
         'Changing language in debug window to \'{1}\'.': 'Changing language in debug window to \'{1}\'.',
         'Changing language in main window to \'{1}\'.': 'Changing language in main window to \'{1}\'.',
+        'Changing language to "{1}".': 'Changing language to "{1}".',
         'Changing language to \'{1}\'.': 'Changing language to \'{1}\'.',
         'Check database connection availability': 'Proverite dostupnost baza podataka',
         'Check for new or changed items': 'Check data',
