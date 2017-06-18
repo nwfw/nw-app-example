@@ -39,9 +39,9 @@ exports.config = {
 
         appComponentCodeRegex: /\.js$/,
         componentDirectories: {
-            component: ['./app/js/components/','./app/js/components/modal'],
-            globalComponent: ['./app/js/components/global/'],
-            modalComponent: ['./app/js/components/modal/']
+            component: ['./app/components/app/'],
+            globalComponent: ['./app/components/global/', './app/components/form'],
+            modalComponent: ['./app/components/modal/']
         },
 
         systemHelperDirectories: [],

@@ -3,7 +3,7 @@ var appState = _appWrapper.getAppState();
 
 exports.component = {
     name: 'app-main',
-    template: _appWrapper.appTemplates.getTemplateContents('app-main'),
+    template: '',
     props: ['state'],
     data: function () {
         return appState.mainData;
