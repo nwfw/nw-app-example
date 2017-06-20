@@ -2,7 +2,7 @@
     "name": "nw-fe-skeleton",
     "version": "1.0.0",
     "description": "nw fe skeleton",
-    "main": "template/index.html",
+    "main": "node_modules/nw-skeleton/app-wrapper/template/index.html",
     "chromium-args": "--mixed-context --enable-logging=stderr",
     "_chromium-args": "--mixed-context",
     "window": {

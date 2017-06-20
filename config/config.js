@@ -26,17 +26,6 @@ exports.config = {
         mixinRoot: './app/js/mixin/',
         mixinExtensionRegex: /\.js$/,
 
-        appTemplateExtensionRegex: /\.html$/,
-        templateDirectories: {
-            template: [
-                './app/template/'
-            ],
-            componentTemplate: [
-                './app/template/components/',
-                './app/template/components/modal/'
-            ]
-        },
-
         appComponentCodeRegex: /\.js$/,
         componentDirectories: {
             component: ['./app/components/app/'],
