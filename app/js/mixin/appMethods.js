@@ -1,4 +1,4 @@
-var path = require('path');
+const path = require('path');
 
 var _appWrapper = window.getAppWrapper();
 var appState = _appWrapper.getAppState();
@@ -6,16 +6,22 @@ var appState = _appWrapper.getAppState();
 var MixinAppMethods  = {
     methods: {
         formatCurrency: function (price) {
-            return _appWrapper.helpers.htmlHelper.formatCurrency(price);
+            return _appWrapper.getHelper('format').formatCurrency(price);
         },
         formatDuration: function (duration) {
-            return _appWrapper.helpers.htmlHelper.formatDuration(duration);
+            return _appWrapper.getHelper('format').formatDuration(duration);
+        },
+        formatDate: function (date, options, includeTime) {
+            return _appWrapper.getHelper('format').formatDate(date, options, includeTime);
+        },
+        formatDateNormalize: function (date, options, includeTime, omitSeconds) {
+            return _appWrapper.getHelper('format').formatDateNormalize(date, options, includeTime, omitSeconds);
         },
         basename: function(file){
             return path.basename(file);
         },
         isDebugOn: function(){
-            return appState.debug && appState.appData.presentationData.debug;
+            return appState.debug;
         }
     }
 };

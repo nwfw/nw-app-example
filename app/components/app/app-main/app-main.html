@@ -10,15 +10,17 @@
             <h1>Default app-main view</h1>
             <h2>Test user messages and debug</h2>
             <input type="button" @click.prevent="testMessage" data-count="1" data-type="debug" value="debug" />
-            <input type="button" @click.prevent="testMessage" data-count="1" data-type="info" value="info" />
-            <input type="button" @click.prevent="testMessage" data-count="1" data-type="warning" value="warning" />
-            <input type="button" @click.prevent="testMessage" data-count="1" data-type="error" value="error" />
+            &nbsp; <input type="button" @click.prevent="testMessage" data-count="1" data-type="info" value="info" />
+            &nbsp; <input type="button" @click.prevent="testMessage" data-count="1" data-type="warning" value="warning" />
+            &nbsp; <input type="button" @click.prevent="testMessage" data-count="1" data-type="error" value="error" />
+            <br />
             <br />
             <input type="button" @click.prevent="testMessage" data-count="10" data-type="debug" value="debug X 10" />
-            <input type="button" @click.prevent="testMessage" data-count="10" data-type="info" value="info X 10" />
-            <input type="button" @click.prevent="testMessage" data-count="10" data-type="warning" value="warning X 10" />
-            <input type="button" @click.prevent="testMessage" data-count="10" data-type="error" value="error X 10" />
+            &nbsp; <input type="button" @click.prevent="testMessage" data-count="10" data-type="info" value="info X 10" />
+            &nbsp; <input type="button" @click.prevent="testMessage" data-count="10" data-type="warning" value="warning X 10" />
+            &nbsp; <input type="button" @click.prevent="testMessage" data-count="10" data-type="error" value="error X 10" />
         </div>
+
     </template>
     <template v-else>
         <app-loader ref="appMainLoader"></app-loader>
