@@ -8,17 +8,32 @@
     <template v-else-if="appState.appInitialized">
         <div class="app-main-inner">
             <h1>Default app-main view</h1>
-            <h2>Test user messages and debug</h2>
-            <input type="button" @click.prevent="testMessage" data-count="1" data-type="debug" value="debug" />
-            &nbsp; <input type="button" @click.prevent="testMessage" data-count="1" data-type="info" value="info" />
-            &nbsp; <input type="button" @click.prevent="testMessage" data-count="1" data-type="warning" value="warning" />
-            &nbsp; <input type="button" @click.prevent="testMessage" data-count="1" data-type="error" value="error" />
-            <br />
-            <br />
-            <input type="button" @click.prevent="testMessage" data-count="10" data-type="debug" value="debug X 10" />
-            &nbsp; <input type="button" @click.prevent="testMessage" data-count="10" data-type="info" value="info X 10" />
-            &nbsp; <input type="button" @click.prevent="testMessage" data-count="10" data-type="warning" value="warning X 10" />
-            &nbsp; <input type="button" @click.prevent="testMessage" data-count="10" data-type="error" value="error X 10" />
+            <div class="app-main-message-test">
+                <h2>Test user messages and debug</h2>
+                <input type="button" @click.prevent="testMessage" data-count="1" data-type="debug" value="debug" />
+                &nbsp; <input type="button" @click.prevent="testMessage" data-count="1" data-type="info" value="info" />
+                &nbsp; <input type="button" @click.prevent="testMessage" data-count="1" data-type="warning" value="warning" />
+                &nbsp; <input type="button" @click.prevent="testMessage" data-count="1" data-type="error" value="error" />
+                &nbsp; <input type="button" @click.prevent="testMessage" data-count="1" data-type="random" value="random" />
+                <br />
+                <br />
+                <br />
+                <input type="button" @click.prevent="testMessage" data-count="10" data-type="debug" value="debug X 10" />
+                &nbsp; <input type="button" @click.prevent="testMessage" data-count="10" data-type="info" value="info X 10" />
+                &nbsp; <input type="button" @click.prevent="testMessage" data-count="10" data-type="warning" value="warning X 10" />
+                &nbsp; <input type="button" @click.prevent="testMessage" data-count="10" data-type="error" value="error X 10" />
+                &nbsp; <input type="button" @click.prevent="testMessage" data-count="10" data-type="random" value="random X 10" />
+            </div>
+            <div class="app-main-data">
+                <div class="app-main-user-config">
+                    <h2>User config</h2>
+                    <inspector-json v-bind:allowDrag="false" ref="userConfigInspector" v-bind:jsonData="appState.userConfig" v-bind:collapsed="1"></inspector-json>
+                </div>
+                <div class="app-main-app-info">
+                    <h2>App info</h2>
+                    <inspector-json v-bind:allowDrag="false" ref="userConfigInspector2" v-bind:jsonData="{appInfo: appState.config.appInfo, platformData: appState.platformData}" v-bind:collapsed="0"></inspector-json>
+                </div>
+            </div>
         </div>
 
     </template>

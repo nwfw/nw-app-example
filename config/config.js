@@ -21,7 +21,44 @@ exports.config = {
         debugCssFiles: [],
         debugJsFiles: [],
 
-        appComponentMapping: {},
+        appComponentMapping: {
+            'app-main': {
+                name: 'app-main',
+                components: {
+                    'inspector-json': {
+                        name: 'inspector-json'
+                    },
+                    'app-error': {
+                        name: 'app-error',
+                        componentCssFiles: ['app-error.css'],
+                    },
+                    'app-loader': {
+                        name: 'app-loader',
+                        componentCssFiles: ['app-loader.css'],
+                        components: {
+                            'app-loader-spinner': {
+                                name: 'app-loader-spinner'
+                            },
+                            'user-messages': {
+                                name: 'user-messages',
+                                components: {
+                                    'user-messages-controls': {
+                                        name: 'user-messages-controls'
+                                    },
+                                    'user-messages-list': {
+                                        name: 'user-messages-list'
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    'app-debug': {
+                        componentCssFiles: ['app-debug.css'],
+                        name: 'app-debug'
+                    }
+                }
+            }
+        },
 
         mixinRoot: './app/js/mixin/',
         mixinExtensionRegex: /\.js$/,
@@ -42,8 +79,8 @@ exports.config = {
                 hideWindow: true,
                 hideEdit: true
             },
-            menus: [],
-            _menus: [
+            _menus: [],
+            menus: [
                 {
                     menuItem: {
                         label: 'App',

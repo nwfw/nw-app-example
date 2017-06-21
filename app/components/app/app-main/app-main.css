@@ -1,0 +1,58 @@
+.app-main-inner {
+    padding: 0 10px;
+    display: flex;
+    flex-flow: column;
+    flex: 1 0 auto;
+    overflow: auto;
+}
+
+.app-main-inner h1 {
+    flex: 0 1 auto;
+    margin: 5px auto;
+    padding: 0px;
+}
+
+.app-main-message-test {
+    flex: 1 1 auto;
+    text-align: center;
+}
+.app-main-data {
+    flex: 1 0 auto;
+    margin-top: 10px;
+    display: flex;
+    flex-flow: row;
+    align-items: stretch;
+}
+.app-main-user-config,
+.app-main-app-info {
+    flex: 1 1 auto;
+    margin-top: 10px;
+    display: flex;
+    flex-flow: column;
+    margin: 5px;
+}
+
+.app-main-inner h2 {
+    margin: 3px auto 5px auto;
+    text-align: center;
+}
+
+.app-main-data h2 {
+    flex: 0 0 auto;
+}
+
+.app-main-data .inspector-json-wrapper {
+    flex: 1 1 auto;
+    background: #CCCCCC;
+    overflow: auto;
+}
+
+.app-main-message-test input {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.app-main-message-test input:hover {
+    background: #999999;
+    color: #000000;
+}
