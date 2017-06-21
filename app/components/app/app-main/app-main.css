@@ -12,7 +12,8 @@
     padding: 0px;
 }
 
-.app-main-message-test {
+.app-main-message-test,
+.app-main-operation-test {
     flex: 1 1 auto;
     text-align: center;
 }
@@ -47,9 +48,15 @@
     overflow: auto;
 }
 
-.app-main-message-test input {
-    font-weight: bold;
+.app-main-inner input {
     cursor: pointer;
+    color: #CCCCCC;
+}
+.app-main-inner input.button-disabled {
+    color: #000000;
+    background: #999999;
+    /*pointer-events: none;*/
+    cursor: not-allowed;
 }
 
 .app-main-message-test input:hover {
