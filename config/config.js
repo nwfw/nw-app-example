@@ -90,7 +90,7 @@ exports.config = {
                         {
                             menuItem: {
                                 label: 'New',
-                                method: 'app.presenter.newPresentationMenuHandler',
+                                method: 'noop',
                                 shortcut: {
                                     key: 'n',
                                     modifiers: {
@@ -103,7 +103,7 @@ exports.config = {
                         {
                             menuItem: {
                                 label: 'Open',
-                                method: 'app.presenter.openPresentationMenuHandler',
+                                method: 'noop',
                                 shortcut: {
                                     key: 'o',
                                     modifiers: {
@@ -116,7 +116,7 @@ exports.config = {
                         {
                             menuItem: {
                                 label: 'Edit',
-                                method: 'app.presenter.editPresentationMenuHandler',
+                                method: 'noop',
                                 shortcut: {
                                     key: 'e',
                                     modifiers: {
