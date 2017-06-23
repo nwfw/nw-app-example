@@ -52,14 +52,15 @@
     cursor: pointer;
     color: #CCCCCC;
 }
-.app-main-inner input.button-disabled {
-    color: #000000;
-    background: #999999;
-    /*pointer-events: none;*/
-    cursor: not-allowed;
-}
 
 .app-main-message-test input:hover {
     background: #999999;
     color: #000000;
+}
+
+.app-main-inner input.button-disabled {
+    color: #999999;
+    border-color: #999999;
+    background: #666666;
+    cursor: not-allowed;
 }

@@ -73,7 +73,7 @@ exports.config = {
         systemHelperDirectories: [],
         helperDirectories: ['./app/js/helper/'],
 
-        hasAppMenu: true,
+        hasAppMenu: false,
         menuData: {
             mainItemName: 'app',
             options: {

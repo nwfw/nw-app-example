@@ -7,6 +7,7 @@ exports.component = {
     name: 'app-main',
     template: '',
     tickInterval: null,
+    operationId: '',
     data: function () {
         return {
             mainData: appState.mainData,
@@ -33,7 +34,7 @@ exports.component = {
             }
             let cancelable = e.target.getAttribute('data-cancelable') == '1' ? true : false;
             this.duration = 800;
-            _appWrapper.getHelper('appOperation').operationStart('operation', cancelable, true, true, 'progress');
+            this.operationId = _appWrapper.getHelper('appOperation').operationStart('operation', cancelable, true, true, 'progress');
             _appWrapper.getHelper('appOperation').operationUpdate(0, 100);
         },
         simulateProgress: function(e){
@@ -125,7 +126,7 @@ exports.component = {
             return appState;
         },
         operationInProgress: function() {
-            return appState.appOperation.operationActive && appState.appOperation.operationText == 'operation';
+            return appState.appOperation.operationActive && appState.appOperation.operationId == this.operationId;
         }
     }
 };
