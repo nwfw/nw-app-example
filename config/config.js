@@ -73,13 +73,13 @@ exports.config = {
         systemHelperDirectories: [],
         helperDirectories: ['./app/js/helper/'],
 
+        hasAppMenu: true,
         menuData: {
             mainItemName: 'app',
             options: {
                 hideWindow: true,
                 hideEdit: true
             },
-            _menus: [],
             menus: [
                 {
                     menuItem: {

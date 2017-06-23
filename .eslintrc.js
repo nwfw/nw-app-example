@@ -7,13 +7,13 @@ module.exports = {
     "extends": "eslint:recommended",
     "parser": "babel-eslint",
     "parserOptions": {
+        "ecmaFeatures": {
+            "arrowFunctions": true,
+            "classes": true,
+        },
         "sourceType": "module",
         "allowImportExportEverywhere": false,
         "codeFrame": false
-    },
-    "ecmaFeatures": {
-        "arrowFunctions": true,
-        "classes": true,
     },
     "rules": {
         "indent": [
