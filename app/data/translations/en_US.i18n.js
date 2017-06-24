@@ -3,6 +3,9 @@ exports.data = {
     'code': 'en_US',
     'locale': 'en-us',
     'translations': {
+        'Auto trim translations': 'Auto trim translations',
+        'Open translation editor': 'Open translation editor',
+        'Toggle debug visible': 'Toggle debug visible',
         'Action is being executed in the background. Are you sure wou want to exit?': 'Action is being executed in the background. Are you sure wou want to exit?',
         'Active config file: "{1}"': 'Active config file: "{1}"',
         'App component initialization finished. {1} app vue components initialized.': 'App component initialization finished. {1} app vue components initialized.',

@@ -3,7 +3,9 @@ exports.data = {
     'code': 'sr_RS',
     'locale': 'sr-rs',
     'translations': {
-        'No excess translations found.': 'Nisu nadjeni prevodi viška.',
+        'Auto trim translations': 'Automatski ukloni prevode viška',
+        'Open translation editor': 'Prevodjenje',
+        'Toggle debug visible': 'Prikaži ili sakrij debug',
         'Action is being executed in the background. Are you sure wou want to exit?': 'U toku je izvršavanje akcije. Da li ste sigurni da želite da zatvorite prozor?',
         'Active config file: "{1}"': 'Aktivni konfiguracioni fajl: "{1}"',
         'App component initialization finished. {1} app vue components initialized.': 'Inicijalizacija app komponenti gotova. {1} komponenti inicijalizovano.',
@@ -84,6 +86,7 @@ exports.data = {
         'Maximize window': 'Maksimizuj',
         'Minimize window': 'Minimizuj',
         'Move window': 'Pomeri prozor',
+        'No excess translations found.': 'Nisu nadjeni prevodi viška.',
         'No file selected': 'Nije izabran fajl',
         'Omitting "{1}", is a directory.': 'Ignorisanje "{1}", jer je direktorijum.',
         'Open debug configuration': 'Otvori debug konfiguraciju',
