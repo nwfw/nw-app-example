@@ -3,7 +3,6 @@ exports.data = {
     'code': 'en_US',
     'locale': 'en-us',
     'translations': {
-        'Trimmed {1} excess translations.': 'Trimmed {1} excess translations.',
         'Action is being executed in the background. Are you sure wou want to exit?': 'Action is being executed in the background. Are you sure wou want to exit?',
         'Active config file: "{1}"': 'Active config file: "{1}"',
         'App component initialization finished. {1} app vue components initialized.': 'App component initialization finished. {1} app vue components initialized.',
@@ -83,6 +82,7 @@ exports.data = {
         'Maximize window': 'Maximize window',
         'Minimize window': 'Minimize window',
         'Move window': 'Move window',
+        'No excess translations found.': 'No excess translations found.',
         'No file selected': 'No file selected',
         'Omitting "{1}", is a directory.': 'Omitting "{1}", is a directory.',
         'Open debug configuration': 'Open debug configuration',
@@ -117,6 +117,7 @@ exports.data = {
         'Toggle dev tools': 'Toggle dev tools',
         'Toggle full screen': 'Toggle full screen',
         'Translation editor': 'Translation editor',
+        'Trimmed {1} excess translations.': 'Trimmed {1} excess translations.',
         'User message level': 'User message level',
         'User messages': 'User messages',
         'User messages cleared': 'User messages cleared',
