@@ -3,6 +3,7 @@ exports.data = {
     'code': 'sr_RS',
     'locale': 'sr-rs',
     'translations': {
+        'Trimmed {1} excess translations.': 'Uklonjeno je {1} prevoda viška.',
         'Action is being executed in the background. Are you sure wou want to exit?': 'U toku je izvršavanje akcije. Da li ste sigurni da želite da zatvorite prozor?',
         'Active config file: "{1}"': 'Aktivni konfiguracioni fajl: "{1}"',
         'App component initialization finished. {1} app vue components initialized.': 'Inicijalizacija app komponenti gotova. {1} komponenti inicijalizovano.',
