@@ -73,7 +73,7 @@ exports.config = {
         systemHelperDirectories: [],
         helperDirectories: ['./app/js/helper/'],
 
-        hasAppMenu: false,
+        hasAppMenu: true,
         menuData: {
             mainItemName: 'app',
             options: {
@@ -144,6 +144,78 @@ exports.config = {
                                 }
                             },
                             children: []
+                        }
+                    ]
+                },
+                {
+                    menuItem: {
+                        label: 'App2',
+                        method: 'noop'
+                    },
+                    children: [
+                        {
+                            menuItem: {
+                                label: 'New2',
+                                method: 'noop',
+                                shortcut: {
+                                    key: 'n',
+                                    modifiers: {
+                                        ctrl: true,
+                                        shift: true
+                                    }
+                                }
+                            },
+                            children: [
+                                {
+                                    menuItem: {
+                                        label: 'Open2',
+                                        method: 'helpers.utilHelper.noop',
+                                        shortcut: {
+                                            key: 'o',
+                                            modifiers: {
+                                                ctrl: true,
+                                                shift: true
+                                            }
+                                        }
+                                    },
+                                    children: [
+                                        {
+                                            menuItem: {
+                                                label: 'Edit2',
+                                                method: 'noop',
+                                                shortcut: {
+                                                    key: 'e',
+                                                    modifiers: {
+                                                        ctrl: true,
+                                                        shift: true
+                                                    }
+                                                }
+                                            },
+                                            children: []
+                                        }
+                                    ]
+                                },
+                                {
+                                    menuItem: {
+                                        type: 'separator'
+                                    },
+                                    children: []
+                                },
+                                {
+                                    menuItem: {
+                                        label: 'Exit2',
+                                        method: 'exitApp',
+                                        shortcut: {
+                                            key: 'x',
+                                            modifiers: {
+                                                ctrl: true,
+                                                shift: true
+                                            }
+                                        }
+                                    },
+                                    children: []
+                                }
+                            ]
                         }
                     ]
                 }
