@@ -6,21 +6,37 @@ var appState = _appWrapper.getAppState();
 exports.component = {
     name: 'app-main',
     template: '',
-    tickInterval: null,
+    tickTimeout: null,
+    finishTimeout: null,
+    boundMethods: {
+        operationTick: null,
+    },
     operationId: '',
+    created: function () {
+        this.boundMethods = {
+            operationTick: this.operationTick.bind(this)
+        };
+    },
     data: function () {
         return {
             mainData: appState.mainData,
-            duration: 800,
             isSimulating: false,
+            cancelable: true,
+            stepValue: 1,
+            maxOperationValue: 1000,
+            currentOperationValue: 0,
+            messageCount: 10,
+            minSpeed: 1,
+            maxSpeed: 1001,
+            speed: 800,
         };
     },
     methods: {
         testMessage: function(e){
             let type = e.target.getAttribute('data-type');
             let messageType = type;
-            let types = ['debug', 'info', 'warning','error'];
-            let count = e.target.getAttribute('data-count');
+            let types = ['debug', 'info', 'warning','error','delimiter'];
+            let count = this.messageCount;
             for (let i=0; i<count; i++){
                 if (type == 'random'){
                     messageType = types[Math.floor(Math.random()*types.length)];
@@ -32,35 +48,39 @@ exports.component = {
             if (_appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
                 return;
             }
-            let cancelable = e.target.getAttribute('data-cancelable') == '1' ? true : false;
-            this.duration = 800;
-            this.operationId = _appWrapper.getHelper('appOperation').operationStart('operation', cancelable, true, true, 'progress');
-            _appWrapper.getHelper('appOperation').operationUpdate(0, 100);
+            this.speed = 800;
+            this.currentOperationValue = 0;
+            this.operationId = _appWrapper.getHelper('appOperation').operationStart('operation', this.cancelable, true, true, 'progress');
+            _appWrapper.getHelper('appOperation').operationUpdate(0, this.maxOperationValue);
         },
         simulateProgress: function(e){
             if (e && _appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
                 return;
             }
-            clearInterval(this.tickInterval);
-            this.tickInterval = setInterval(this.operationTick.bind(this), this.duration);
+            let duration = this.maxSpeed - this.speed;
+            clearTimeout(this.tickTimeout);
+            this.tickTimeout = setTimeout(this.boundMethods.operationTick, duration);
             this.isSimulating = true;
         },
-        operationTick: function(){
+        operationTick: async function(){
             let appOperationHelper = _appWrapper.getHelper('appOperation');
+            clearTimeout(this.tickTimeout);
             if (!appOperationHelper.canOperationContinue()){
-                clearInterval(this.tickInterval);
-                setTimeout(() => {
+                clearTimeout(this.finishTimeout);
+                this.finishTimeout = setTimeout( () => {
+                    clearTimeout(this.finishTimeout);
                     this.isSimulating = false;
                     appState.status.appStatus = 'offline';
                     appOperationHelper.operationFinish('cancelled');
                 }, 1000);
             } else {
-                let percentComplete = appState.progressData.percentNumber;
-                percentComplete += 1;
-                if (percentComplete < 100){
-                    appOperationHelper.operationUpdate(percentComplete, 100);
+                this.currentOperationValue += 1;
+                if (this.currentOperationValue < this.maxOperationValue){
+                    appOperationHelper.operationUpdate(this.currentOperationValue, this.maxOperationValue);
+                    let duration = this.maxSpeed - this.speed;
+                    await _appWrapper.nextTick();
+                    this.tickTimeout = setTimeout(this.boundMethods.operationTick, duration);
                 } else {
-                    clearInterval(this.tickInterval);
                     this.isSimulating = false;
                     appState.status.appStatus = 'success';
                     appOperationHelper.operationFinish('done');
@@ -71,54 +91,36 @@ exports.component = {
             if (_appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
                 return;
             }
-            clearInterval(this.tickInterval);
+            clearTimeout(this.tickTimeout);
             this.isSimulating = false;
             this.$forceUpdate();
-        },
-        increaseSpeed: function(e){
-            if (_appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
-                return;
-            }
-            this.duration = parseInt(this.duration / 2, 10);
-            if (this.duration <= 25){
-                this.duration = 25;
-            }
-
-            this.simulateProgress();
-        },
-        decreaseSpeed: function(e){
-            if (_appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
-                return;
-            }
-            this.duration = this.duration * 2;
-            if (this.duration >= 1000){
-                this.duration = 1000;
-            }
-            this.simulateProgress();
         },
         operationIncrement: function(e){
             if (_appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
                 return;
             }
-            let value = parseInt(e.target.getAttribute('data-value'), 10);
+            let value = parseInt(this.stepValue, 10);
             value = appState.progressData.percentNumber + value;
-            _appWrapper.getHelper('appOperation').operationUpdate(value, 100);
+            this.currentOperationValue = parseInt(value / 100 * this.maxOperationValue, 10);
+            _appWrapper.getHelper('appOperation').operationUpdate(this.currentOperationValue, this.maxOperationValue);
+        },
+        operationDecrement: function(e){
+            if (_appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
+                return;
+            }
+            let value = 0 - parseInt(this.stepValue, 10);
+            value = appState.progressData.percentNumber + value;
+            this.currentOperationValue = parseInt(value / 100 * this.maxOperationValue, 10);
+            _appWrapper.getHelper('appOperation').operationUpdate(this.currentOperationValue, this.maxOperationValue);
         },
         operationFinish: function(e){
             if (_appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
                 return;
             }
             this.isSimulating = false;
-            clearInterval(this.tickInterval);
-            _appWrapper.getHelper('appOperation').updateProgress(100, 100);
+            clearTimeout(this.tickTimeout);
+            _appWrapper.getHelper('appOperation').updateProgress(this.maxOperationValue, this.maxOperationValue);
             _appWrapper.getHelper('appOperation').operationFinish('done');
-        },
-        setStatus: function(e){
-            if (_appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
-                return;
-            }
-            let status = e.target.getAttribute('data-status');
-            appState.status.appStatus = status;
         }
     },
     computed: {

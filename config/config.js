@@ -260,7 +260,7 @@ exports.config = {
     userMessageLevel: 3,
     maxUserMessages: 1000,
     userMessagesExpanded: false,
-    userMessagesTimestamp: true,
+    messageTimestamp: true,
     userMessagesToolbarVisible: false,
 
     windowCloseTimeoutDuration: 15000,

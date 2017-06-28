@@ -10,56 +10,76 @@
             <h1>Default app-main view</h1>
             <div class="app-main-message-test">
                 <h2>Test user messages and debug</h2>
-                <input type="button" @click.prevent="testMessage" data-count="1" data-type="debug" value="debug" />
-                &nbsp; <input type="button" @click.prevent="testMessage" data-count="1" data-type="info" value="info" />
-                &nbsp; <input type="button" @click.prevent="testMessage" data-count="1" data-type="warning" value="warning" />
-                &nbsp; <input type="button" @click.prevent="testMessage" data-count="1" data-type="error" value="error" />
-                &nbsp; <input type="button" @click.prevent="testMessage" data-count="1" data-type="random" value="random" />
-                <br />
-                <br />
-                <br />
-                <input type="button" @click.prevent="testMessage" data-count="10" data-type="debug" value="debug X 10" />
-                &nbsp; <input type="button" @click.prevent="testMessage" data-count="10" data-type="info" value="info X 10" />
-                &nbsp; <input type="button" @click.prevent="testMessage" data-count="10" data-type="warning" value="warning X 10" />
-                &nbsp; <input type="button" @click.prevent="testMessage" data-count="10" data-type="error" value="error X 10" />
-                &nbsp; <input type="button" @click.prevent="testMessage" data-count="10" data-type="random" value="random X 10" />
+                <label>Count:</label>
+                <select name="count" v-model="messageCount">
+                    <option value="1">1</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="250">250</option>
+                </select>
+                &nbsp; &nbsp; &nbsp;
+                <input type="button" @click.prevent="testMessage" :data-count="messageCount" data-type="debug" :value="'debug X ' + messageCount" />
+                &nbsp; <input type="button" @click.prevent="testMessage" :data-count="messageCount" data-type="info" :value="'info X ' + messageCount" />
+                &nbsp; <input type="button" @click.prevent="testMessage" :data-count="messageCount" data-type="warning" :value="'warning X ' + messageCount" />
+                &nbsp; <input type="button" @click.prevent="testMessage" :data-count="messageCount" data-type="error" :value="'error X ' + messageCount" />
+                &nbsp; <input type="button" @click.prevent="testMessage" :data-count="messageCount" data-type="delimiter" :value="'delimiter X ' + messageCount" />
+                &nbsp; <input type="button" @click.prevent="testMessage" :data-count="messageCount" data-type="random" :value="'random X ' + messageCount" />
             </div>
             <div class="app-main-operation-test">
                 <h2>Test app operation and statuses</h2>
                 <div>
+                    Cancelable: <span class="fa" v-bind:class="{'fa-square-o' : !cancelable, 'fa-check-square-o': cancelable}"></span><br />
                     In progress: <span class="fa" v-bind:class="{'fa-square-o' : !operationInProgress, 'fa-check-square-o': operationInProgress}"></span><br />
                     Simulating: <span class="fa" v-bind:class="{'fa-square-o' : !isSimulating, 'fa-check-square-o': isSimulating}"></span><br />
-                    Simulating interval: {{ formatDuration(duration/1000, true) }}s
+                    Simulating speed: {{ speed }}
                 </div>
                 <br />
-                &nbsp; <input v-bind:class="{'button-disabled': appState.appOperation.operationActive}" type="button" @click.prevent="operationStart" data-cancelable="1" value="operationStart (cancelable)" />
-                &nbsp; <input v-bind:class="{'button-disabled': appState.appOperation.operationActive}" type="button" @click.prevent="operationStart" data-cancelable="0" value="operationStart (non-cancelable)" />
+                <label>
+                    Cancelable:
+                    <template v-if="!appState.appOperation.operationActive">
+                        <input type="checkbox" value="1" v-model="cancelable" />
+                    </template>
+                    <template v-else>
+                        <span class="fa" v-bind:class="{'fa-square-o' : !cancelable, 'fa-check-square-o': cancelable}"></span>
+                    </template>
+                </label>
+                &nbsp; <input v-bind:class="{'button-disabled': appState.appOperation.operationActive}" type="button" @click.prevent="operationStart" value="operationStart" />
+                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress}" type="button" @click.prevent="operationFinish" value="Finish" />
                 <br />
                 <br />
                 &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress || isSimulating}" type="button" @click.prevent="simulateProgress" value="Simulate progress" />
-                &nbsp; <input v-bind:class="{'button-disabled': !isSimulating || duration <= 25 }" type="button" @click.prevent="increaseSpeed" value="Increase speed" />
-                &nbsp; <input v-bind:class="{'button-disabled': !isSimulating || duration >= 1000 }" type="button" @click.prevent="decreaseSpeed" value="Decrease speed" />
                 &nbsp; <input v-bind:class="{'button-disabled': !isSimulating }" type="button" @click.prevent="stopSimulating" value="Stop simulating" />
+                &nbsp;
+                <label>
+                    Speed
+                </label>
+                &nbsp;
+                    <input v-model="speed" class="range-input" type="range" :min="minSpeed" :max="maxSpeed - 1" step="1" /> {{ speed }}
                 <br />
                 <br />
-                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress || parseInt(appState.progressData.percentComplete, 10) >= 99}" type="button" @click.prevent="operationIncrement" value="increment progress by 1" data-value="1" />
-                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress || parseInt(appState.progressData.percentComplete, 10) >= 90}" type="button" @click.prevent="operationIncrement" value="increment progress by 10" data-value="10" />
-                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress || parseInt(appState.progressData.percentComplete, 10) >= 80}" type="button" @click.prevent="operationIncrement" value="increment progress by 20" data-value="20" />
+                <label>Step value: </label>
+                <select name="stepValue" v-model="stepValue">
+                    <option value="1">1</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                </select>
+                &nbsp; &nbsp; &nbsp;
+                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress || parseInt(appState.progressData.percentComplete, 10) >= (100 - stepValue)}" type="button" @click.prevent="operationIncrement" :value="'Increment progress (+' + stepValue + ')'" />
+                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress || parseInt(appState.progressData.percentComplete, 10) <= stepValue}" type="button" @click.prevent="operationDecrement" :value="'Decrement progress (-' + stepValue + ')'" />
                 <br />
                 <br />
-                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress || parseInt(appState.progressData.percentComplete, 10) <= 10}" type="button" @click.prevent="operationIncrement" value="decrement progress by 10" data-value="-10" />
-                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress || parseInt(appState.progressData.percentComplete, 10) <= 20}" type="button" @click.prevent="operationIncrement" value="decrement progress by 20" data-value="-20" />
-                <br />
-                <br />
-                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress}" type="button" @click.prevent="setStatus" value="Status (error)" data-status="error" />
-                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress}" type="button" @click.prevent="setStatus" value="Status (idle)" data-status="idle" />
-                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress}" type="button" @click.prevent="setStatus" value="Status (busy)" data-status="busy" />
-                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress}" type="button" @click.prevent="setStatus" value="Status (success)" data-status="success" />
-                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress}" type="button" @click.prevent="setStatus" value="Status (working)" data-status="working" />
-                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress}" type="button" @click.prevent="setStatus" value="Status (offline)" data-status="offline" />
-                <br />
-                <br />
-                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress}" type="button" @click.prevent="operationFinish" value="Finish" />
+                <label>App status: </label>
+                <select name="status" v-model="appState.status.appStatus">
+                    <option value="error">error</option>
+                    <option value="idle">idle</option>
+                    <option value="busy">busy</option>
+                    <option value="success">success</option>
+                    <option value="working">working</option>
+                    <option value="offline">offline</option>
+                </select>
             </div>
             <div class="app-main-data">
                 <div class="app-main-user-config">

@@ -95,6 +95,18 @@ exports.data = {
         'calculating': 'calculating',
         'days': 'days',
         'messages': 'messages',
-        'not translated': 'not translated'
+        'not translated': 'not translated',
+        'No results.': '--No results.--',
+        'Call stack': '--Call stack--',
+        'File': '--File--',
+        'Function': '--Function--',
+        'Line': '--Line--',
+        'Column': '--Column--',
+        'Show call stack': '--Show call stack--',
+        'Hide call stack': '--Hide call stack--',
+        'Toggle message call stacks': '--Toggle message call stacks--',
+        'Show message call stacks': '--Show message call stacks--',
+        'Hide message call stacks': '--Hide message call stacks--',
+        'Message level': '--Message level--'
     }
 };

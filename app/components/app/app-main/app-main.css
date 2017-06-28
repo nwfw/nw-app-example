@@ -64,3 +64,8 @@
     background: #666666;
     cursor: not-allowed;
 }
+
+.app-main-inner .range-input {
+    position: relative;
+    top: 4px;
+}
