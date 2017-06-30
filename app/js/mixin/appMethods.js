@@ -17,6 +17,9 @@ var MixinAppMethods  = {
         formatDateNormalize: function (date, options, includeTime, omitSeconds) {
             return _appWrapper.getHelper('format').formatDateNormalize(date, options, includeTime, omitSeconds);
         },
+        addZeros: function (value, maxLength) {
+            return _appWrapper.getHelper('format').addZeros(value, maxLength);
+        },
         basename: function(file){
             return path.basename(file);
         },

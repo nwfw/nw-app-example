@@ -8,6 +8,7 @@ exports.component = {
     template: '',
     tickTimeout: null,
     finishTimeout: null,
+    checkSpeedTimeout: null,
     boundMethods: {
         operationTick: null,
     },
@@ -29,25 +30,41 @@ exports.component = {
             minSpeed: 1,
             maxSpeed: 1001,
             speed: 800,
+            messageType: 'random',
+            logMessage: 1,
+            logDebug: 1,
+            operationStatusChanging: 0,
+            simulationStatusChanging: 0,
         };
     },
     methods: {
-        testMessage: function(e){
-            let type = e.target.getAttribute('data-type');
-            let messageType = type;
+        clearMessages: function(e){
+            if (e && _appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
+                return;
+            }
+            _appWrapper.getHelper('debug').clearUserMessages();
+            _appWrapper.getHelper('debug').clearDebugMessages();
+        },
+        testMessage: function(){
             let types = ['debug', 'info', 'warning','error','delimiter'];
             let count = this.messageCount;
+            let messageType = this.messageType;
             for (let i=0; i<count; i++){
-                if (type == 'random'){
+                if (this.messageType == 'random'){
                     messageType = types[Math.floor(Math.random()*types.length)];
                 }
-                _appWrapper.getHelper('component').addUserMessage('message', messageType, [], false, true, true, true);
+                if (this.logMessage){
+                    _appWrapper.getHelper('component').addUserMessage('message', messageType, [], false, true, true, this.logDebug);
+                } else if (this.logDebug) {
+                    _appWrapper.getHelper('component').log('message', messageType, [], true, true);
+                }
             }
         },
         operationStart: function(e){
             if (_appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
                 return;
             }
+            this.statusChange('operationStatusChanging');
             this.speed = 800;
             this.currentOperationValue = 0;
             this.operationId = _appWrapper.getHelper('appOperation').operationStart('operation', this.cancelable, true, true, 'progress');
@@ -57,6 +74,7 @@ exports.component = {
             if (e && _appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
                 return;
             }
+            this.statusChange('simulationStatusChanging');
             let duration = this.maxSpeed - this.speed;
             clearTimeout(this.tickTimeout);
             this.tickTimeout = setTimeout(this.boundMethods.operationTick, duration);
@@ -91,6 +109,7 @@ exports.component = {
             if (_appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
                 return;
             }
+            this.statusChange('simulationStatusChanging');
             clearTimeout(this.tickTimeout);
             this.isSimulating = false;
             this.$forceUpdate();
@@ -117,10 +136,28 @@ exports.component = {
             if (_appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
                 return;
             }
+            this.statusChange('operationStatusChanging');
             this.isSimulating = false;
             clearTimeout(this.tickTimeout);
             _appWrapper.getHelper('appOperation').updateProgress(this.maxOperationValue, this.maxOperationValue);
             _appWrapper.getHelper('appOperation').operationFinish('done');
+        },
+        statusChange: function(property){
+            this[property] = 1;
+            setTimeout( () => {
+                this[property] = 0;
+            }, 500);
+        },
+        checkSpeedInput: function(e) {
+            if (this.speed > (this.maxSpeed - 1)){
+                this.speed = (this.maxSpeed - 1);
+            }
+            if (this.speed < this.minSpeed){
+                this.speed = this.minSpeed;
+            }
+            if (e.target.value != this.speed){
+                e.target.value = this.speed;
+            }
         }
     },
     computed: {
