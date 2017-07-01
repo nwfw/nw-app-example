@@ -166,6 +166,12 @@ exports.component = {
         },
         operationInProgress: function() {
             return appState.appOperation.operationActive && appState.appOperation.operationId == this.operationId;
+        },
+        appInfoJsonData: function () {
+            return {
+                appInfo: appState.config.appInfo,
+                platformData: appState.platformData
+            };
         }
     }
 };
