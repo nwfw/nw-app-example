@@ -70,6 +70,47 @@ exports.config = {
         systemHelperDirectories: [],
         helperDirectories: ['./app/js/helper/'],
 
+        hasTrayIcon: true,
+        trayData: {
+            title: 'Fe app',
+            icon: 'app/images/tray-icon.png',
+            alticon: 'app/images/tray-icon-alternate.png',
+            menus: [
+                {
+                    label: 'Edit configuration',
+                    tooltip: 'Edit configuration',
+                    type: 'normal',
+                    method: 'appConfig.openConfigEditorHandler',
+                    children: [
+                        {
+                            label: 'Open debug configuration',
+                            tooltip: 'Open debug configuration',
+                            type: 'normal',
+                            method: 'helpers.debugHelper.openDebugConfigEditor',
+                        },
+                        {
+                            label: 'Open user message configuration',
+                            tooltip: 'Open user message configuration',
+                            type: 'normal',
+                            method: 'helpers.userMessageHelper.openUserMessageConfigEditor',
+                        }
+                    ]
+                },
+                {
+                    label: 'Separator',
+                    tooltip: 'Separator',
+                    type: 'separator',
+                    method: 'noop'
+                },
+                {
+                    label: 'Close window',
+                    tooltip: 'Close window',
+                    type: 'normal',
+                    method: 'exitApp'
+                }
+            ]
+        },
+
         hasAppMenu: true,
         menuData: {
             mainItemName: 'app',
