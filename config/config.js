@@ -44,9 +44,6 @@ exports.config = {
                                 components: {
                                     'user-messages-controls': {
                                         name: 'user-messages-controls'
-                                    },
-                                    'user-messages-list': {
-                                        name: 'user-messages-list'
                                     }
                                 }
                             }
@@ -245,31 +242,21 @@ exports.config = {
 
     liveCss: true,
     compileCss: true,
-    hideDebug: false,
-    debug: true,
-    devTools: true,
-    debugLevel: 3,
-    debugLevels: {
-        'debug': 1,
-        'info': 2,
-        'warning': 3,
-        'error': 4
-    },
-    debugGroupsCollapsed: false,
 
-    userMessageLevel: 3,
-    maxUserMessages: 1000,
-    userMessagesExpanded: false,
-    messageTimestamp: true,
-    userMessagesToolbarVisible: false,
+    debug: {
+        forceDebug: {
+            App: false,
+        },
+    },
+
+    userMessages: {
+        forceUserMessages: {
+            App: false,
+        }
+    },
+
 
     windowCloseTimeoutDuration: 15000,
     windowReloadTimeoutDuration: 15000,
 
-    forceDebug: {
-        App: false,
-    },
-    forceUserMessages: {
-        App: false,
-    }
 };
