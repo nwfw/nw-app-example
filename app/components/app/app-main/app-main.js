@@ -23,9 +23,11 @@ exports.component = {
             mainData: appState.mainData,
             isSimulating: false,
             cancelable: true,
+            logProgress: false,
             stepValue: 1,
             maxOperationValue: 1000,
             currentOperationValue: 0,
+            lastLoggedValue: 0,
             messageCount: 10,
             minSpeed: 1,
             maxSpeed: 1001,
@@ -96,6 +98,10 @@ exports.component = {
                 if (this.currentOperationValue < this.maxOperationValue){
                     appOperationHelper.operationUpdate(this.currentOperationValue, this.maxOperationValue);
                     let duration = this.maxSpeed - this.speed;
+                    if (this.logProgress && ((this.currentOperationValue - this.lastLoggedValue) % 10 == 0)){
+                        this.lastLoggedValue = this.currentOperationValue;
+                        _appWrapper.getHelper('component').addUserMessage('Log progress: {1} / {2}', 'info', [this.currentOperationValue, this.maxOperationValue], false, true, true);
+                    }
                     await _appWrapper.nextTick();
                     this.tickTimeout = setTimeout(this.boundMethods.operationTick, duration);
                 } else {

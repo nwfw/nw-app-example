@@ -63,6 +63,16 @@
                         <span class="fa" v-bind:class="{'fa-square-o' : !cancelable, 'fa-check-square-o': cancelable}"></span>
                     </template>
                 </label>
+                &nbsp;
+                <label>
+                    Log progress:
+                    <template v-if="!appState.appOperation.operationActive">
+                        <input type="checkbox" value="1" v-model="logProgress" />
+                    </template>
+                    <template v-else>
+                        <span class="fa" v-bind:class="{'fa-square-o' : !logProgress, 'fa-check-square-o': logProgress}"></span>
+                    </template>
+                </label>
                 &nbsp; <input v-bind:class="{'button-disabled': appState.appOperation.operationActive}" type="button" @click.prevent="operationStart" value="operationStart" />
                 &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress}" type="button" @click.prevent="operationFinish" value="Finish" />
                 <br />
