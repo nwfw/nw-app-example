@@ -1,4 +1,4 @@
-// const _ = require('lodash');
+const _ = require('lodash');
 
 var _appWrapper = window.getAppWrapper();
 var appState = _appWrapper.getAppState();
@@ -7,13 +7,12 @@ exports.component = {
     name: 'test-modal',
 
     data: function () {
-        return {
-
-        };
+        return appState.modalData;
     },
     methods: {
         addModalMessage: function(){
-            _appWrapper.getHelper('modal').addModalMessage({message: 'test', type: 'info'});
+            let types = ['info', 'warning', 'error'];
+            _appWrapper.getHelper('modal').addModalMessage({message: 'test', type: _.sample(types)});
         }
     },
     computed: {

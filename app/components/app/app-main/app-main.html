@@ -8,6 +8,10 @@
     <template v-else-if="appState.status.appInitialized">
         <div class="app-main-inner">
             <h1>Default app-main view</h1>
+            <div class="app-main-section app-main-clear-data">
+                <h2>Clear user data</h2>
+                <input type="button" @click.prevent="clearUserData" value="Clear user data" />
+            </div>
             <div class="app-main-section app-main-message-test">
                 <h2>Test user messages and debug</h2>
                 <label>Count: </label>
@@ -123,6 +127,49 @@
                     <input type="checkbox" value="1" v-model="animateTestModal" />
                 </label>
                 &nbsp;
+                <label>
+                    Auto close
+                    <input type="checkbox" value="1" v-model="autoCloseModal" />
+                </label>
+                &nbsp;
+                <label>
+                    Show close link
+                    <input type="checkbox" @change="modalCheckboxChange" data-model="showCloseLink" v-model="showCloseLink" />
+                </label>
+                <br />
+                <br />
+                <label>
+                    Show confirm button
+                    <input type="checkbox" @change="modalCheckboxChange" data-model="showConfirmButton" v-model="showConfirmButton" />
+                </label>
+                &nbsp;
+                <label>
+                    Confirm disabled
+                    <input type="checkbox" @change="modalCheckboxChange" data-model="confirmDisabled" v-model="confirmDisabled" />
+                </label>
+                &nbsp;
+                <label>
+                    Confirm selected
+                    <input type="checkbox" @change="modalCheckboxChange" data-model="confirmSelected" v-model="confirmSelected" />
+                </label>
+                <br />
+                <br />
+                <label>
+                    Show cancel button
+                    <input type="checkbox" @change="modalCheckboxChange" data-model="showCancelButton" v-model="showCancelButton" />
+                </label>
+                &nbsp;
+                <label>
+                    Cancel disabled
+                    <input type="checkbox" @change="modalCheckboxChange" data-model="cancelDisabled" v-model="cancelDisabled" />
+                </label>
+                &nbsp;
+                <label>
+                    Cancel selected
+                    <input type="checkbox" @change="modalCheckboxChange" data-model="cancelSelected" v-model="cancelSelected" />
+                </label>
+                <br />
+                <br />
                 <input type="button" @click.prevent="openTestModal" value="Open test modal" />
             </div>
             <div class="app-main-section app-main-data">

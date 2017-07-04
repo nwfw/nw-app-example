@@ -1,3 +1,4 @@
+const _ = require('lodash');
 var BaseClass = require('nw-skeleton').BaseClass;
 
 var _appWrapper;
@@ -30,6 +31,10 @@ class App extends BaseClass {
 
         this.helpers = await _appWrapper.initializeHelpers(this.getConfig('appConfig.helperDirectories'));
         await _appWrapper.wait(appState.config.shortPauseDuration);
+        let mainData = await _appWrapper.getHelper('userData').loadUserData();
+        if (mainData && _.isObject(mainData) && mainData.appMainData){
+            appState.appData.mainData = mainData.appMainData;
+        }
         this.addUserMessage('App initialized.', 'info', [], false,  false);
         return true;
     }

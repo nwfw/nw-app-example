@@ -1,4 +1,4 @@
-// const _ = require('lodash');
+const _ = require('lodash');
 
 var _appWrapper = window.getAppWrapper();
 var appState = _appWrapper.getAppState();
@@ -19,28 +19,7 @@ exports.component = {
         };
     },
     data: function () {
-        return {
-            mainData: appState.mainData,
-            isSimulating: false,
-            cancelable: true,
-            logProgress: false,
-            stepValue: 1,
-            maxOperationValueLimit: 10000,
-            maxOperationValue: 1000,
-            currentOperationValue: 0,
-            lastLoggedValue: 0,
-            messageCount: 10,
-            minSpeed: 1,
-            maxSpeed: 1001,
-            speed: 800,
-            messageType: 'random',
-            logMessage: 1,
-            logDebug: 1,
-            operationStatusChanging: 0,
-            simulationStatusChanging: 0,
-
-            animateTestModal: false,
-        };
+        return appState.appData.mainData;
     },
     methods: {
         clearMessages: function(e){
@@ -182,14 +161,96 @@ exports.component = {
         openTestModal: function() {
             let modalHelper = _appWrapper.getHelper('modal');
             let modalOptions = {
-                title: 'Test modal'
+                title: 'Test modal',
+                body: 'This is a test modal'
             };
             if (this.animateTestModal){
                 modalOptions.animateSize = true;
             }
+            if (this.autoCloseModal){
+                modalOptions.autoCloseTime = 5000;
+            }
+
+            modalOptions.showConfirmButton = this.showConfirmButton;
+            modalOptions.showCancelButton = this.showCancelButton;
+            modalOptions.confirmDisabled = this.confirmDisabled;
+            modalOptions.cancelDisabled = this.cancelDisabled;
+            modalOptions.confirmSelected = this.confirmSelected;
+            modalOptions.cancelSelected = this.cancelSelected;
+            modalOptions.showCloseLink = this.showCloseLink;
+
+            _appWrapper._confirmModalAction = function() {
+                modalHelper.modalBusy('Confirming...');
+                setTimeout( () => {
+                    modalHelper.emptyModal();
+                    modalHelper.modalNotBusy();
+                    modalHelper.closeCurrentModal();
+                }, 1000);
+            };
+            _appWrapper._cancelModalAction = function() {
+                modalHelper.modalBusy('Cancelling...');
+                setTimeout( () => {
+                    modalHelper.emptyModal();
+                    modalHelper.modalNotBusy();
+                    modalHelper.closeCurrentModal();
+                }, 1000);
+            };
+
             appState.modalData.currentModal = modalHelper.getModalObject('testModal', modalOptions);
             modalHelper.openCurrentModal();
+        },
+        modalCheckboxChange: function (e){
+            let cb = e.target;
+            let prop = cb.getAttribute('data-model');
+            let checked = cb.checked;
+            if (prop == 'showCancelButton'){
+                if (!checked){
+                    this.cancelSelected = false;
+                }
+            }
+            if (prop == 'cancelDisabled'){
+                if (checked){
+                    this.cancelSelected = false;
+                }
+            }
+            if (prop == 'cancelSelected'){
+                if (checked){
+                    this.cancelDisabled = false;
+                    this.showCancelButton = true;
+                    this.confirmSelected = false;
+                }
+            }
+
+            if (prop == 'showConfirmButton'){
+                if (!checked){
+                    this.confirmSelected = false;
+                }
+            }
+            if (prop == 'confirmDisabled'){
+                if (checked){
+                    this.confirmSelected = false;
+                }
+            }
+            if (prop == 'confirmSelected'){
+                if (checked){
+                    this.confirmDisabled = false;
+                    this.showConfirmButton = true;
+                    this.cancelSelected = false;
+                }
+            }
+        },
+        clearUserData: function() {
+            _appWrapper.getHelper('userData').clearUserData();
+            let keys = Object.keys(this.$data);
+            for (let i=0; i<keys.length; i++){
+                this[keys[i]] = appState.appData.defaultMainData[keys[i]];
+            }
+            _appWrapper.getHelper('userData').saveUserData({appMainData: appState.appData.defaultMainData});
         }
+    },
+    updated: function(){
+        _appWrapper.getHelper('userData').saveUserData({appMainData: this.$data});
+        appState.appData.mainData = _.cloneDeep(appState.appData.defaultMainData);
     },
     computed: {
         appState: function(){
