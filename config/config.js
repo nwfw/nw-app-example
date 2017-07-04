@@ -83,14 +83,14 @@ exports.config = {
                     method: 'appConfig.openConfigEditorHandler',
                     children: [
                         {
-                            label: 'Open debug configuration',
-                            tooltip: 'Open debug configuration',
+                            label: 'Debug log configuration',
+                            tooltip: 'Debug log configuration',
                             type: 'normal',
                             method: 'helpers.debugHelper.openDebugConfigEditor',
                         },
                         {
-                            label: 'Open user message configuration',
-                            tooltip: 'Open user message configuration',
+                            label: 'User messages configuration',
+                            tooltip: 'User messages configuration',
                             type: 'normal',
                             method: 'helpers.userMessageHelper.openUserMessageConfigEditor',
                         }
@@ -273,7 +273,7 @@ exports.config = {
 
     currentLanguage: 'sr_RS',
     currentLocale: 'sr-rs',
-    allowLanguageChange: false,
+    allowLanguageChange: true,
     autoAddLabels: true,
 
     configData: {

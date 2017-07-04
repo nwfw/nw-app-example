@@ -25,6 +25,7 @@ exports.component = {
             cancelable: true,
             logProgress: false,
             stepValue: 1,
+            maxOperationValueLimit: 10000,
             maxOperationValue: 1000,
             currentOperationValue: 0,
             lastLoggedValue: 0,
@@ -37,11 +38,13 @@ exports.component = {
             logDebug: 1,
             operationStatusChanging: 0,
             simulationStatusChanging: 0,
+
+            animateTestModal: false,
         };
     },
     methods: {
         clearMessages: function(e){
-            if (e && _appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
+            if (e && e.target.hasClass('button-disabled')){
                 return;
             }
             _appWrapper.getHelper('debug').clearUserMessages();
@@ -63,7 +66,7 @@ exports.component = {
             }
         },
         operationStart: function(e){
-            if (_appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
+            if (e.target.hasClass('button-disabled')){
                 return;
             }
             this.statusChange('operationStatusChanging');
@@ -73,7 +76,7 @@ exports.component = {
             _appWrapper.getHelper('appOperation').operationUpdate(0, this.maxOperationValue);
         },
         simulateProgress: function(e){
-            if (e && _appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
+            if (e && e.target.hasClass('button-disabled')){
                 return;
             }
             this.statusChange('simulationStatusChanging');
@@ -112,7 +115,7 @@ exports.component = {
             }
         },
         stopSimulating: function (e){
-            if (_appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
+            if (e.target.hasClass('button-disabled')){
                 return;
             }
             this.statusChange('simulationStatusChanging');
@@ -121,7 +124,7 @@ exports.component = {
             this.$forceUpdate();
         },
         operationIncrement: function(e){
-            if (_appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
+            if (e.target.hasClass('button-disabled')){
                 return;
             }
             let value = parseInt(this.stepValue, 10);
@@ -130,7 +133,7 @@ exports.component = {
             _appWrapper.getHelper('appOperation').operationUpdate(this.currentOperationValue, this.maxOperationValue);
         },
         operationDecrement: function(e){
-            if (_appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
+            if (e.target.hasClass('button-disabled')){
                 return;
             }
             let value = 0 - parseInt(this.stepValue, 10);
@@ -139,7 +142,7 @@ exports.component = {
             _appWrapper.getHelper('appOperation').operationUpdate(this.currentOperationValue, this.maxOperationValue);
         },
         operationFinish: function(e){
-            if (_appWrapper.getHelper('html').hasClass(e.target, 'button-disabled')){
+            if (e.target.hasClass('button-disabled')){
                 return;
             }
             this.statusChange('operationStatusChanging');
@@ -164,6 +167,28 @@ exports.component = {
             if (e.target.value != this.speed){
                 e.target.value = this.speed;
             }
+        },
+        checkMaxOperationValueInput: function(e) {
+            if (this.maxOperationValue > (this.maxOperationValueLimit)){
+                this.maxOperationValue = (this.maxOperationValueLimit);
+            }
+            if (this.maxOperationValue < 1){
+                this.maxOperationValue = 1;
+            }
+            if (e.target.value != this.maxOperationValue){
+                e.target.value = this.maxOperationValue;
+            }
+        },
+        openTestModal: function() {
+            let modalHelper = _appWrapper.getHelper('modal');
+            let modalOptions = {
+                title: 'Test modal'
+            };
+            if (this.animateTestModal){
+                modalOptions.animateSize = true;
+            }
+            appState.modalData.currentModal = modalHelper.getModalObject('testModal', modalOptions);
+            modalHelper.openCurrentModal();
         }
     },
     computed: {

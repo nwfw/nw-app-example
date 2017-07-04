@@ -55,6 +55,13 @@
                 </div>
                 <br />
                 <label>
+                    Operation value (length)
+                </label>
+                &nbsp;
+                <input v-model="maxOperationValue" class="range-input" type="range" :min="1" :max="maxOperationValueLimit" step="1" /> <input @keyup="checkMaxOperationValueInput" type="number" v-model="maxOperationValue" :min="1" :max="maxOperationValueLimit" />
+                <br />
+                <br />
+                <label>
                     Cancelable:
                     <template v-if="!appState.appOperation.operationActive">
                         <input type="checkbox" value="1" v-model="cancelable" />
@@ -108,6 +115,15 @@
                     <option value="working">working</option>
                     <option value="offline">offline</option>
                 </select>
+            </div>
+            <div class="app-main-section app-main-modal-test">
+                <h2>Test modal</h2>
+                <label>
+                    Animate size:
+                    <input type="checkbox" value="1" v-model="animateTestModal" />
+                </label>
+                &nbsp;
+                <input type="button" @click.prevent="openTestModal" value="Open test modal" />
             </div>
             <div class="app-main-section app-main-data">
                 <div class="app-main-user-config">
