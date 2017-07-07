@@ -8,14 +8,16 @@
     <template v-else-if="appState.status.appInitialized">
         <div class="app-main-inner">
             <h1>Default app-main view</h1>
-            <div class="app-main-section app-main-clear-data">
-                <h2>Clear user data</h2>
-                <input type="button" @click.prevent="clearUserData" value="Clear user data" />
+            <div v-if="hasCustomData || savedDataChanged" class="app-main-section app-main-clear-data">
+                <h2>User data</h2>
+                <input v-if="hasCustomData" type="button" @click.prevent="resetUserData" value="Reset user data" />
+                &nbsp;
+                <input v-if="savedDataChanged" type="button" @click.prevent="saveUserData" value="Save user data" />
             </div>
             <div class="app-main-section app-main-message-test">
                 <h2>Test user messages and debug</h2>
                 <label>Count: </label>
-                <select name="count" v-model="messageCount">
+                <select name="count" v-model.number="messageCount">
                     <option value="1">1</option>
                     <option value="5">5</option>
                     <option value="10">10</option>

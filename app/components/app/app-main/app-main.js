@@ -19,7 +19,7 @@ exports.component = {
         };
     },
     data: function () {
-        return appState.appData.mainData;
+        return _.cloneDeep(appState.userData.appMainData);
     },
     methods: {
         clearMessages: function(e){
@@ -239,18 +239,34 @@ exports.component = {
                 }
             }
         },
-        clearUserData: function() {
+        resetUserData: function() {
             _appWrapper.getHelper('userData').clearUserData();
             let keys = Object.keys(this.$data);
             for (let i=0; i<keys.length; i++){
                 this[keys[i]] = appState.appData.defaultMainData[keys[i]];
             }
             _appWrapper.getHelper('userData').saveUserData({appMainData: appState.appData.defaultMainData});
+        },
+        saveUserData: function() {
+            let userDataHelper = _appWrapper.getHelper('userData');
+            userDataHelper.saveUserData({appMainData: _.cloneDeep(this.$data)});
+        },
+        userDataChanged: function(){
+            let utilHelper = _appWrapper.getHelper('util');
+            var currentData = _.cloneDeep(this.$data);
+            var oldData = _.cloneDeep(appState.userData.appMainData);
+            var dataDiff = utilHelper.difference(oldData, currentData);
+            return Object.keys(dataDiff).length;
+        },
+        defaultDataChanged: function(){
+            let utilHelper = _appWrapper.getHelper('util');
+
+            var currentDataMap = utilHelper.propertyValuesMap(_.cloneDeep(this.$data));
+            let savedData = _.cloneDeep(appState.appData.defaultMainData);
+            let oldDataMap = utilHelper.propertyValuesMap(savedData);
+            var keyMapDiff = utilHelper.difference(oldDataMap, currentDataMap);
+            return Object.keys(keyMapDiff).length;
         }
-    },
-    updated: function(){
-        _appWrapper.getHelper('userData').saveUserData({appMainData: this.$data});
-        appState.appData.mainData = _.cloneDeep(appState.appData.defaultMainData);
     },
     computed: {
         appState: function(){
@@ -264,6 +280,12 @@ exports.component = {
                 appInfo: appState.config.appInfo,
                 platformData: appState.platformData
             };
+        },
+        hasCustomData: function(){
+            return this.defaultDataChanged();
+        },
+        savedDataChanged: function(){
+            return this.userDataChanged();
         }
     }
 };

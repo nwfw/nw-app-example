@@ -31,9 +31,12 @@ class App extends BaseClass {
 
         this.helpers = await _appWrapper.initializeHelpers(this.getConfig('appConfig.helperDirectories'));
         await _appWrapper.wait(appState.config.shortPauseDuration);
-        let mainData = await _appWrapper.getHelper('userData').loadUserData();
-        if (mainData && _.isObject(mainData) && mainData.appMainData){
-            appState.appData.mainData = mainData.appMainData;
+        let userData = await _appWrapper.getHelper('userData').loadUserData();
+        if (userData && _.isObject(userData) && userData.appMainData){
+            appState.appData.appMainData = userData.appMainData;
+        } else {
+            appState.appData.appMainData = _.cloneDeep(appState.appData.defaultMainData);
+            appState.userData.appMainData = _.cloneDeep(appState.appData.defaultMainData);
         }
         this.addUserMessage('App initialized.', 'info', [], false,  false);
         return true;

@@ -1,5 +1,5 @@
 exports.appData = {
-    mainData: {
+    appMainData: {
         isSimulating: false,
         cancelable: true,
         logProgress: false,
