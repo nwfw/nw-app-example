@@ -82,7 +82,6 @@ exports.component = {
                 if (this.currentOperationValue < this.maxOperationValue){
                     appOperationHelper.operationUpdate(this.currentOperationValue, this.maxOperationValue);
                     let duration = this.maxSpeed - this.speed;
-                    console.log(this.logProgress);
                     if (this.logProgress && ((this.currentOperationValue - this.lastLoggedValue) % 10 == 0)){
                         this.lastLoggedValue = this.currentOperationValue;
                         _appWrapper.getHelper('component').addUserMessage('Log progress: {1} / {2}', 'info', [this.currentOperationValue, this.maxOperationValue], false, true, true, true);

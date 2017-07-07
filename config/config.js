@@ -260,12 +260,14 @@ exports.config = {
     compileCss: true,
 
     debug: {
+        debugToFile: false,
         forceDebug: {
             App: false,
         },
     },
 
     userMessages: {
+        userMessagesToFile: false,
         forceUserMessages: {
             App: false,
         }
