@@ -2,7 +2,7 @@ exports.appData = {
     appMainData: {
         isSimulating: false,
         cancelable: true,
-        logProgress: false,
+        logProgress: true,
         stepValue: 1,
         maxOperationValueLimit: 10000,
         maxOperationValue: 1000,
@@ -33,6 +33,7 @@ exports.appData = {
         isSimulating: false,
         cancelable: true,
         logProgress: false,
+        logProgressMessages: false,
         stepValue: 1,
         maxOperationValueLimit: 10000,
         maxOperationValue: 1000,

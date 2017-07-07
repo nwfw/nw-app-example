@@ -1,3 +1,7 @@
 .test-modal .modal-dialog-body {
     text-align: center;
 }
+
+.test-modal .test-modal-text {
+    margin: 5px auto 10px auto;
+}

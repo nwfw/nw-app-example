@@ -12,7 +12,8 @@ exports.component = {
     methods: {
         addModalMessage: function(){
             let types = ['info', 'warning', 'error'];
-            _appWrapper.getHelper('modal').addModalMessage({message: 'test', type: _.sample(types)});
+            let messages = ['test', 'testing', 'more testing', 'another test', 'one more test'];
+            _appWrapper.getHelper('modal').addModalMessage({message: _.sample(messages), type: _.sample(types)});
         }
     },
     computed: {

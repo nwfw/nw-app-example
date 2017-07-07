@@ -18,12 +18,15 @@ exports.component = {
             operationTick: this.operationTick.bind(this)
         };
     },
+    updated: function(){
+        this.saveUserData(null, true);
+    },
     data: function () {
         return _.cloneDeep(appState.userData.appMainData);
     },
     methods: {
         clearMessages: function(e){
-            if (e && e.target.hasClass('button-disabled')){
+            if (e && e.target && e.target.hasClass('button-disabled')){
                 return;
             }
             _appWrapper.getHelper('debug').clearUserMessages();
@@ -49,13 +52,12 @@ exports.component = {
                 return;
             }
             this.statusChange('operationStatusChanging');
-            this.speed = 800;
             this.currentOperationValue = 0;
             this.operationId = _appWrapper.getHelper('appOperation').operationStart('operation', this.cancelable, true, true, 'progress');
             _appWrapper.getHelper('appOperation').operationUpdate(0, this.maxOperationValue);
         },
         simulateProgress: function(e){
-            if (e && e.target.hasClass('button-disabled')){
+            if (e && e.target && e.target.hasClass('button-disabled')){
                 return;
             }
             this.statusChange('simulationStatusChanging');
@@ -80,9 +82,10 @@ exports.component = {
                 if (this.currentOperationValue < this.maxOperationValue){
                     appOperationHelper.operationUpdate(this.currentOperationValue, this.maxOperationValue);
                     let duration = this.maxSpeed - this.speed;
+                    console.log(this.logProgress);
                     if (this.logProgress && ((this.currentOperationValue - this.lastLoggedValue) % 10 == 0)){
                         this.lastLoggedValue = this.currentOperationValue;
-                        _appWrapper.getHelper('component').addUserMessage('Log progress: {1} / {2}', 'info', [this.currentOperationValue, this.maxOperationValue], false, true, true);
+                        _appWrapper.getHelper('component').addUserMessage('Log progress: {1} / {2}', 'info', [this.currentOperationValue, this.maxOperationValue], false, true, true, true);
                     }
                     await _appWrapper.nextTick();
                     this.tickTimeout = setTimeout(this.boundMethods.operationTick, duration);
@@ -239,17 +242,28 @@ exports.component = {
                 }
             }
         },
-        resetUserData: function() {
+        resetUserData: function(e) {
+            if (e && e.target && e.target.hasClass('button-disabled')){
+                return;
+            }
+            let modalHelper = _appWrapper.getHelper('modal');
+            modalHelper.confirm('Are you sure?', 'Resetting all user data', 'Yes', 'No', this.doResetUserData);
+        },
+        doResetUserData: function() {
             _appWrapper.getHelper('userData').clearUserData();
             let keys = Object.keys(this.$data);
             for (let i=0; i<keys.length; i++){
                 this[keys[i]] = appState.appData.defaultMainData[keys[i]];
             }
             _appWrapper.getHelper('userData').saveUserData({appMainData: appState.appData.defaultMainData});
+            _appWrapper.getHelper('modal').closeCurrentModal();
         },
-        saveUserData: function() {
+        saveUserData: function(e, omitAppState) {
+            if (e && e.target && e.target.hasClass('button-disabled')){
+                return;
+            }
             let userDataHelper = _appWrapper.getHelper('userData');
-            userDataHelper.saveUserData({appMainData: _.cloneDeep(this.$data)});
+            userDataHelper.saveUserData({appMainData: _.cloneDeep(this.$data)}, omitAppState);
         },
         userDataChanged: function(){
             let utilHelper = _appWrapper.getHelper('util');
