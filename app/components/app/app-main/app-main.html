@@ -12,7 +12,7 @@
                 <h2>User data</h2>
                 <input v-bind:class="{'button-disabled': !hasCustomData}" type="button" @click.prevent="resetUserData" value="Reset user data" />
                 &nbsp;
-                <input v-bind:class="{'button-disabled': !savedDataChanged}" type="button" @click.prevent="saveUserData" value="Save user data" />
+                <input v-if="false" v-bind:class="{'button-disabled': !savedDataChanged}" type="button" @click.prevent="saveUserData" value="Save user data" />
             </div>
             <div class="app-main-section app-main-message-test">
                 <h2>Test user messages and debug</h2>
@@ -39,14 +39,14 @@
                 &nbsp;
                 <label>
                     User message:
-                    <input type="checkbox" value="1" v-model="logMessage" />
+                    <checkbox-styled ref="logMessagesCheckbox" v-bind:modelProperty="'appState.userData.appMainData.logMessage'" v-bind:name="'logMessages'"></checkbox-styled>
                 </label>
                 &nbsp;
                 <label>
                     Debug message:
-                    <input type="checkbox" value="1" v-model="logDebug" />
+                    <checkbox-styled ref="logDebugCheckbox" v-bind:modelProperty="'appState.userData.appMainData.logDebug'" v-bind:name="'logDebug'"></checkbox-styled>
                 </label>
-                &nbsp; <input type="button" @click.prevent="testMessage" :value="'log X ' + messageCount" />
+                &nbsp; <input type="button" @click.prevent="testMessage" :value="'log X ' + messageCount" v-bind:class="{'button-disabled': !(logDebug || logMessage)}" />
                 &nbsp; <input v-bind:class="{'button-disabled': !(appState.debugMessages.length + appState.userMessages.length)}" type="button" @click.prevent="clearMessages" value="Clear all" />
             </div>
             <div class="app-main-section app-main-operation-test">
@@ -70,7 +70,7 @@
                 <label>
                     Cancelable:
                     <template v-if="!appState.appOperation.operationActive">
-                        <input type="checkbox" value="1" v-model="cancelable" />
+                        <checkbox-styled ref="cancelableCheckbox" v-bind:modelProperty="'appState.userData.appMainData.cancelable'" v-bind:name="'cancelable'"></checkbox-styled>
                     </template>
                     <template v-else>
                         <span class="fa" v-bind:class="{'fa-square-o' : !cancelable, 'fa-check-square-o': cancelable}"></span>
@@ -80,7 +80,7 @@
                 <label>
                     Log progress:
                     <template v-if="!appState.appOperation.operationActive">
-                        <input type="checkbox" value="1" v-model="logProgress" />
+                        <checkbox-styled ref="logProgressCheckbox" v-bind:modelProperty="'appState.userData.appMainData.logProgress'" v-bind:name="'logProgress'"></checkbox-styled>
                     </template>
                     <template v-else>
                         <span class="fa" v-bind:class="{'fa-square-o' : !logProgress, 'fa-check-square-o': logProgress}"></span>
@@ -126,49 +126,49 @@
                 <h2>Test modal</h2>
                 <label>
                     Animate size:
-                    <input type="checkbox" value="1" v-model="animateTestModal" />
+                    <checkbox-styled ref="animateTestModalCheckbox" v-bind:modelProperty="'appState.userData.appMainData.animateTestModal'" v-bind:name="'animateTestModal'"></checkbox-styled>
                 </label>
                 &nbsp;
                 <label>
                     Auto close
-                    <input type="checkbox" value="1" v-model="autoCloseModal" />
+                    <checkbox-styled ref="autoCloseModalCheckbox" v-bind:modelProperty="'appState.userData.appMainData.autoCloseModal'" v-bind:name="'autoCloseModal'"></checkbox-styled>
                 </label>
                 &nbsp;
                 <label>
                     Show close link
-                    <input type="checkbox" @change="modalCheckboxChange" data-model="showCloseLink" v-model="showCloseLink" />
+                    <checkbox-styled ref="showCloseLinkCheckbox" v-bind:modelProperty="'appState.userData.appMainData.showCloseLink'" v-bind:name="'showCloseLink'" v-bind:change="modalCheckboxChange"></checkbox-styled>
                 </label>
                 <br />
                 <br />
                 <label>
                     Show confirm button
-                    <input type="checkbox" @change="modalCheckboxChange" data-model="showConfirmButton" v-model="showConfirmButton" />
+                    <checkbox-styled ref="showConfirmButtonCheckbox" v-bind:modelProperty="'appState.userData.appMainData.showConfirmButton'" v-bind:name="'showConfirmButton'" v-bind:change="modalCheckboxChange"></checkbox-styled>
                 </label>
                 &nbsp;
                 <label>
                     Confirm disabled
-                    <input type="checkbox" @change="modalCheckboxChange" data-model="confirmDisabled" v-model="confirmDisabled" />
+                    <checkbox-styled ref="confirmDisabledCheckbox" v-bind:modelProperty="'appState.userData.appMainData.confirmDisabled'" v-bind:name="'confirmDisabled'" v-bind:change="modalCheckboxChange"></checkbox-styled>
                 </label>
                 &nbsp;
                 <label>
                     Confirm selected
-                    <input type="checkbox" @change="modalCheckboxChange" data-model="confirmSelected" v-model="confirmSelected" />
+                    <checkbox-styled ref="confirmSelectedCheckbox" v-bind:modelProperty="'appState.userData.appMainData.confirmSelected'" v-bind:name="'confirmSelected'" v-bind:change="modalCheckboxChange"></checkbox-styled>
                 </label>
                 <br />
                 <br />
                 <label>
                     Show cancel button
-                    <input type="checkbox" @change="modalCheckboxChange" data-model="showCancelButton" v-model="showCancelButton" />
+                    <checkbox-styled ref="showCancelButtonCheckbox" v-bind:modelProperty="'appState.userData.appMainData.showCancelButton'" v-bind:name="'showCancelButton'" v-bind:change="modalCheckboxChange"></checkbox-styled>
                 </label>
                 &nbsp;
                 <label>
                     Cancel disabled
-                    <input type="checkbox" @change="modalCheckboxChange" data-model="cancelDisabled" v-model="cancelDisabled" />
+                    <checkbox-styled ref="cancelDisabledCheckbox" v-bind:modelProperty="'appState.userData.appMainData.cancelDisabled'" v-bind:name="'cancelDisabled'" v-bind:change="modalCheckboxChange"></checkbox-styled>
                 </label>
                 &nbsp;
                 <label>
                     Cancel selected
-                    <input type="checkbox" @change="modalCheckboxChange" data-model="cancelSelected" v-model="cancelSelected" />
+                    <checkbox-styled ref="cancelSelectedCheckbox" v-bind:modelProperty="'appState.userData.appMainData.cancelSelected'" v-bind:name="'cancelSelected'" v-bind:change="modalCheckboxChange"></checkbox-styled>
                 </label>
                 <br />
                 <br />

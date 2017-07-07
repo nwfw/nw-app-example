@@ -22,7 +22,7 @@ exports.component = {
         this.saveUserData(null, true);
     },
     data: function () {
-        return _.cloneDeep(appState.userData.appMainData);
+        return appState.userData.appMainData;
     },
     methods: {
         clearMessages: function(e){
@@ -203,7 +203,7 @@ exports.component = {
         },
         modalCheckboxChange: function (e){
             let cb = e.target;
-            let prop = cb.getAttribute('data-model');
+            let prop = cb.getAttribute('name');
             let checked = cb.checked;
             if (prop == 'showCancelButton'){
                 if (!checked){
@@ -263,7 +263,15 @@ exports.component = {
                 return;
             }
             let userDataHelper = _appWrapper.getHelper('userData');
-            userDataHelper.saveUserData({appMainData: _.cloneDeep(this.$data)}, omitAppState);
+            let data = _.cloneDeep(this.$data);
+            // data.speed = 800;
+            // data.isSimulating = false;
+            // data.currentOperationValue = 0;
+            // data.lastLoggedValue = 0;
+            // data.operationStatusChanging = 0;
+            // data.simulationStatusChanging = 0;
+
+            userDataHelper.saveUserData({appMainData: data}, omitAppState);
             if (!omitAppState){
                 _appWrapper.addNotification('User data saved.', []);
             }
