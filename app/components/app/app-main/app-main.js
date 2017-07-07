@@ -257,6 +257,7 @@ exports.component = {
             }
             _appWrapper.getHelper('userData').saveUserData({appMainData: appState.appData.defaultMainData});
             _appWrapper.getHelper('modal').closeCurrentModal();
+            _appWrapper.addNotification('User data reset.', []);
         },
         saveUserData: function(e, omitAppState) {
             if (e && e.target && e.target.hasClass('button-disabled')){
@@ -264,6 +265,9 @@ exports.component = {
             }
             let userDataHelper = _appWrapper.getHelper('userData');
             userDataHelper.saveUserData({appMainData: _.cloneDeep(this.$data)}, omitAppState);
+            if (!omitAppState){
+                _appWrapper.addNotification('User data saved.', []);
+            }
         },
         userDataChanged: function(){
             let utilHelper = _appWrapper.getHelper('util');
