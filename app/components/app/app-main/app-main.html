@@ -133,17 +133,17 @@
                 <h2>Test modal</h2>
                 <label>
                     Animate size:
-                    <checkbox-styled ref="animateTestModalCheckbox" v-bind:modelProperty="'appState.userData.appMainData.animateTestModal'" v-bind:name="'animateTestModal'"></checkbox-styled>
+                    <checkbox-styled ref="animateTestModalCheckbox" v-bind:modelProperty="'appState.userData.appMainData.animateTestModal'" v-bind:name="'animateTestModal'" v-bind:change="styledCheckboxChange"></checkbox-styled>
                 </label>
                 &nbsp;
                 <label>
                     Auto close
-                    <checkbox-styled ref="autoCloseModalCheckbox" v-bind:modelProperty="'appState.userData.appMainData.autoCloseModal'" v-bind:name="'autoCloseModal'"></checkbox-styled>
+                    <checkbox-styled ref="autoCloseModalCheckbox" v-bind:modelProperty="'appState.userData.appMainData.autoCloseModal'" v-bind:name="'autoCloseModal'" v-bind:change="styledCheckboxChange"></checkbox-styled>
                 </label>
                 &nbsp;
                 <label>
                     Show close link
-                    <checkbox-styled ref="showCloseLinkCheckbox" v-bind:modelProperty="'appState.userData.appMainData.showCloseLink'" v-bind:name="'showCloseLink'" v-bind:change="modalCheckboxChange"></checkbox-styled>
+                    <checkbox-styled ref="showCloseLinkCheckbox" v-bind:modelProperty="'appState.userData.appMainData.showCloseLink'" v-bind:name="'showCloseLink'" v-bind:change="styledCheckboxChange"></checkbox-styled>
                 </label>
                 <br />
                 <br />

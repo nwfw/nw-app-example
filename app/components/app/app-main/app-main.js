@@ -19,6 +19,7 @@ exports.component = {
         };
     },
     updated: function(){
+        console.log('upd');
         this.saveUserData();
     },
     data: function () {
@@ -170,6 +171,9 @@ exports.component = {
             modalOptions.confirmSelected = this.confirmSelected;
             modalOptions.cancelSelected = this.cancelSelected;
             modalOptions.showCloseLink = this.showCloseLink;
+            modalOptions.busy = true;
+
+            let options = _.cloneDeep(modalOptions);
 
             _appWrapper._confirmModalAction = function() {
                 modalHelper.modalBusy('Confirming...');
@@ -188,8 +192,7 @@ exports.component = {
                 }, 1000);
             };
 
-            appState.modalData.currentModal = modalHelper.getModalObject('testModal', modalOptions);
-            modalHelper.openCurrentModal();
+            modalHelper.openModal('testModal', options);
         },
         styledCheckboxChange: function (e){
             let cb = e.target;
@@ -201,40 +204,86 @@ exports.component = {
             let cb = e.target;
             let prop = cb.getAttribute('name');
             let checked = cb.checked;
+
+            let cancelSelected;
+            let cancelDisabled;
+            let showCancelButton;
+            let confirmSelected;
+            let confirmDisabled;
+            let showConfirmButton;
+
+
             if (prop == 'showCancelButton'){
                 if (!checked){
-                    this.cancelSelected = false;
+                    showCancelButton = false;
+                    cancelSelected = false;
+                } else {
+                    showCancelButton = true;
                 }
             }
             if (prop == 'cancelDisabled'){
                 if (checked){
-                    this.cancelSelected = false;
+                    cancelDisabled = true;
+                    cancelSelected = false;
+                } else {
+                    cancelDisabled = false;
                 }
             }
             if (prop == 'cancelSelected'){
                 if (checked){
-                    this.cancelDisabled = false;
-                    this.showCancelButton = true;
-                    this.confirmSelected = false;
+                    cancelDisabled = false;
+                    showCancelButton = true;
+                    confirmSelected = false;
+                    cancelSelected = true;
+                } else {
+                    cancelSelected = false;
                 }
             }
 
             if (prop == 'showConfirmButton'){
                 if (!checked){
-                    this.confirmSelected = false;
+                    showConfirmButton = false;
+                    confirmSelected = false;
+                } else {
+                    showConfirmButton = true;
                 }
             }
             if (prop == 'confirmDisabled'){
                 if (checked){
-                    this.confirmSelected = false;
+                    confirmSelected = false;
+                    confirmDisabled = true;
+                } else {
+                    confirmDisabled = false;
                 }
             }
             if (prop == 'confirmSelected'){
                 if (checked){
-                    this.confirmDisabled = false;
-                    this.showConfirmButton = true;
-                    this.cancelSelected = false;
+                    confirmSelected = true;
+                    confirmDisabled = false;
+                    showConfirmButton = true;
+                    cancelSelected = false;
+                } else {
+                    confirmSelected = false;
                 }
+            }
+
+            if (!_.isUndefined(cancelSelected)){
+                this.$data.cancelSelected = cancelSelected;
+            }
+            if (!_.isUndefined(cancelDisabled)){
+                this.$data.cancelDisabled = cancelDisabled;
+            }
+            if (!_.isUndefined(showCancelButton)){
+                this.$data.showCancelButton = showCancelButton;
+            }
+            if (!_.isUndefined(confirmSelected)){
+                this.$data.confirmSelected = confirmSelected;
+            }
+            if (!_.isUndefined(confirmDisabled)){
+                this.$data.confirmDisabled = confirmDisabled;
+            }
+            if (!_.isUndefined(showConfirmButton)){
+                this.$data.showConfirmButton = showConfirmButton;
             }
         },
         resetUserData: function(e) {
