@@ -12,74 +12,8 @@
     padding: 0px;
 }
 
-.app-main-section {
-    border: 1px solid #666666;
-    margin: 5px 0;
-    padding: 0px 5px 5px 5px;
-}
-
-.app-main-message-test,
-.app-main-operation-test {
-    flex: 1 1 auto;
-    text-align: center;
-}
-
-.app-main-operation-info {
-    float: right;
-    position: relative;
-}
-.app-main-operation-info-section {
-    padding: 1px 5px 2px 5px;
-    border: 1px solid;
-    border-color: transparent;
-    border-radius: 5px;
-    transition-property: border-color, background-color, color, text-shadow;
-    transition-duration: var(--short-animation-duration);
-    transition-timing-function: ease-in-out;
-}
-
-.app-main-operation-info-section.highlighted {
-    background-color: #FFCC33;
-    color: #333333;
-    border-color: #333333;
-    text-shadow: 0px 0px 3px #333333;
-}
-
-.app-main-operation-info-section .fa {
-    width: 16px;
-    position: relative;
-    top: 1px;
-}
-
-.app-main-data {
-    flex: 1 0 auto;
-    margin-top: 10px;
-    display: flex;
-    flex-flow: row;
-    align-items: stretch;
-}
-.app-main-user-config,
-.app-main-app-info {
-    flex: 1 1 auto;
-    margin-top: 10px;
-    display: flex;
-    flex-flow: column;
-    margin: 5px;
-}
-
 .app-main-inner h2 {
     margin: 3px auto 5px auto;
-    text-align: center;
-}
-
-.app-main-data h2 {
-    flex: 0 0 auto;
-}
-
-.app-main-data .inspector-json-wrapper {
-    flex: 1 1 auto;
-    background: #CCCCCC;
-    overflow: auto;
 }
 
 .app-main-inner input {
@@ -87,12 +21,13 @@
     color: #CCCCCC;
 }
 
-.app-main-message-test input:hover {
+.app-main-inner input[type=button]:hover {
     background: #999999;
     color: #000000;
 }
 
-.app-main-inner input.button-disabled {
+.app-main-inner input.button-disabled,
+.app-main-inner input.button-disabled:hover {
     color: #999999;
     border-color: #999999;
     background: #666666;
@@ -104,15 +39,66 @@
     top: 4px;
 }
 
-.app-main-inner .simulation-speed {
-    display: inline-block;
-    width: 30px;
+.app-main-section {
+    border: 1px solid #666666;
+    margin: 5px 0;
+    padding: 0px 5px 5px 5px;
     text-align: center;
+    flex: 1 1 auto;
 }
 
-.app-main-modal-test {
-    text-align: center;
+.app-main-section.app-main-operation-test .app-main-operation-info {
+    float: right;
+    position: relative;
 }
-.app-main-clear-data {
-    text-align: center;
+
+.app-main-section.app-main-operation-test .app-main-operation-info .app-main-operation-info-section {
+    padding: 1px 5px 2px 5px;
+    border: 1px solid;
+    border-color: transparent;
+    border-radius: 5px;
+    transition-property: border-color, background-color, color, text-shadow;
+    transition-duration: var(--short-animation-duration);
+    transition-timing-function: ease-in-out;
+}
+
+.app-main-section.app-main-operation-test .app-main-operation-info .app-main-operation-info-section.highlighted {
+    background-color: #FFCC33;
+    color: #333333;
+    border-color: #333333;
+    text-shadow: 0px 0px 3px #333333;
+}
+
+.app-main-section.app-main-operation-test .app-main-operation-info .app-main-operation-info-section .fa {
+    width: 16px;
+    position: relative;
+    top: 1px;
+}
+
+.app-main-section.app-main-data {
+    flex: 1 0 auto;
+    margin-top: 10px;
+    display: flex;
+    flex-flow: row;
+    align-items: stretch;
+    text-align: left;
+}
+
+.app-main-section.app-main-data .app-main-user-config,
+.app-main-section.app-main-data .app-main-app-info {
+    flex: 1 1 auto;
+    margin-top: 10px;
+    display: flex;
+    flex-flow: column;
+    margin: 5px;
+}
+
+.app-main-section.app-main-data h2 {
+    flex: 0 0 auto;
+}
+
+.app-main-section.app-main-data .inspector-json-wrapper {
+    flex: 1 1 auto;
+    background: #CCCCCC;
+    overflow: auto;
 }

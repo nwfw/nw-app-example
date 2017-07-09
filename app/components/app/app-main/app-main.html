@@ -15,39 +15,52 @@
                 <input v-if="false" v-bind:class="{'button-disabled': !savedDataChanged}" type="button" @click.prevent="saveUserData" value="Save user data" />
             </div>
             <div class="app-main-section app-main-message-test">
-                <h2>Test user messages and debug</h2>
+                <h2>Test user messages, debug and notifications</h2>
                 <label>Count: </label>
-                <select name="count" v-model.number="messageCount">
-                    <option value="1">1</option>
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <option value="250">250</option>
+                <select name="count" v-nwmodel.number="messageCount">
+                    <option v-for="countItem in messageCounts" :value="countItem" v-html="countItem"></option>
                 </select>
                 &nbsp;
                 <label>Type: </label>
-                <select name="type" v-model="messageType">
-                    <option value="debug">debug</option>
-                    <option value="info">info</option>
-                    <option value="delimiter">delimiter</option>
-                    <option value="warning">warning</option>
-                    <option value="error">error</option>
-                    <option value="random">random</option>
+                <select name="type" v-nwmodel="messageType">
+                    <option v-for="type in messageTypes" :value="type" v-html="type"></option>
                 </select>
                 &nbsp;
                 <label>
                     User message:
-                    <checkbox-styled ref="logMessagesCheckbox" v-bind:modelProperty="'appState.userData.appMainData.logMessage'" v-bind:name="'logMessages'"></checkbox-styled>
+                    <checkbox-styled ref="logMessageCheckbox" v-bind:modelProperty="'appState.userData.appMainData.logMessage'" v-bind:name="'logMessage'" v-bind:change="styledCheckboxChange"></checkbox-styled>
                 </label>
                 &nbsp;
                 <label>
                     Debug message:
-                    <checkbox-styled ref="logDebugCheckbox" v-bind:modelProperty="'appState.userData.appMainData.logDebug'" v-bind:name="'logDebug'"></checkbox-styled>
+                    <checkbox-styled ref="logDebugCheckbox" v-bind:modelProperty="'appState.userData.appMainData.logDebug'" v-bind:name="'logDebug'" v-bind:change="styledCheckboxChange"></checkbox-styled>
                 </label>
                 &nbsp; <input type="button" @click.prevent="testMessage" :value="'log X ' + messageCount" v-bind:class="{'button-disabled': !(logDebug || logMessage)}" />
                 &nbsp; <input v-bind:class="{'button-disabled': !(appState.debugMessages.length + appState.userMessages.length)}" type="button" @click.prevent="clearMessages" value="Clear all" />
+                <br />
+                <br />
+                <label>
+                    Custom notification
+                    <checkbox-styled ref="customNotificationCheckbox" v-bind:modelProperty="'appState.userData.appMainData.customNotification'" v-bind:name="'customNotification'" v-bind:change="styledCheckboxChange"></checkbox-styled>
+                </label>
+                <br />
+                <br />
+                <span v-if="!customNotification">
+                    <label>
+                        Notification:
+                    </label>
+                    <select v-nwmodel="notificationText">
+                        <option v-for="notification in notifications" :value="notification" v-html="notification"></option>
+                    </select>
+                </span>
+                <span v-else>
+                    <label>
+                    Notification text:
+                    </label>
+                    <input name="customNotificationText" type="text" size="40" v-nwmodel.trim="customNotificationText"/>
+                </span>
+                &nbsp;
+                <input v-bind:class="{'button-disabled': customNotification && !customNotificationText}" type="button" @click.prevent="addNotification" value="Add notification" />
             </div>
             <div class="app-main-section app-main-operation-test">
                 <h2>Test app operation and statuses</h2>
@@ -64,13 +77,14 @@
                     Operation value (length)
                 </label>
                 &nbsp;
-                <input v-model="maxOperationValue" class="range-input" type="range" :min="1" :max="maxOperationValueLimit" step="1" /> <input @keyup="checkMaxOperationValueInput" type="number" v-model="maxOperationValue" :min="1" :max="maxOperationValueLimit" />
+                <input v-nwmodel="maxOperationValue" class="range-input" type="range" :min="1" :max="maxOperationValueLimit" step="1" />
+                <input @input="checkMaxOperationValueInput" type="number" v-nwmodel="maxOperationValue" :min="1" :max="maxOperationValueLimit" @updatemodel="onUpdateModel" />
                 <br />
                 <br />
                 <label>
                     Cancelable:
                     <template v-if="!appState.appOperation.operationActive">
-                        <checkbox-styled ref="cancelableCheckbox" v-bind:modelProperty="'appState.userData.appMainData.cancelable'" v-bind:name="'cancelable'"></checkbox-styled>
+                        <checkbox-styled ref="cancelableCheckbox" v-bind:modelProperty="'appState.userData.appMainData.cancelable'" v-bind:name="'cancelable'" v-bind:change="styledCheckboxChange"></checkbox-styled>
                     </template>
                     <template v-else>
                         <span class="fa" v-bind:class="{'fa-square-o' : !cancelable, 'fa-check-square-o': cancelable}"></span>
@@ -80,7 +94,7 @@
                 <label>
                     Log progress:
                     <template v-if="!appState.appOperation.operationActive">
-                        <checkbox-styled ref="logProgressCheckbox" v-bind:modelProperty="'appState.userData.appMainData.logProgress'" v-bind:name="'logProgress'"></checkbox-styled>
+                        <checkbox-styled ref="logProgressCheckbox" v-bind:modelProperty="'appState.userData.appMainData.logProgress'" v-bind:name="'logProgress'" v-bind:change="styledCheckboxChange"></checkbox-styled>
                     </template>
                     <template v-else>
                         <span class="fa" v-bind:class="{'fa-square-o' : !logProgress, 'fa-check-square-o': logProgress}"></span>
@@ -97,15 +111,13 @@
                     Speed
                 </label>
                 &nbsp;
-                <input v-model="speed" class="range-input" type="range" :min="minSpeed" :max="maxSpeed - 1" step="1" /> <input @keyup="checkSpeedInput" type="number" v-model="speed" :min="minSpeed" :max="maxSpeed - 1" />
+                <input v-nwmodel.number="speed" name="speedRange" class="range-input" type="range" :min="minSpeed" :max="maxSpeed - 1" step="1" />
+                <input name="speed" type="number" v-nwmodel.number="speed" :min="minSpeed" :max="maxSpeed - 1" />
                 <br />
                 <br />
                 <label>Step value: </label>
-                <select name="stepValue" v-model="stepValue">
-                    <option value="1">1</option>
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
+                <select name="stepValue" v-nwmodel="stepValue">
+                    <option v-for="value in stepValues" :value="value" v-html="value"></option>
                 </select>
                 &nbsp; &nbsp; &nbsp;
                 &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress || parseInt(appState.progressData.percentComplete, 10) >= (100 - stepValue)}" type="button" @click.prevent="operationIncrement" :value="'Increment progress (+' + stepValue + ')'" />
@@ -113,13 +125,8 @@
                 <br />
                 <br />
                 <label>App status: </label>
-                <select name="status" v-model="appState.status.appStatus">
-                    <option value="error">error</option>
-                    <option value="idle">idle</option>
-                    <option value="busy">busy</option>
-                    <option value="success">success</option>
-                    <option value="working">working</option>
-                    <option value="offline">offline</option>
+                <select name="status" v-model.literal="appState.status.appStatus">
+                    <option v-for="status in appStatuses" :value="status" v-html="status"></option>
                 </select>
             </div>
             <div class="app-main-section app-main-modal-test">

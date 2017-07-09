@@ -150,7 +150,7 @@ exports.config = {
                                 label: 'Exit',
                                 method: 'exitApp',
                                 shortcut: {
-                                    key: 'x',
+                                    key: 'q',
                                     modifiers: {
                                         ctrl: true
                                     }

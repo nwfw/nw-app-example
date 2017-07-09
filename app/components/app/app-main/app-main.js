@@ -19,10 +19,11 @@ exports.component = {
         };
     },
     updated: function(){
-        this.saveUserData(null, true);
+        this.saveUserData();
     },
     data: function () {
-        return appState.userData.appMainData;
+        let data = appState.userData.appMainData;
+        return data;
     },
     methods: {
         clearMessages: function(e){
@@ -35,7 +36,7 @@ exports.component = {
         testMessage: function(){
             let types = ['debug', 'info', 'warning','error','delimiter'];
             let count = this.messageCount;
-            let messageType = this.messageType;
+            let messageType = _.cloneDeep(this.messageType);
             for (let i=0; i<count; i++){
                 if (this.messageType == 'random'){
                     messageType = types[Math.floor(Math.random()*types.length)];
@@ -138,17 +139,6 @@ exports.component = {
                 this[property] = 0;
             }, 500);
         },
-        checkSpeedInput: function(e) {
-            if (this.speed > (this.maxSpeed - 1)){
-                this.speed = (this.maxSpeed - 1);
-            }
-            if (this.speed < this.minSpeed){
-                this.speed = this.minSpeed;
-            }
-            if (e.target.value != this.speed){
-                e.target.value = this.speed;
-            }
-        },
         checkMaxOperationValueInput: function(e) {
             if (this.maxOperationValue > (this.maxOperationValueLimit)){
                 this.maxOperationValue = (this.maxOperationValueLimit);
@@ -201,6 +191,12 @@ exports.component = {
             appState.modalData.currentModal = modalHelper.getModalObject('testModal', modalOptions);
             modalHelper.openCurrentModal();
         },
+        styledCheckboxChange: function (e){
+            let cb = e.target;
+            let prop = cb.getAttribute('name');
+            let checked = cb.checked;
+            this[prop] = checked;
+        },
         modalCheckboxChange: function (e){
             let cb = e.target;
             let prop = cb.getAttribute('name');
@@ -252,28 +248,21 @@ exports.component = {
             _appWrapper.getHelper('userData').clearUserData();
             let keys = Object.keys(this.$data);
             for (let i=0; i<keys.length; i++){
-                this[keys[i]] = appState.appData.defaultMainData[keys[i]];
+                this[keys[i]] = appState.appData.defaultAppMainData[keys[i]];
             }
-            _appWrapper.getHelper('userData').saveUserData({appMainData: appState.appData.defaultMainData});
+            _appWrapper.getHelper('userData').saveUserData({appMainData: appState.appData.defaultAppMainData});
             _appWrapper.getHelper('modal').closeCurrentModal();
-            _appWrapper.addNotification('User data reset.', []);
+            _appWrapper.addUserMessage('User data reset.', 'info', []);
         },
-        saveUserData: function(e, omitAppState) {
+        saveUserData: async function(e, noNotification) {
             if (e && e.target && e.target.hasClass('button-disabled')){
                 return;
             }
             let userDataHelper = _appWrapper.getHelper('userData');
             let data = _.cloneDeep(this.$data);
-            // data.speed = 800;
-            // data.isSimulating = false;
-            // data.currentOperationValue = 0;
-            // data.lastLoggedValue = 0;
-            // data.operationStatusChanging = 0;
-            // data.simulationStatusChanging = 0;
-
-            userDataHelper.saveUserData({appMainData: data}, omitAppState);
-            if (!omitAppState){
-                _appWrapper.addNotification('User data saved.', []);
+            let saved = await userDataHelper.saveUserData({appMainData: data});
+            if (saved && !noNotification){
+                _appWrapper.addUserMessage('User data saved.', 'info', []);
             }
         },
         userDataChanged: function(){
@@ -287,10 +276,17 @@ exports.component = {
             let utilHelper = _appWrapper.getHelper('util');
 
             var currentDataMap = utilHelper.propertyValuesMap(_.cloneDeep(this.$data));
-            let savedData = _.cloneDeep(appState.appData.defaultMainData);
+            let savedData = _.cloneDeep(appState.appData.defaultAppMainData);
             let oldDataMap = utilHelper.propertyValuesMap(savedData);
             var keyMapDiff = utilHelper.difference(oldDataMap, currentDataMap);
             return Object.keys(keyMapDiff).length;
+        },
+        addNotification: function(){
+            let text = this.notificationText;
+            if (this.customNotification){
+                text = this.customNotificationText;
+            }
+            _appWrapper.addNotification(text, 'info', true);
         }
     },
     computed: {
@@ -311,6 +307,19 @@ exports.component = {
         },
         savedDataChanged: function(){
             return this.userDataChanged();
+        },
+        isCustomNotification: function(){
+            return this.customNotification;
+        }
+    },
+    watch: {
+        speed: function(){
+            if (this.speed > (this.maxSpeed - 1)){
+                this.speed = (this.maxSpeed - 1);
+            }
+            if (this.speed < this.minSpeed){
+                this.speed = this.minSpeed;
+            }
         }
     }
 };
