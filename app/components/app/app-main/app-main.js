@@ -54,7 +54,7 @@ exports.component = {
             }
             this.statusChange('operationStatusChanging');
             this.operationData.currentOperationValue = 0;
-            this.operationData.operationId = _appWrapper.getHelper('appOperation').operationStart('operation', this.cancelable, true, true, 'progress');
+            this.operationData.operationId = _appWrapper.getHelper('appOperation').operationStart('operation', this.cancelable, true, true, 'progress', false, true);
             _appWrapper.getHelper('appOperation').operationUpdate(0, this.maxOperationValue);
         },
         simulateProgress: function(e){
@@ -315,6 +315,41 @@ exports.component = {
                 text = this.customNotificationText;
             }
             _appWrapper.addNotification(text, 'info', true);
+        },
+        addDesktopNotification: async function(e){
+            if (e && e.target && e.target.hasClass('button-disabled')){
+                return;
+            }
+            let notifTexts = [
+                'Desktop notification',
+                'Desktop notification test',
+                'Testing desktop notifications'
+            ];
+            let notifBodies = [
+                'Desktop notification info',
+                'Desktop notification test info',
+                'Testing desktop notifications info'
+            ];
+            let notifText = notifTexts[Math.floor(Math.random() * notifTexts.length)];
+            let notifBody = notifBodies[Math.floor(Math.random() * notifBodies.length)];
+            _appWrapper.addDesktopNotification(notifText, [], true, {
+                requireInteraction: true,
+                message: notifBody
+            },
+            {
+                onClosed: (notificationId, byUser) => {
+                    console.log('onclose', notificationId, byUser);
+                    // e.target.removeClass('button-disabled');
+                },
+                onClicked: (notificationId) => {
+                    console.log('onclick', notificationId);
+                    // e.target.removeClass('button-disabled');
+                },
+                onButtonClicked: (notificationId, buttonIndex) => {
+                    // e.target.removeClass('button-disabled');
+                    console.log('button click', notificationId, buttonIndex);
+                }
+            });
         }
     },
     computed: {

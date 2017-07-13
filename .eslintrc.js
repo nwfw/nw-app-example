@@ -37,6 +37,7 @@ module.exports = {
     "globals": {
         "appState": true,
         "nw": true,
-        "Vue": true
+        "Vue": true,
+        "chrome": true
     }
 };

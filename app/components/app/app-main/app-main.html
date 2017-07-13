@@ -61,6 +61,9 @@
                 </span>
                 &nbsp;
                 <input v-bind:class="{'button-disabled': customNotification && !customNotificationText}" type="button" @click.prevent="addNotification" value="Add notification" />
+                <br />
+                <br />
+                <input type="button" @click.prevent="addDesktopNotification" value="Add desktop notification" />
             </div>
             <div class="app-main-section app-main-operation-test">
                 <h2>Test app operation and statuses</h2>
