@@ -65,11 +65,11 @@
             <div class="app-main-section app-main-operation-test">
                 <h2>Test app operation and statuses</h2>
                 <div class="app-main-operation-info">
-                    <div class="app-main-operation-info-section app-main-operation-info-progress" v-bind:class="{'highlighted': operationStatusChanging}">
+                    <div class="app-main-operation-info-section app-main-operation-info-progress" v-bind:class="{'highlighted': operationData.operationStatusChanging}">
                         In progress: <span class="fa" v-bind:class="{'fa-square-o': !operationInProgress, 'fa-check-square-o': operationInProgress}"></span>&nbsp;
                     </div>
-                    <div class="app-main-operation-info-section app-main-operation-info-simulating" v-bind:class="{'highlighted': simulationStatusChanging}">
-                        Simulating: <span class="fa" v-bind:class="{'fa-square-o': !isSimulating, 'fa-check-square-o': isSimulating}"></span>&nbsp;
+                    <div class="app-main-operation-info-section app-main-operation-info-simulating" v-bind:class="{'highlighted': operationData.simulationStatusChanging}">
+                        Simulating: <span class="fa" v-bind:class="{'fa-square-o': !operationData.isSimulating, 'fa-check-square-o': operationData.isSimulating}"></span>&nbsp;
                     </div>
                 </div>
                 <br />
@@ -77,8 +77,8 @@
                     Operation value (length)
                 </label>
                 &nbsp;
-                <input v-nwmodel="maxOperationValue" class="range-input" type="range" :min="1" :max="maxOperationValueLimit" step="1" />
-                <input @input="checkMaxOperationValueInput" type="number" v-nwmodel="maxOperationValue" :min="1" :max="maxOperationValueLimit" @updatemodel="onUpdateModel" />
+                <input v-nwmodel.number="maxOperationValue" class="range-input" type="range" :min="1" :max="maxOperationValueLimit" step="1" />
+                <input type="number" v-nwmodel.number="maxOperationValue" :min="1" :max="maxOperationValueLimit" />
                 <br />
                 <br />
                 <label>
@@ -104,8 +104,8 @@
                 &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress}" type="button" @click.prevent="operationFinish" value="Finish" />
                 <br />
                 <br />
-                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress || isSimulating}" type="button" @click.prevent="simulateProgress" value="Simulate progress" />
-                &nbsp; <input v-bind:class="{'button-disabled': !isSimulating }" type="button" @click.prevent="stopSimulating" value="Stop simulating" />
+                &nbsp; <input v-bind:class="{'button-disabled': !operationInProgress || operationData.isSimulating}" type="button" @click.prevent="simulateProgress" value="Simulate progress" />
+                &nbsp; <input v-bind:class="{'button-disabled': !operationData.isSimulating }" type="button" @click.prevent="stopSimulating" value="Stop simulating" />
                 &nbsp;
                 <label>
                     Speed
@@ -137,14 +137,25 @@
                 </label>
                 &nbsp;
                 <label>
-                    Auto close
-                    <checkbox-styled ref="autoCloseModalCheckbox" v-bind:modelProperty="'appState.userData.appMainData.autoCloseModal'" v-bind:name="'autoCloseModal'" v-bind:change="styledCheckboxChange"></checkbox-styled>
-                </label>
-                &nbsp;
-                <label>
                     Show close link
                     <checkbox-styled ref="showCloseLinkCheckbox" v-bind:modelProperty="'appState.userData.appMainData.showCloseLink'" v-bind:name="'showCloseLink'" v-bind:change="styledCheckboxChange"></checkbox-styled>
                 </label>
+                &nbsp;
+                <label>
+                    Auto close
+                    <checkbox-styled ref="autoCloseModalCheckbox" v-bind:modelProperty="'appState.userData.appMainData.autoCloseModal'" v-bind:name="'autoCloseModal'" v-bind:change="styledCheckboxChange"></checkbox-styled>
+                </label>
+                <template v-if="autoCloseModal">
+                    <br />
+                    <label>
+                        Auto close time (seconds)
+                    </label>
+                    &nbsp;
+                    <input v-nwmodel="autoCloseDuration" class="range-input" type="range" :min="autoCloseDurationMin" :max="autoCloseDurationMax" step="autoCloseDurationStep" @updatemodel="onUpdateModel" />
+                    <span class="auto-close-duration-display">
+                        {{ formatDurationCustom(autoCloseDuration / 1000) }}s
+                    </span>
+                </template>
                 <br />
                 <br />
                 <label>

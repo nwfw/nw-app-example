@@ -5,7 +5,7 @@ exports.appState = {
             bodyComponent: 'test-modal',
             defaultBodyComponent: 'test-modal',
             modalClassName: 'test-modal',
-            preventEscClose: true,
+            preventEscClose: false,
             hideProgress: false,
             remainingTime: 0,
             success: false,

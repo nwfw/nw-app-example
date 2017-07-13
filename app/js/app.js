@@ -33,8 +33,8 @@ class App extends BaseClass {
         await _appWrapper.wait(appState.config.shortPauseDuration);
         let userData = await _appWrapper.getHelper('userData').loadUserData();
         if (userData && _.isObject(userData) && userData.appMainData){
+            _.extend(userData.appMainData, appState.appData.defaultAppMainData);
             appState.appData.appMainData = _.cloneDeep(userData.appMainData);
-            // appState.userData.appMainData = _.cloneDeep(userData.appMainData);
         } else {
             appState.appData.appMainData = _.cloneDeep(appState.appData.defaultAppMainData);
             appState.userData.appMainData = _.cloneDeep(appState.appData.defaultAppMainData);

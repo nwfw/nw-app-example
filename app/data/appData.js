@@ -1,12 +1,16 @@
 exports.appData = {
     appMainData: {},
-    defaultAppMainData: {
+    operationData: {
         isSimulating: false,
-        cancelable: true,
         operationStatusChanging: 0,
         simulationStatusChanging: 0,
+        currentOperationValue: 0,
+        lastLoggedValue: 0,
+        operationId: null,
+    },
+    defaultAppMainData: {
+        cancelable: true,
         logProgress: false,
-        logProgressMessages: false,
         stepValue: 1,
         stepValues: [
             1,
@@ -24,8 +28,6 @@ exports.appData = {
         ],
         maxOperationValueLimit: 10000,
         maxOperationValue: 1000,
-        currentOperationValue: 0,
-        lastLoggedValue: 0,
         minSpeed: 1,
         maxSpeed: 1001,
         speed: 800,
@@ -63,6 +65,10 @@ exports.appData = {
 
         animateTestModal: false,
         autoCloseModal: false,
+        autoCloseDuration: 5000,
+        autoCloseDurationMin: 5000,
+        autoCloseDurationMax: 120000,
+        autoCloseDurationStep: 1000,
         preventEscClose: false,
         showCloseLink: true,
         showConfirmButton: true,

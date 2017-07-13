@@ -102,3 +102,28 @@
     background: #CCCCCC;
     overflow: auto;
 }
+
+.auto-close-duration-display {
+    display: inline-block;
+    min-width: 30px;
+    text-align: right;
+}
+
+
+.theme-basic .app-main-inner input {
+    cursor: pointer;
+    color: #333333;
+}
+
+.theme-basic .app-main-inner input[type=button]:hover {
+    background: #666666;
+    color: #000000;
+}
+
+.theme-basic .app-main-inner input.button-disabled,
+.theme-basic .app-main-inner input.button-disabled:hover {
+    color: #666666;
+    border-color: #666666;
+    background: #CCCCCC;
+    cursor: not-allowed;
+}

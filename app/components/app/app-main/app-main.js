@@ -19,7 +19,6 @@ exports.component = {
         };
     },
     updated: function(){
-        console.log('upd');
         this.saveUserData();
     },
     data: function () {
@@ -54,8 +53,8 @@ exports.component = {
                 return;
             }
             this.statusChange('operationStatusChanging');
-            this.currentOperationValue = 0;
-            this.operationId = _appWrapper.getHelper('appOperation').operationStart('operation', this.cancelable, true, true, 'progress');
+            this.operationData.currentOperationValue = 0;
+            this.operationData.operationId = _appWrapper.getHelper('appOperation').operationStart('operation', this.cancelable, true, true, 'progress');
             _appWrapper.getHelper('appOperation').operationUpdate(0, this.maxOperationValue);
         },
         simulateProgress: function(e){
@@ -66,7 +65,7 @@ exports.component = {
             let duration = this.maxSpeed - this.speed;
             clearTimeout(this.tickTimeout);
             this.tickTimeout = setTimeout(this.boundMethods.operationTick, duration);
-            this.isSimulating = true;
+            this.operationData.isSimulating = true;
         },
         operationTick: async function(){
             let appOperationHelper = _appWrapper.getHelper('appOperation');
@@ -75,23 +74,23 @@ exports.component = {
                 clearTimeout(this.finishTimeout);
                 this.finishTimeout = setTimeout( () => {
                     clearTimeout(this.finishTimeout);
-                    this.isSimulating = false;
+                    this.operationData.isSimulating = false;
                     appState.status.appStatus = 'offline';
                     appOperationHelper.operationFinish('cancelled');
                 }, 1000);
             } else {
-                this.currentOperationValue += 1;
-                if (this.currentOperationValue < this.maxOperationValue){
-                    appOperationHelper.operationUpdate(this.currentOperationValue, this.maxOperationValue);
+                this.operationData.currentOperationValue += 1;
+                if (this.operationData.currentOperationValue < this.maxOperationValue){
+                    appOperationHelper.operationUpdate(this.operationData.currentOperationValue, this.maxOperationValue);
                     let duration = this.maxSpeed - this.speed;
-                    if (this.logProgress && ((this.currentOperationValue - this.lastLoggedValue) % 10 == 0)){
-                        this.lastLoggedValue = this.currentOperationValue;
-                        _appWrapper.getHelper('component').addUserMessage('Log progress: {1} / {2}', 'info', [this.currentOperationValue, this.maxOperationValue], false, true, true, true);
+                    if (this.logProgress && ((this.operationData.currentOperationValue - this.operationData.lastLoggedValue) % 10 == 0)){
+                        this.operationData.lastLoggedValue = this.operationData.currentOperationValue;
+                        _appWrapper.getHelper('component').addUserMessage('Log progress: {1} / {2}', 'info', [this.operationData.currentOperationValue, this.maxOperationValue], false, true, true, true);
                     }
                     await _appWrapper.nextTick();
                     this.tickTimeout = setTimeout(this.boundMethods.operationTick, duration);
                 } else {
-                    this.isSimulating = false;
+                    this.operationData.isSimulating = false;
                     appState.status.appStatus = 'success';
                     appOperationHelper.operationFinish('done');
                 }
@@ -103,7 +102,7 @@ exports.component = {
             }
             this.statusChange('simulationStatusChanging');
             clearTimeout(this.tickTimeout);
-            this.isSimulating = false;
+            this.operationData.isSimulating = false;
             this.$forceUpdate();
         },
         operationIncrement: function(e){
@@ -112,8 +111,8 @@ exports.component = {
             }
             let value = parseInt(this.stepValue, 10);
             value = appState.progressData.percentNumber + value;
-            this.currentOperationValue = parseInt(value / 100 * this.maxOperationValue, 10);
-            _appWrapper.getHelper('appOperation').operationUpdate(this.currentOperationValue, this.maxOperationValue);
+            this.operationData.currentOperationValue = parseInt(value / 100 * this.maxOperationValue, 10);
+            _appWrapper.getHelper('appOperation').operationUpdate(this.operationData.currentOperationValue, this.maxOperationValue);
         },
         operationDecrement: function(e){
             if (e.target.hasClass('button-disabled')){
@@ -121,35 +120,24 @@ exports.component = {
             }
             let value = 0 - parseInt(this.stepValue, 10);
             value = appState.progressData.percentNumber + value;
-            this.currentOperationValue = parseInt(value / 100 * this.maxOperationValue, 10);
-            _appWrapper.getHelper('appOperation').operationUpdate(this.currentOperationValue, this.maxOperationValue);
+            this.operationData.currentOperationValue = parseInt(value / 100 * this.maxOperationValue, 10);
+            _appWrapper.getHelper('appOperation').operationUpdate(this.operationData.currentOperationValue, this.maxOperationValue);
         },
         operationFinish: function(e){
             if (e.target.hasClass('button-disabled')){
                 return;
             }
             this.statusChange('operationStatusChanging');
-            this.isSimulating = false;
+            this.operationData.isSimulating = false;
             clearTimeout(this.tickTimeout);
             _appWrapper.getHelper('appOperation').updateProgress(this.maxOperationValue, this.maxOperationValue);
             _appWrapper.getHelper('appOperation').operationFinish('done');
         },
         statusChange: function(property){
-            this[property] = 1;
+            this.operationData[property] = 1;
             setTimeout( () => {
-                this[property] = 0;
+                this.operationData[property] = 0;
             }, 500);
-        },
-        checkMaxOperationValueInput: function(e) {
-            if (this.maxOperationValue > (this.maxOperationValueLimit)){
-                this.maxOperationValue = (this.maxOperationValueLimit);
-            }
-            if (this.maxOperationValue < 1){
-                this.maxOperationValue = 1;
-            }
-            if (e.target.value != this.maxOperationValue){
-                e.target.value = this.maxOperationValue;
-            }
         },
         openTestModal: function() {
             let modalHelper = _appWrapper.getHelper('modal');
@@ -161,7 +149,9 @@ exports.component = {
                 modalOptions.animateSize = true;
             }
             if (this.autoCloseModal){
-                modalOptions.autoCloseTime = 5000;
+                modalOptions.autoCloseTime = Math.floor(this.autoCloseDuration / 1000) * 1000;
+            } else {
+                modalOptions.autoCloseTime = 0;
             }
 
             modalOptions.showConfirmButton = this.showConfirmButton;
@@ -175,22 +165,8 @@ exports.component = {
 
             let options = _.cloneDeep(modalOptions);
 
-            _appWrapper._confirmModalAction = function() {
-                modalHelper.modalBusy('Confirming...');
-                setTimeout( () => {
-                    modalHelper.emptyModal();
-                    modalHelper.modalNotBusy();
-                    modalHelper.closeCurrentModal();
-                }, 1000);
-            };
-            _appWrapper._cancelModalAction = function() {
-                modalHelper.modalBusy('Cancelling...');
-                setTimeout( () => {
-                    modalHelper.emptyModal();
-                    modalHelper.modalNotBusy();
-                    modalHelper.closeCurrentModal();
-                }, 1000);
-            };
+            _appWrapper._confirmModalAction = modalHelper.closeCurrentModalDelayed.bind(modalHelper, 1000, 'Confirming...');
+            _appWrapper._cancelModalAction = modalHelper.closeCurrentModalDelayed.bind(modalHelper, 1000, 'Cancelling...');
 
             modalHelper.openModal('testModal', options);
         },
@@ -308,8 +284,11 @@ exports.component = {
                 return;
             }
             let userDataHelper = _appWrapper.getHelper('userData');
-            let data = _.cloneDeep(this.$data);
-            let saved = await userDataHelper.saveUserData({appMainData: data});
+            // let data = _.cloneDeep(this.$data);
+            // let data = appState.userData;
+
+            // let saved = await userDataHelper.saveUserData({appMainData: data});
+            let saved = await userDataHelper.saveUserData(appState.userData);
             if (saved && !noNotification){
                 _appWrapper.addUserMessage('User data saved.', 'info', []);
             }
@@ -343,7 +322,7 @@ exports.component = {
             return appState;
         },
         operationInProgress: function() {
-            return appState.appOperation.operationActive && appState.appOperation.operationId == this.operationId;
+            return appState.appOperation.operationActive && appState.appOperation.operationId == this.operationData.operationId;
         },
         appInfoJsonData: function () {
             return {
@@ -359,6 +338,9 @@ exports.component = {
         },
         isCustomNotification: function(){
             return this.customNotification;
+        },
+        operationData: function(){
+            return appState.appData.operationData;
         }
     },
     watch: {
@@ -368,6 +350,14 @@ exports.component = {
             }
             if (this.speed < this.minSpeed){
                 this.speed = this.minSpeed;
+            }
+        },
+        maxOperationValue: function(){
+            if (this.maxOperationValue > (this.maxOperationValueLimit)){
+                this.maxOperationValue = this.maxOperationValueLimit;
+            }
+            if (this.maxOperationValue < 1){
+                this.maxOperationValue = 1;
             }
         }
     }

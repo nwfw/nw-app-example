@@ -8,8 +8,11 @@ var MixinAppMethods  = {
         formatCurrency: function (price) {
             return _appWrapper.getHelper('format').formatCurrency(price);
         },
-        formatDuration: function (duration, secondFractions) {
-            return _appWrapper.getHelper('format').formatDuration(duration, secondFractions);
+        formatDuration: function (duration, omitEmpty, omitZeros, secondFractions) {
+            return _appWrapper.getHelper('format').formatDuration(duration, omitEmpty, omitZeros, secondFractions);
+        },
+        formatDurationCustom: function (time, format, returnObj) {
+            return _appWrapper.getHelper('format').formatDurationCustom(time, format, returnObj);
         },
         formatDate: function (date, options, includeTime) {
             return _appWrapper.getHelper('format').formatDate(date, options, includeTime);
