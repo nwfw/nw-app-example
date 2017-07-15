@@ -163,7 +163,32 @@ exports.component = {
             modalOptions.showCloseLink = this.showCloseLink;
             modalOptions.busy = true;
 
+
             let options = _.cloneDeep(modalOptions);
+
+            options.onBeforeOpen = function(){
+                console.log('Test modal onBeforeOpen');
+            };
+
+            options.onOpen = function(){
+                console.log('Test modal onOpen');
+            };
+
+            options.onBeforeClose = function(){
+                console.log('Test modal onBeforeClose');
+            };
+
+            options.onClose = function(){
+                console.log('Test modal onClose');
+            };
+
+            options.onConfirm = function(){
+                console.log('Test modal onConfirm');
+            };
+
+            options.onCancel = function(){
+                console.log('Test modal onCancel');
+            };
 
             _appWrapper._confirmModalAction = modalHelper.closeCurrentModalDelayed.bind(modalHelper, 1000, 'Confirming...');
             _appWrapper._cancelModalAction = modalHelper.closeCurrentModalDelayed.bind(modalHelper, 1000, 'Cancelling...');
