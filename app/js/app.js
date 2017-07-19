@@ -15,7 +15,6 @@ class App extends BaseClass {
         this.forceDebug = false;
         this.forceUserMessages = false;
 
-        appState.mainLoaderTitle = _appWrapper.appTranslations.translate('Please wait, initializing application...');
 
         return this;
     }
@@ -28,6 +27,8 @@ class App extends BaseClass {
                 _appWrapper.resetAppStatus();
             }, 400);
         }
+
+        appState.mainLoaderTitle = _appWrapper.appTranslations.translate('Please wait, initializing application...');
 
         this.helpers = await _appWrapper.initializeHelpers(this.getConfig('appConfig.helperDirectories'));
         await _appWrapper.wait(appState.config.shortPauseDuration);
@@ -64,6 +65,10 @@ class App extends BaseClass {
         this.addUserMessage('App shutdown complete.', 'info', [], false,  false);
         await _appWrapper.wait(appState.config.mediumPauseDuration);
         return returnValue;
+    }
+
+    localRequire (moduleName){
+        return require(moduleName);
     }
 }
 exports.App = App;

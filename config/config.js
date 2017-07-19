@@ -7,6 +7,7 @@ exports.config = {
         appFile: './app/js/app'
     },
     appConfig: {
+        mainComponent: 'app-main',
         initCssFiles: [
             '/app/css/config.css',
         ],
@@ -22,11 +23,14 @@ exports.config = {
         debugJsFiles: [],
 
         appComponentMapping: {
-            'app-main': {
-                name: 'app-main',
+            'app-window': {
+                name: 'app-window',
                 components: {
-                    'inspector-json': {
-                        name: 'inspector-json'
+                    'app-main': {
+                        name: 'app-main',
+                        components: {
+
+                        }
                     }
                 }
             }
@@ -40,6 +44,16 @@ exports.config = {
             component: ['./app/components/app/'],
             globalComponent: ['./app/components/global/', './app/components/form'],
             modalComponent: ['./app/components/modal/']
+        },
+        componentModules: {
+            component: [
+                // {
+                //     moduleName: 'canvas-playground',
+                //     parentComponent: 'app-window'
+                // }
+            ],
+            globalComponent: [],
+            modalComponent: []
         },
 
         systemHelperDirectories: [],
