@@ -9,6 +9,8 @@ exports.config = {
     appConfig: {
         appSubFiles: [],
         mainComponent: 'app-main',
+        // mainComponent: 'tessel-main',
+        // mainComponent: 'canvas-playground',
         initCssFiles: [
             '/app/css/config.css',
         ],
@@ -48,6 +50,10 @@ exports.config = {
         },
         componentModules: {
             component: [
+                // {
+                //     moduleName: 'nw-tessel-components',
+                //     parentComponent: 'app-window'
+                // },
                 // {
                 //     moduleName: 'canvas-playground',
                 //     parentComponent: 'app-window'
