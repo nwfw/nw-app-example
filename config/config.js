@@ -270,6 +270,8 @@ exports.config = {
         }
     },
 
+    themeModules: ['nw-themes'],
+
     liveCss: true,
     compileCss: true,
 

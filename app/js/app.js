@@ -56,46 +56,58 @@ class App extends BaseClass {
     async loadSubFiles (){
         this.appSubFiles = this.getConfig('appConfig.appSubFiles');
         if (this.appSubFiles && this.appSubFiles.length){
+            this.log('Loading app sub files...', 'group', []);
             for(let i=0; i<this.appSubFiles.length;i++){
                 let subFileData = this.appSubFiles[i];
                 if (subFileData && _.isObject(subFileData) && subFileData.name && subFileData.className && subFileData.file){
+                    this.log('Loading app sub file "{1}"', 'info', [subFileData.name]);
                     global[subFileData.className] = require(path.resolve(subFileData.file))[subFileData.className];
                     this[subFileData.name] = new global[subFileData.className]();
                 }
             }
+            this.log('Loading app sub files...', 'groupend', []);
         }
     }
 
     async initializeSubFiles(){
         if (this.appSubFiles && this.appSubFiles.length){
+            this.log('Initializing app sub files...', 'group', []);
             for(let i=0; i<this.appSubFiles.length;i++){
                 let subFileData = this.appSubFiles[i];
                 if (this[subFileData.name] && this[subFileData.name].initialize && _.isFunction(this[subFileData.name].initialize)){
+                    this.log('Initializing app sub file "{1}"', 'info', [subFileData.name]);
                     await this[subFileData.name].initialize();
                 }
             }
+            this.log('Initializing app sub files...', 'groupend', []);
         }
     }
 
     async finalizeSubFiles(){
         if (this.appSubFiles && this.appSubFiles.length){
+            this.log('Finalizing app sub files...', 'group', []);
             for(let i=0; i<this.appSubFiles.length;i++){
                 let subFileData = this.appSubFiles[i];
                 if (this[subFileData.name] && this[subFileData.name].finalize && _.isFunction(this[subFileData.name].finalize)){
+                    this.log('Finalizing app sub file "{1}"', 'info', [subFileData.name]);
                     await this[subFileData.name].finalize();
                 }
             }
+            this.log('Finalizing app sub files...', 'groupend', []);
         }
     }
 
     async shutdownSubFiles(){
         if (this.appSubFiles && this.appSubFiles.length){
+            this.log('Shutting down app sub files...', 'group', []);
             for(let i=0; i<this.appSubFiles.length;i++){
                 let subFileData = this.appSubFiles[i];
                 if (this[subFileData.name] && this[subFileData.name].shutdown && _.isFunction(this[subFileData.name].shutdown)){
+                    this.log('Shutting down app sub file "{1}"', 'info', [subFileData.name]);
                     await this[subFileData.name].shutdown();
                 }
             }
+            this.log('Shutting down app sub files...', 'groupend', []);
         }
     }
 
