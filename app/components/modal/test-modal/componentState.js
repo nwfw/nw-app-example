@@ -2,8 +2,8 @@ exports.appState = {
     appModals: {
         testModal: {
             name: 'test-modal',
-            bodyComponent: 'canvas-playground',
-            defaultBodyComponent: 'canvas-playground',
+            bodyComponent: 'test-modal',
+            defaultBodyComponent: 'test-modal',
             modalClassName: 'test-modal',
             preventEscClose: false,
             remainingTime: 0,
