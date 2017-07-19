@@ -28,14 +28,7 @@ exports.config = {
         componentMapping: {
             'app-window': {
                 name: 'app-window',
-                components: {
-                    'app-main': {
-                        name: 'app-main',
-                        components: {
-
-                        }
-                    }
-                }
+                components: {}
             }
         },
 
