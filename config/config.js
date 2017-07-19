@@ -22,7 +22,7 @@ exports.config = {
         debugCssFiles: [],
         debugJsFiles: [],
 
-        appComponentMapping: {
+        componentMapping: {
             'app-window': {
                 name: 'app-window',
                 components: {
