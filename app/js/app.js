@@ -1,5 +1,7 @@
 const _ = require('lodash');
-var BaseClass = require('nw-skeleton').BaseClass;
+const path = require('path');
+
+let BaseClass = require('nw-skeleton').BaseClass;
 
 var _appWrapper;
 var appState;
@@ -15,6 +17,7 @@ class App extends BaseClass {
         this.forceDebug = false;
         this.forceUserMessages = false;
 
+        this.subFileClasses = {};
 
         return this;
     }
@@ -32,6 +35,8 @@ class App extends BaseClass {
 
         this.helpers = await _appWrapper.initializeHelpers(this.getConfig('appConfig.helperDirectories'));
         await _appWrapper.wait(appState.config.shortPauseDuration);
+
+
         let userData = await _appWrapper.getHelper('userData').loadUserData();
         if (userData && _.isObject(userData) && userData.appMainData){
             _.extend(userData.appMainData, appState.appData.defaultAppMainData);
@@ -40,15 +45,65 @@ class App extends BaseClass {
             appState.appData.appMainData = _.cloneDeep(appState.appData.defaultAppMainData);
             appState.userData.appMainData = _.cloneDeep(appState.appData.defaultAppMainData);
         }
+
+        await this.loadSubFiles();
+        await this.initializeSubFiles();
+
         this.addUserMessage('App initialized.', 'info', [], false,  false);
         return true;
     }
 
+    async loadSubFiles (){
+        this.appSubFiles = this.getConfig('appConfig.appSubFiles');
+        if (this.appSubFiles && this.appSubFiles.length){
+            for(let i=0; i<this.appSubFiles.length;i++){
+                let subFileData = this.appSubFiles[i];
+                if (subFileData && _.isObject(subFileData) && subFileData.name && subFileData.className && subFileData.file){
+                    global[subFileData.className] = require(path.resolve(subFileData.file))[subFileData.className];
+                    this[subFileData.name] = new global[subFileData.className]();
+                }
+            }
+        }
+    }
+
+    async initializeSubFiles(){
+        if (this.appSubFiles && this.appSubFiles.length){
+            for(let i=0; i<this.appSubFiles.length;i++){
+                let subFileData = this.appSubFiles[i];
+                if (this[subFileData.name] && this[subFileData.name].initialize && _.isFunction(this[subFileData.name].initialize)){
+                    await this[subFileData.name].initialize();
+                }
+            }
+        }
+    }
+
+    async finalizeSubFiles(){
+        if (this.appSubFiles && this.appSubFiles.length){
+            for(let i=0; i<this.appSubFiles.length;i++){
+                let subFileData = this.appSubFiles[i];
+                if (this[subFileData.name] && this[subFileData.name].finalize && _.isFunction(this[subFileData.name].finalize)){
+                    await this[subFileData.name].finalize();
+                }
+            }
+        }
+    }
+
+    async shutdownSubFiles(){
+        if (this.appSubFiles && this.appSubFiles.length){
+            for(let i=0; i<this.appSubFiles.length;i++){
+                let subFileData = this.appSubFiles[i];
+                if (this[subFileData.name] && this[subFileData.name].shutdown && _.isFunction(this[subFileData.name].shutdown)){
+                    await this[subFileData.name].shutdown();
+                }
+            }
+        }
+    }
+
     async finalize() {
         await _appWrapper.nextTick();
-        var returnValue = true;
+        let returnValue = true;
         if (!appState.isDebugWindow){
-            returnValue = true;
+            await this.finalizeSubFiles();
         } else {
             returnValue = true;
         }
@@ -59,9 +114,9 @@ class App extends BaseClass {
     }
 
     async shutdown () {
-        var returnValue = true;
+        let returnValue = true;
         this.addUserMessage('Shutting app down...', 'info', [], false,  false);
-        await _appWrapper.wait(appState.config.shortPauseDuration);
+        await this.shutdownSubFiles();
         this.addUserMessage('App shutdown complete.', 'info', [], false,  false);
         await _appWrapper.wait(appState.config.mediumPauseDuration);
         return returnValue;

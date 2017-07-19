@@ -7,6 +7,7 @@ exports.config = {
         appFile: './app/js/app'
     },
     appConfig: {
+        appSubFiles: [],
         mainComponent: 'app-main',
         initCssFiles: [
             '/app/css/config.css',
