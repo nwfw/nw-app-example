@@ -21,11 +21,14 @@
         "lodash": "^4.17.4",
         "nw-skeleton": "^1.0.0"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "nwjs-builder-phoenix": "^1.14.3"
+    },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "nwjs --load-extension=/Users/dino/prg/node/vue-devtools-3.1.0/shells/chrome .",
-        "doc": "rm -rf doc && jsdoc -c jsDocConfig.js"
+        "doc": "rm -rf doc && jsdoc -c jsDocConfig.js",
+        "dist": "build --tasks mac-x64 --mirror https://dl.nwjs.io/ ."
     },
     "repository": {
         "type": "git",
@@ -34,6 +37,26 @@
     "author": "Dino Ivankov <dinoivankov@gmail.com>",
     "license": "MIT",
     "homepage": "https://bitbucket.org/jazziebgd/nw-fe-skeleton#readme",
+    "build": {
+        "nwVersion": "0.23.7",
+        "nwFlavor": "sdk",
+        "win": {
+            "productName": "Fe app",
+            "productVersion": "1.0.0",
+            "fileDescription": "Fe app",
+            "copyright": "2017 Jazzie Web",
+            "fileVersion": "1.0.0",
+            "companyName": "Jazzie Web",
+            "icon": "app/images/tray-icon.png"
+        },
+        "mac": {
+            "name": "Fe app",
+            "version": "1.0.0",
+            "description": "Fe app",
+            "copyright": "2017 Jazzie Web",
+            "icon": "app/images/icon.icns"
+        }
+    },
     "nwjsBuilder": {
         "productName": "Gooda web sync",
         "productVersion": "1.0.0",
