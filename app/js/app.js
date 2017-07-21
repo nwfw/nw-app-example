@@ -1,3 +1,39 @@
+/**
+ * @fileOverview App class file
+ * @author Dino Ivankov <dinoivankov@gmail.com>
+ * @version 1.1.0
+ */
+
+/**
+ * @namespace
+ * @name app
+ * @description app app namespace
+ */
+
+/**
+ * @namespace
+ * @name components
+ * @description components components namespace
+ */
+
+/**
+ * @namespace
+ * @name mixins
+ * @description mixins mixins namespace
+ */
+
+/**
+ * @namespace
+ * @name mixins.appMethods
+ * @description mixins.appMethods mixins.appMethods namespace
+ */
+
+/**
+ * BaseClass object
+ * @external BaseClass
+ * @relativelink {"text":"BaseClass","url":"../node_modules/nw-skeleton/doc/appWrapper.BaseClass.html"};
+ */
+
 const _ = require('lodash');
 const path = require('path');
 
@@ -6,8 +42,22 @@ let BaseClass = require('nw-skeleton').BaseClass;
 var _appWrapper;
 var appState;
 
+/**
+ * App class - main class for nw-skeleton app instances
+ *
+ * @class
+ * @extends BaseClass
+ * @memberOf app
+ * @property {Object} subFileClasses Object containing subFile classes for this app
+ */
 class App extends BaseClass {
 
+    /**
+     * Creates App instance
+     *
+     * @constructor
+     * @return {App}              Instance of App class
+     */
     constructor () {
         super();
 
@@ -22,6 +72,12 @@ class App extends BaseClass {
         return this;
     }
 
+    /**
+     * Initializes app and its dependencies
+     *
+     * @async
+     * @return {App} App class instance
+     */
     async initialize () {
         await super.initialize();
         this.addUserMessage('Initializing app...', 'info', [], false,  false);
@@ -53,6 +109,11 @@ class App extends BaseClass {
         return true;
     }
 
+    /**
+     * Loads sub files using configuration
+     *
+     * @async
+     */
     async loadSubFiles (){
         this.appSubFiles = this.getConfig('appConfig.appSubFiles');
         if (this.appSubFiles && this.appSubFiles.length){
@@ -69,6 +130,11 @@ class App extends BaseClass {
         }
     }
 
+    /**
+     * Initializes loaded sub files
+     *
+     * @async
+     */
     async initializeSubFiles(){
         if (this.appSubFiles && this.appSubFiles.length){
             this.log('Initializing app sub files...', 'group', []);
@@ -83,6 +149,11 @@ class App extends BaseClass {
         }
     }
 
+    /**
+     * Finalizes loaded sub files
+     *
+     * @async
+     */
     async finalizeSubFiles(){
         if (this.appSubFiles && this.appSubFiles.length){
             this.log('Finalizing app sub files...', 'group', []);
@@ -97,6 +168,11 @@ class App extends BaseClass {
         }
     }
 
+    /**
+     * Shuts down loaded sub files
+     *
+     * @async
+     */
     async shutdownSubFiles(){
         if (this.appSubFiles && this.appSubFiles.length){
             this.log('Shutting down app sub files...', 'group', []);
@@ -111,6 +187,14 @@ class App extends BaseClass {
         }
     }
 
+    /**
+     * Finalizes app and its subfiles. This method is called once
+     * frontend application is created, so code here has all references that
+     * are available to the application
+     *
+     * @async
+     * @return {boolean} Finalization result
+     */
     async finalize() {
         await _appWrapper.nextTick();
         let returnValue = true;
@@ -125,6 +209,13 @@ class App extends BaseClass {
         return returnValue;
     }
 
+    /**
+     * Shuts down application and all its dependencies, freeing memory,
+     * removing references and preparing for app exit
+     *
+     * @async
+     * @return {boolean} Shutdown result
+     */
     async shutdown () {
         let returnValue = true;
         this.addUserMessage('Shutting app down...', 'info', [], false,  false);
@@ -134,6 +225,12 @@ class App extends BaseClass {
         return returnValue;
     }
 
+    /**
+     * Local require for loading app modules from appWrapper
+     *
+     * @param  {string} moduleName Name of module to require
+     * @return {Object}            Required module
+     */
     localRequire (moduleName){
         return require(moduleName);
     }
