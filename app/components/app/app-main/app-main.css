@@ -21,7 +21,14 @@
     color: #CCCCCC;
 }
 
+.app-main-inner input[type=button] {
+    transition-property: background, background-color, border-color, color;
+    transition-timing-function: linear;
+    transition-duration: var(--short-animation-duration);
+}
+
 .app-main-inner input[type=button]:hover {
+    transition-duration: 0s;
     background: #999999;
     color: #000000;
 }
@@ -34,17 +41,28 @@
     cursor: not-allowed;
 }
 
-.app-main-inner .range-input {
-    position: relative;
-    top: 4px;
-}
-
 .app-main-section {
     border: 1px solid #666666;
     margin: 5px 0;
     padding: 0px 5px 5px 5px;
     text-align: center;
     flex: 1 1 auto;
+}
+
+.app-main-inner .user-data-count {
+    display: inline-flex;
+    min-width: 36px;
+    justify-content: space-around;
+}
+
+.app-main-inner .user-data-variables {
+    display: inline-block;
+    min-width: 60px;
+    text-align: left;
+}
+
+.app-main-inner .app-main-message-test .notification-text {
+    width: 150px;
 }
 
 .app-main-section.app-main-operation-test .app-main-operation-info {

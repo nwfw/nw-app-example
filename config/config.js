@@ -9,8 +9,6 @@ exports.config = {
     appConfig: {
         appSubFiles: [],
         mainComponent: 'app-main',
-        // mainComponent: 'tessel-main',
-        // mainComponent: 'canvas-playground',
         initCssFiles: [
             '/app/css/config.css',
         ],
@@ -43,14 +41,14 @@ exports.config = {
         },
         componentModules: {
             component: [
-                // {
-                //     moduleName: 'nw-tessel-components',
-                //     parentComponent: 'app-window'
-                // },
-                // {
-                //     moduleName: 'canvas-playground',
-                //     parentComponent: 'app-window'
-                // }
+                {
+                    moduleName: 'nw-tessel-components',
+                    parentComponent: 'app-window'
+                },
+                {
+                    moduleName: 'canvas-playground',
+                    parentComponent: 'app-window'
+                }
             ],
             globalComponent: [],
             modalComponent: []
@@ -83,6 +81,32 @@ exports.config = {
                             type: 'normal',
                             method: 'helpers.userMessageHelper.openUserMessageConfigEditor',
                         }
+                    ]
+                },
+                {
+                    label: 'Main view',
+                    tooltip: 'Main view',
+                    type: 'normal',
+                    method: 'noop',
+                    children: [
+                        {
+                            label: 'app-main',
+                            tooltip: 'App main',
+                            type: 'normal',
+                            method: 'app.setMainView',
+                        },
+                        {
+                            label: 'tessel-main',
+                            tooltip: 'Tessel main',
+                            type: 'normal',
+                            method: 'app.setMainView',
+                        },
+                        {
+                            label: 'canvas-playground',
+                            tooltip: 'Canvas playground',
+                            type: 'normal',
+                            method: 'app.setMainView',
+                        },
                     ]
                 },
                 {

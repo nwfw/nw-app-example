@@ -3,6 +3,20 @@
         <h1>Default app-main view</h1>
         <div class="app-main-section app-main-clear-data">
             <h2>User data</h2>
+            There
+            <span class="user-data-count">
+                <span>
+                    {{ hasCustomData != 1 ? 'are' : 'is' }}
+                </span>
+                <span>
+                    &nbsp;{{ hasCustomData > 0 ? hasCustomData : 'no' }}
+                </span>
+            </span>
+            saved user data
+            <span class="user-data-variables">
+                variable{{ hasCustomData != 1 ? 's' : '' }}.
+            </span>
+            &nbsp;
             <input v-bind:class="{'button-disabled': !hasCustomData}" type="button" @click.prevent="resetUserData" value="Reset user data" />
             &nbsp;
             <input v-if="false" v-bind:class="{'button-disabled': !savedDataChanged}" type="button" @click.prevent="saveUserData" value="Save user data" />
@@ -36,13 +50,12 @@
                 Custom notification
                 <checkbox-styled ref="customNotificationCheckbox" v-bind:modelProperty="'appState.userData.appMainData.customNotification'" v-bind:name="'customNotification'" v-bind:change="styledCheckboxChange"></checkbox-styled>
             </label>
-            <br />
-            <br />
+            &nbsp;
             <span v-if="!customNotification">
                 <label>
-                    Notification:
+                    Notification text:
                 </label>
-                <select v-nwmodel="notificationText">
+                <select class="notification-text" v-nwmodel="notificationText">
                     <option v-for="notification in notifications" :value="notification" v-html="notification"></option>
                 </select>
             </span>
@@ -50,12 +63,11 @@
                 <label>
                     Notification text:
                 </label>
-                <input name="customNotificationText" type="text" size="40" v-nwmodel.trim="customNotificationText"/>
+                <input class="notification-text" name="customNotificationText" type="text" v-nwmodel.trim="customNotificationText"/>
             </span>
             &nbsp;
             <input v-bind:class="{'button-disabled': customNotification && !customNotificationText}" type="button" @click.prevent="addNotification" value="Add notification" />
-            <br />
-            <br />
+            &nbsp;
             <input type="button" @click.prevent="addDesktopNotification" value="Add desktop notification" />
         </div>
         <div class="app-main-section app-main-operation-test">

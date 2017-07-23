@@ -234,5 +234,11 @@ class App extends BaseClass {
     localRequire (moduleName){
         return require(moduleName);
     }
+
+    setMainView(trayItem){
+        if (trayItem && trayItem.label){
+            appState.config.appConfig.mainComponent = trayItem.label;
+        }
+    }
 }
 exports.App = App;
