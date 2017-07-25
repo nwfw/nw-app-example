@@ -10,10 +10,10 @@ exports.config = {
         appSubFiles: [],
         mainComponent: 'app-main',
         initCssFiles: [
-            '/app/css/config.css',
+            'app/css/config.css',
         ],
         cssFiles: [
-            '/app/css/fonts.css'
+            'app/css/fonts.css'
         ],
         overrideCssFiles: [],
 
