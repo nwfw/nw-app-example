@@ -21,7 +21,11 @@
     },
     "dependencies": {
         "lodash": "^4.17.4",
-        "nw-skeleton": "^1.0.0"
+        "nw-skeleton": "git+ssh://git@bitbucket.org:jazziebgd/nw-skeleton.git",
+        "nw-themes": "git+ssh://git@bitbucket.org:jazziebgd/nw-themes.git",
+        "nw-tessel-components": "git+ssh://git@bitbucket.org:jazziebgd/nw-tessel-components.git",
+        "canvas-playground": "git+ssh://git@bitbucket.org:jazziebgd/canvas-playground.git",
+        "nw-app-test": "git+ssh://git@bitbucket.org:jazziebgd/nw-app-test.git"
     },
     "devDependencies": {
         "nwjs-builder-phoenix": "^1.14.3"
