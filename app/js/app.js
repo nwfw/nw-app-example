@@ -100,7 +100,7 @@ class App extends BaseClass {
             await this.loadSubFiles();
             await this.initializeSubFiles();
             this.initialized = true;
-            this.addUserMessage('App initialized.', 'info', [], false,  false);
+            // this.addUserMessage('App initialized.', 'info', [], false,  false);
         }
         return this;
     }
@@ -109,6 +109,7 @@ class App extends BaseClass {
      * Loads sub files using configuration
      *
      * @async
+     * @return {undefined}
      */
     async loadSubFiles (){
         this.appSubFiles = this.getConfig('appConfig.appSubFiles');
@@ -130,6 +131,7 @@ class App extends BaseClass {
      * Initializes loaded sub files
      *
      * @async
+     * @return {undefined}
      */
     async initializeSubFiles(){
         if (this.appSubFiles && this.appSubFiles.length){
@@ -137,7 +139,7 @@ class App extends BaseClass {
             for(let i=0; i<this.appSubFiles.length;i++){
                 let subFileData = this.appSubFiles[i];
                 if (this[subFileData.name] && this[subFileData.name].initialize && _.isFunction(this[subFileData.name].initialize)){
-                    this.log('Initializing app sub file "{1}"', 'info', [subFileData.name]);
+                    this.addUserMessage('Initializing app sub file "{1}"', 'info', [subFileData.name], false, false);
                     await this[subFileData.name].initialize();
                 }
             }
@@ -149,6 +151,7 @@ class App extends BaseClass {
      * Finalizes loaded sub files
      *
      * @async
+     * @return {undefined}
      */
     async finalizeSubFiles(){
         if (this.appSubFiles && this.appSubFiles.length){
@@ -156,7 +159,7 @@ class App extends BaseClass {
             for(let i=0; i<this.appSubFiles.length;i++){
                 let subFileData = this.appSubFiles[i];
                 if (this[subFileData.name] && this[subFileData.name].finalize && _.isFunction(this[subFileData.name].finalize)){
-                    this.log('Finalizing app sub file "{1}"', 'info', [subFileData.name]);
+                    this.addUserMessage('Finalizing app sub file "{1}"', 'info', [subFileData.name], false, false);
                     await this[subFileData.name].finalize();
                 }
             }
@@ -168,6 +171,7 @@ class App extends BaseClass {
      * Shuts down loaded sub files
      *
      * @async
+     * @return {undefined}
      */
     async shutdownSubFiles(){
         if (this.appSubFiles && this.appSubFiles.length){

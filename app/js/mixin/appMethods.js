@@ -113,7 +113,7 @@ var MixinAppMethods  = {
          * @memberOf mixins.appMethods
          * @param  {Date}       date            Date value to format
          * @param  {Object}     options         Date format options
-         * @param  {Boolean}    includeTime     Flag to indicate whether to include date
+         * @param  {Boolean}    includeDate     Flag to indicate whether to include date
          * @param  {Boolean}    omitSeconds     Flag to indicate whether to omit seconds
          * @return {string}                     Formatted time string
          */
@@ -126,8 +126,9 @@ var MixinAppMethods  = {
          *
          * @method
          * @memberOf mixins.appMethods
-         * @param {mixed}  value      Starting value
-         * @param {string} maxLength  Value with added zeros
+         * @param {mixed}  value        Starting value
+         * @param {string} maxLength    Maximum return value string length
+         * @return {string}             Value with added zeros
          */
         addZeros: function (value, maxLength) {
             return _appWrapper.getHelper('format').addZeros(value, maxLength);
