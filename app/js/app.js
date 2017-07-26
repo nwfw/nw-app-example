@@ -48,7 +48,9 @@ var appState;
  * @class
  * @extends BaseClass
  * @memberOf app
- * @property {Object} subFileClasses Object containing subFile classes for this app
+ * @property {Object}   subFileClasses  Object containing subFile classes for this app
+ * @property {Boolean}  initialized     Flag to indicate whether app instance is initialized
+ * @property {Boolean}  finalized       Flag to indicate whether app instance is finalized
  */
 class App extends BaseClass {
 
@@ -67,6 +69,8 @@ class App extends BaseClass {
         this.forceDebug = false;
         this.forceUserMessages = false;
 
+        this.initialized = false;
+        this.finalized = false;
         this.subFileClasses = {};
 
         return this;
@@ -79,34 +83,36 @@ class App extends BaseClass {
      * @return {App} App class instance
      */
     async initialize () {
-        await super.initialize();
-        this.addUserMessage('Initializing app...', 'info', [], false,  false);
-        if (!appState.isDebugWindow){
-            setTimeout(() => {
-                _appWrapper.resetAppStatus();
-            }, 400);
+        if (!this.initialized){
+            await super.initialize();
+            this.addUserMessage('Initializing app...', 'info', [], false,  false);
+            if (!appState.isDebugWindow){
+                setTimeout(() => {
+                    _appWrapper.resetAppStatus();
+                }, 400);
+            }
+
+            appState.mainLoaderTitle = _appWrapper.appTranslations.translate('Please wait, initializing application...');
+
+            this.helpers = await _appWrapper.initializeHelpers(this.getConfig('appConfig.helperDirectories'));
+            await _appWrapper.wait(appState.config.shortPauseDuration);
+
+            let userData = await _appWrapper.getHelper('userData').loadUserData();
+            if (userData && _.isObject(userData) && userData.appMainData){
+                _.extend(userData.appMainData, appState.appData.defaultAppMainData);
+                appState.appData.appMainData = _.cloneDeep(userData.appMainData);
+            } else {
+                appState.appData.appMainData = _.cloneDeep(appState.appData.defaultAppMainData);
+                appState.userData.appMainData = _.cloneDeep(appState.appData.defaultAppMainData);
+            }
+
+
+            await this.loadSubFiles();
+            await this.initializeSubFiles();
+            this.initialized = true;
+            this.addUserMessage('App initialized.', 'info', [], false,  false);
         }
-
-        appState.mainLoaderTitle = _appWrapper.appTranslations.translate('Please wait, initializing application...');
-
-        this.helpers = await _appWrapper.initializeHelpers(this.getConfig('appConfig.helperDirectories'));
-        await _appWrapper.wait(appState.config.shortPauseDuration);
-
-
-        let userData = await _appWrapper.getHelper('userData').loadUserData();
-        if (userData && _.isObject(userData) && userData.appMainData){
-            _.extend(userData.appMainData, appState.appData.defaultAppMainData);
-            appState.appData.appMainData = _.cloneDeep(userData.appMainData);
-        } else {
-            appState.appData.appMainData = _.cloneDeep(appState.appData.defaultAppMainData);
-            appState.userData.appMainData = _.cloneDeep(appState.appData.defaultAppMainData);
-        }
-
-        await this.loadSubFiles();
-        await this.initializeSubFiles();
-
-        this.addUserMessage('App initialized.', 'info', [], false,  false);
-        return true;
+        return this;
     }
 
     /**
@@ -198,13 +204,16 @@ class App extends BaseClass {
     async finalize() {
         await _appWrapper.nextTick();
         let returnValue = true;
-        if (!appState.isDebugWindow){
-            await this.finalizeSubFiles();
-        } else {
-            returnValue = true;
-        }
-        if (returnValue){
-            await _appWrapper.wait(appState.config.shortPauseDuration);
+        if (!this.finalized){
+            if (!appState.isDebugWindow){
+                await this.finalizeSubFiles();
+            } else {
+                returnValue = true;
+            }
+            if (returnValue){
+                await _appWrapper.wait(appState.config.shortPauseDuration);
+            }
+            this.finalized = true;
         }
         return returnValue;
     }
