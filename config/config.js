@@ -48,10 +48,19 @@ exports.config = {
                 {
                     moduleName: 'canvas-playground',
                     parentComponent: 'app-window'
+                },
+                {
+                    moduleName: 'nw-app-test',
+                    parentComponent: 'app-window'
                 }
             ],
             globalComponent: [],
-            modalComponent: []
+            modalComponent: [
+                {
+                    moduleName: 'nw-app-test',
+                    parentComponent: 'app-window'
+                }
+            ]
         },
 
         systemHelperDirectories: [],
@@ -92,6 +101,12 @@ exports.config = {
                         {
                             label: 'app-main',
                             tooltip: 'App main',
+                            type: 'normal',
+                            method: 'app.setMainView',
+                        },
+                        {
+                            label: 'app-test',
+                            tooltip: 'App test',
                             type: 'normal',
                             method: 'app.setMainView',
                         },
@@ -172,6 +187,19 @@ exports.config = {
                                     key: 'e',
                                     modifiers: {
                                         ctrl: true
+                                    }
+                                }
+                            },
+                            children: []
+                        },
+                        {
+                            menuItem: {
+                                label: 'About app',
+                                method: 'showAppInfo',
+                                shortcut: {
+                                    key: '?',
+                                    modifiers: {
+                                        // ctrl: true
                                     }
                                 }
                             },
