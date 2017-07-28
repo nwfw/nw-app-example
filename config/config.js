@@ -13,7 +13,8 @@ exports.config = {
             '/app/css/config.css',
         ],
         cssFiles: [
-            '/app/css/fonts.css'
+            '/app/css/fonts.css',
+            '/app/css/style.css'
         ],
         overrideCssFiles: [],
 
@@ -341,8 +342,6 @@ exports.config = {
         }
     },
 
-
     windowCloseTimeoutDuration: 15000,
     windowReloadTimeoutDuration: 15000,
-
 };
