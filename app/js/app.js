@@ -8,12 +8,12 @@ const _ = require('lodash');
 const path = require('path');
 
 /**
- * BaseClass object
+ * AppBaseClass object
  *
- * @external BaseClass
- * @relativelink {"text":"BaseClass","url":"../node_modules/nw-skeleton/doc/appWrapper.BaseClass.html"};
+ * @external AppBaseClass
+ * @relativelink {"text":"AppBaseClass","url":"../node_modules/nw-skeleton/doc/appWrapper.AppBaseClass.html"};
  */
-let BaseClass = require('nw-skeleton').BaseClass;
+const AppBaseClass = require('nw-skeleton').AppBaseClass;
 
 var _appWrapper;
 var appState;
@@ -33,12 +33,12 @@ var appState;
  * </p>[Shutdown]{@link app.App#shutdown} is called before application window is closed or unloaded and should perform all necessary cleanup operations, remove any event listeners and free any remaining references left over from application usage. This method will also (await) call 'shutdown' method on any sub classes that have that method.</p>
  *
  * @class
- * @extends BaseClass
+ * @extends {AppBaseClass}
  * @memberOf app
  * @property {Boolean}  initialized     Flag to indicate whether app instance is initialized
  * @property {Boolean}  finalized       Flag to indicate whether app instance is finalized
  */
-class App extends BaseClass {
+class App extends AppBaseClass {
 
     /**
      * Creates App instance
