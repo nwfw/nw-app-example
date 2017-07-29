@@ -85,7 +85,6 @@ class App extends AppBaseClass {
             await this.loadSubFiles();
             await this.initializeSubFiles();
             this.initialized = true;
-            this.addUserMessage('Application initialized.', 'info', []);
         }
         return this;
     }
