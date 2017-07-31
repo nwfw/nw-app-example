@@ -150,10 +150,14 @@ class App extends AppBaseClass {
             for(let i=0; i<this.appSubFiles.length;i++){
                 let subFileData = this.appSubFiles[i];
                 if (subFileData && _.isObject(subFileData) && subFileData.name && subFileData.className && subFileData.file){
-                    this.log('Loading app sub file "{1}"', 'debug', [subFileData.file]);
-                    global[subFileData.className] = require(path.resolve(subFileData.file))[subFileData.className];
-                    this[subFileData.name] = new global[subFileData.className]();
-                    this.log('App sub file "{1}" loaded', 'debug', [subFileData.file]);
+                    try {
+                        this.log('Loading app sub file "{1}"', 'debug', [subFileData.file]);
+                        global[subFileData.className] = require(path.resolve(subFileData.file))[subFileData.className];
+                        this[subFileData.name] = new global[subFileData.className]();
+                        this.log('App sub file "{1}" loaded', 'debug', [subFileData.file]);
+                    } catch (ex) {
+                        this.log('Error loading app sub file "{1}" - "{2}"', 'error', [subFileData.file, ex.message]);
+                    }
                 }
             }
             this.log('Loading {1} app sub files', 'groupend', [subFileCount]);
@@ -173,9 +177,13 @@ class App extends AppBaseClass {
             for(let i=0; i<subFileCount;i++){
                 let subFileData = this.appSubFiles[i];
                 if (this[subFileData.name] && this[subFileData.name].initialize && _.isFunction(this[subFileData.name].initialize)){
-                    this.addUserMessage('Initializing app sub class "{1}"', 'debug', [subFileData.className], false, false);
-                    await this[subFileData.name].initialize();
-                    this.addUserMessage('App sub class "{1}" initialized.', 'debug', [subFileData.className], false, false);
+                    try {
+                        this.addUserMessage('Initializing app sub class "{1}"', 'debug', [subFileData.className], false, false);
+                        await this[subFileData.name].initialize();
+                        this.addUserMessage('App sub class "{1}" initialized.', 'debug', [subFileData.className], false, false);
+                    } catch (ex) {
+                        this.log('Error initializing app sub class "{1}" - "{2}"', 'error', [subFileData.className, ex.message]);
+                    }
                 }
             }
             this.log('Initializing {1} app sub classes', 'groupend', [subFileCount]);
@@ -195,9 +203,13 @@ class App extends AppBaseClass {
             for(let i=0; i<subFileCount;i++){
                 let subFileData = this.appSubFiles[i];
                 if (this[subFileData.name] && this[subFileData.name].finalize && _.isFunction(this[subFileData.name].finalize)){
-                    this.addUserMessage('Finalizing app sub class "{1}"...', 'debug', [subFileData.className], false, false);
-                    await this[subFileData.name].finalize();
-                    this.addUserMessage('App sub class "{1}" finalized.', 'debug', [subFileData.className], false, false);
+                    try {
+                        this.addUserMessage('Finalizing app sub class "{1}"...', 'debug', [subFileData.className], false, false);
+                        await this[subFileData.name].finalize();
+                        this.addUserMessage('App sub class "{1}" finalized.', 'debug', [subFileData.className], false, false);
+                    } catch (ex) {
+                        this.log('Error finalizing app sub class "{1}" - "{2}"', 'error', [subFileData.className, ex.message]);
+                    }
                 }
             }
             this.log('Finalizing app {1} sub classes', 'groupend', [subFileCount]);
@@ -217,9 +229,14 @@ class App extends AppBaseClass {
             for(let i=0; i<subFileCount;i++){
                 let subFileData = this.appSubFiles[i];
                 if (this[subFileData.name] && this[subFileData.name].shutdown && _.isFunction(this[subFileData.name].shutdown)){
-                    this.log('Shutting down app sub class "{1}"', 'debug', [subFileData.className]);
-                    await this[subFileData.name].shutdown();
-                    this.log('App sub class "{1}" shutdown complete', 'debug', [subFileData.className]);
+                    try {
+                        this.log('Shutting down app sub class "{1}"', 'debug', [subFileData.className]);
+                        await this[subFileData.name].shutdown();
+                        this.log('App sub class "{1}" shutdown complete', 'debug', [subFileData.className]);
+                    } catch (ex) {
+                        this.log('Error shutting down app sub class "{1}" - "{2}"', 'error', [subFileData.className, ex.message]);
+                    }
+
                 }
             }
             this.log('Shutting down {1} app sub classes', 'groupend', [subFileCount]);

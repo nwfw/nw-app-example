@@ -8,7 +8,7 @@
     "chromium-args": "--mixed-context",
     "_chromium-args": "--mixed-context --enable-logging=stderr",
     "window": {
-        "title": "Presenter",
+        "title": "Fe app",
         "position": "center",
         "icon": "app/images/tray-icon.png",
         "transparent": true,
