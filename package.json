@@ -23,7 +23,6 @@
         "lodash": "^4.17.4",
         "nw-skeleton": "git+ssh://git@bitbucket.org:jazziebgd/nw-skeleton.git",
         "nw-themes": "git+ssh://git@bitbucket.org:jazziebgd/nw-themes.git",
-        "nw-tessel-components": "git+ssh://git@bitbucket.org:jazziebgd/nw-tessel-components.git",
         "canvas-playground": "git+ssh://git@bitbucket.org:jazziebgd/canvas-playground.git",
         "nw-app-test": "git+ssh://git@bitbucket.org:jazziebgd/nw-app-test.git"
     },
@@ -46,7 +45,7 @@
     "license": "MIT",
     "homepage": "https://bitbucket.org/jazziebgd/nw-fe-skeleton#readme",
     "build": {
-        "nwVersion": "0.23.7",
+        "nwVersion": "0.24.0",
         "nwFlavor": "sdk",
         "win": {
             "productName": "Fe app",

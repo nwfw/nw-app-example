@@ -43,10 +43,6 @@ exports.config = {
         componentModules: {
             component: [
                 {
-                    moduleName: 'nw-tessel-components',
-                    parentComponent: 'app-window'
-                },
-                {
                     moduleName: 'canvas-playground',
                     parentComponent: 'app-window'
                 },
@@ -108,12 +104,6 @@ exports.config = {
                         {
                             label: 'app-test',
                             tooltip: 'App test',
-                            type: 'normal',
-                            method: 'app.setMainView',
-                        },
-                        {
-                            label: 'tessel-main',
-                            tooltip: 'Tessel main',
                             type: 'normal',
                             method: 'app.setMainView',
                         },
