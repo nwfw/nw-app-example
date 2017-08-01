@@ -200,7 +200,7 @@ exports.config = {
                                 shortcut: {
                                     key: '?',
                                     modifiers: {
-                                        // ctrl: true
+                                        alt: true
                                     }
                                 }
                             },
