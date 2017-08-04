@@ -7,13 +7,8 @@ exports.config = {
         appFile: './app/js/app',
         appSubFiles: [],
         mainComponent: 'app-main',
-        initCssFiles: [
-            '/app/css/config.css',
-        ],
-        cssFiles: [
-            '/app/css/fonts.css',
-            '/app/css/style.css'
-        ],
+        initCssFiles: [],
+        cssFiles: [],
         overrideCssFiles: [],
 
         initJsFiles: [],
@@ -35,6 +30,10 @@ exports.config = {
         },
         componentModules: {
             component: [
+                // {
+                //     moduleName: 'phoddit',
+                //     parentComponent: 'app-main'
+                // },
                 {
                     moduleName: 'canvas-playground',
                     parentComponent: 'app-main'
@@ -58,8 +57,8 @@ exports.config = {
         hasTrayIcon: true,
         trayData: {
             title: 'Fe app',
-            icon: 'app/images/tray-icon.png',
-            alticon: 'app/images/tray-icon-alternate.png',
+            icon: 'node_modules/nw-skeleton/app-wrapper/images/tray-icon.png',
+            alticon: 'node_modules/nw-skeleton/app-wrapper/images/tray-icon-alternate.png',
             menus: [
                 {
                     label: 'Edit configuration',

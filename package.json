@@ -10,7 +10,7 @@
     "window": {
         "title": "Fe app",
         "position": "center",
-        "icon": "app/images/tray-icon.png",
+        "icon": "node_modules/nw-skeleton/app-wrapper/images/tray-icon.png",
         "transparent": true,
         "show": false,
         "kiosk": false,

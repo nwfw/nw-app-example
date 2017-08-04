@@ -4,7 +4,8 @@ exports.appState = {
             subComponents: [
                 null,
                 'app-test',
-                'canvas-playground'
+                'canvas-playground',
+                // 'phoddit-main',
             ],
             currentComponent: null,
         },
