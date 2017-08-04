@@ -89,6 +89,19 @@ class App extends WrapperApp {
         return require(moduleName);
     }
 
+    /**
+     * Handler for menu item that sets subcomponent view
+     *
+     * @param {Object} menuItem Menuitem that triggered the handler
+     * @return {undefined}
+     */
+    setMainView (menuItem){
+        let componentName = menuItem && menuItem.label ? menuItem.label : false;
+        if (componentName){
+            appState.userData.mainData.currentComponent = componentName;
+        }
+    }
+
 }
 exports.App = App;
 
