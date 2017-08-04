@@ -1,0 +1,16 @@
+.subcomponent-info-modal .modal-dialog {
+    min-width: 75vw;
+}
+
+.subcomponent-info-modal li {
+    margin: 10px 5px;
+}
+
+.subcomponent-info-modal li div {
+    font-style: italic;
+    margin: 2px 0 0 10px;
+}
+
+.subcomponent-info-modal li li {
+    margin: 5px;
+}

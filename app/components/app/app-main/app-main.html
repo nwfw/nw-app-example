@@ -1,0 +1,31 @@
+<div class="main">
+    <transition name="height">
+        <div v-show="!currentComponent" class="main-welcome">
+            <h1>
+                Welcome to nw-fe-app
+            </h1>
+            <p class="paragraph">
+                This is app-main component from fe-app that overrides default one from nw-skeleton.
+                It demonstrates some of the functionalities with additional components and themes loaded as modules as well as config/state overrides.
+            </p>
+        </div>
+    </transition>
+    <div class="main-component-picker" :class="{'has-component': currentComponent}">
+        <label>Pick sub-component to load it below: </label>
+        <select v-model="currentComponent">
+            <option v-for="subComponent in subComponents" :value="subComponent" v-html="subComponent ? subComponent : 'none'"></option>
+        </select>
+        &nbsp; <a :title="'Sub components info'" class="sub-component-info-link fa fa-info-circle" @click.prevent="showInfo"></a>
+        &nbsp;
+        <transition name="fade">
+            <a v-if="currentComponent" :title="'Reset'" class="sub-component-reset-link fa fa-undo" @click.prevent="resetAll"></a>
+        </transition>
+    </div>
+    <transition name="fade">
+        <div class="main-subcomponent-wrapper" v-if="currentComponent">
+            <transition name="fade">
+                <component v-bind:is="currentComponent" ref="appMainSubComponent"></component>
+            </transition>
+        </div>
+    </transition>
+</div>

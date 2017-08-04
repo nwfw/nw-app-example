@@ -1,0 +1,26 @@
+.main-welcome {
+    padding: 10px;
+    max-height: 120px;
+    min-height: 100px;
+}
+
+.main-welcome h1 {
+    text-align: center;
+}
+
+.main-component-picker {
+    padding: 10px;
+    text-align: center;
+    transition-property: border, margin-bottom;
+    transition-timing-function: ease-in-out;
+    transition-duration: var(--medium-animation-duration);
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid #CCCCCC;
+    margin-bottom: none;
+}
+
+.main-component-picker.has-component {
+    border-bottom: 1px solid #CCCCCC;
+    border-top: 1px solid transparent;
+    margin-bottom: 5px;
+}

@@ -3,10 +3,8 @@ exports.config = {
         name: 'Fe app',
         description: 'fe app',
     },
-    wrapper: {
-        appFile: './app/js/app'
-    },
     appConfig: {
+        appFile: './app/js/app',
         appSubFiles: [],
         mainComponent: 'app-main',
         initCssFiles: [
@@ -24,12 +22,7 @@ exports.config = {
         debugCssFiles: [],
         debugJsFiles: [],
 
-        componentMapping: {
-            'app-window': {
-                name: 'app-window',
-                components: {}
-            }
-        },
+        componentMapping: {},
 
         mixinRoot: './app/js/mixin/',
         mixinExtensionRegex: /\.js$/,
@@ -44,18 +37,17 @@ exports.config = {
             component: [
                 {
                     moduleName: 'canvas-playground',
-                    parentComponent: 'app-window'
+                    parentComponent: 'app-main'
                 },
                 {
                     moduleName: 'nw-app-test',
-                    parentComponent: 'app-window'
+                    parentComponent: 'app-main'
                 }
             ],
             globalComponent: [],
             modalComponent: [
                 {
-                    moduleName: 'nw-app-test',
-                    parentComponent: 'app-window'
+                    moduleName: 'nw-app-test'
                 }
             ]
         },
@@ -87,32 +79,6 @@ exports.config = {
                             type: 'normal',
                             method: 'helpers.userMessageHelper.openUserMessageConfigEditor',
                         }
-                    ]
-                },
-                {
-                    label: 'Main view',
-                    tooltip: 'Main view',
-                    type: 'normal',
-                    method: 'noop',
-                    children: [
-                        {
-                            label: 'app-main',
-                            tooltip: 'App main',
-                            type: 'normal',
-                            method: 'app.setMainView',
-                        },
-                        {
-                            label: 'app-test',
-                            tooltip: 'App test',
-                            type: 'normal',
-                            method: 'app.setMainView',
-                        },
-                        {
-                            label: 'canvas-playground',
-                            tooltip: 'Canvas playground',
-                            type: 'normal',
-                            method: 'app.setMainView',
-                        },
                     ]
                 },
                 {

@@ -8,7 +8,7 @@
 const path = require('path');
 
 var _appWrapper = window.getAppWrapper();
-var appState = _appWrapper.getAppState();
+// var appState = _appWrapper.getAppState();
 
 /**
  * App methods mixin
@@ -144,17 +144,6 @@ var MixinAppMethods  = {
          */
         basename: function(file){
             return path.basename(file);
-        },
-
-        /**
-         * Checks whether debug is on and returns value accordingly
-         *
-         * @method
-         * @memberOf mixins.appMethods
-         * @return {Boolean} True if debug is on, false otherwise
-         */
-        isDebugOn: function(){
-            return appState.debug;
         }
     }
 };

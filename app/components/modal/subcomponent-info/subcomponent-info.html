@@ -1,0 +1,36 @@
+<div class="paragraph">
+    <div>
+        Below is the list of available components with their descriptions.
+    </div>
+    <ul>
+        <li>
+            <strong>
+                <a class="select-component" @click.prevent="selectComponent">app-test</a>
+            </strong>
+            <ul>
+                <li>
+                    Component that is used for main functionailties testing.
+                </li>
+                <li>
+                    Automatically saves component data, when component gets rendered next time, previous values are applied.
+                </li>
+            </ul>
+        </li>
+        <li>
+            <strong>
+                <a class="select-component" @click.prevent="selectComponent">canvas-playground</a>
+            </strong>
+            <ul>
+                <li>
+                    Demo component using canvas HTML5 element.
+                </li>
+                <li>
+                    Automatically saves component data, when component gets rendered next time, previous values are applied.
+                </li>
+                <li>
+                    Async component - it is initialized and loaded on demand instead of being loaded on application startup like non-async components.
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
