@@ -54,14 +54,14 @@
             "copyright": "2017 Jazzie Web",
             "fileVersion": "1.0.0",
             "companyName": "Jazzie Web",
-            "icon": "app/images/tray-icon.png"
+            "icon": "node_modules/nw-skeleton/app-wrapper/images/tray-icon.png"
         },
         "mac": {
             "name": "Fe app",
             "version": "1.0.0",
             "description": "Fe app",
             "copyright": "2017 Jazzie Web",
-            "icon": "app/images/icon.icns"
+            "icon": "node_modules/nw-skeleton/app-wrapper/images/icon.icns"
         }
     },
     "nwjsBuilder": {
