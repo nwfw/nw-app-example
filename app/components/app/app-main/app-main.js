@@ -65,7 +65,7 @@ exports.component = {
             appState.userData.mainData = _.defaultsDeep(this.$data, appState.appData.mainData);
             let saved = await userDataHelper.saveUserData(appState.userData);
             if (saved && !noNotification){
-                _appWrapper.addUserMessage('User data saved.', 'info', []);
+                // _appWrapper.addUserMessage('User data saved.', 'info', []);
             }
         },
     },
