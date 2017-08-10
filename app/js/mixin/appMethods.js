@@ -42,11 +42,12 @@ var MixinAppMethods  = {
          * @param  {Number}  duration        Duration in milliseconds
          * @param  {Boolean} omitEmpty       Flag to indicate whether to omit empty values
          * @param  {Boolean} omitZeros       Flag to indicate whether to omit zeros in one-digit values
+         * @param  {(Boolean|Number)}   roundDecimals   Toggle (and set decimals) for value rounding (seconds only)
          * @param  {Boolean} secondFractions Flag to indicate whether to display second fractions
          * @return {string}                  Formatted duration
          */
-        formatDuration: function (duration, omitEmpty, omitZeros, secondFractions) {
-            return _appWrapper.getHelper('format').formatDuration(duration, omitEmpty, omitZeros, secondFractions);
+        formatDuration: function (duration, omitEmpty, omitZeros, roundDecimals, secondFractions) {
+            return _appWrapper.getHelper('format').formatDuration(duration, omitEmpty, omitZeros, roundDecimals, secondFractions);
         },
 
         /**
