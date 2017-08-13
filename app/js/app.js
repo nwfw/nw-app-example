@@ -40,7 +40,10 @@ class App extends WrapperApp {
 
         _appWrapper = window.getAppWrapper();
         appState = _appWrapper.getAppState();
-        _appWrapper.noop(appState);
+        this.boundMethods = {
+            windowBlur: null,
+            windowFocus: null
+        };
     }
 
     /**
@@ -79,6 +82,20 @@ class App extends WrapperApp {
         return result;
     }
 
+    addEventListeners () {
+        if (!appState.isDebugWindow){
+            _appWrapper.on('window:blur', this.boundMethods.windowBlur);
+            _appWrapper.on('window:focus', this.boundMethods.windowFocus);
+        }
+    }
+
+    removeEventListeners () {
+        if (!appState.isDebugWindow){
+            _appWrapper.removeListener('window:blur', this.boundMethods.windowBlur);
+            _appWrapper.removeListener('window:focus', this.boundMethods.windowFocus);
+        }
+    }
+
     /**
      * Local require for loading app modules from appWrapper
      *
@@ -99,6 +116,28 @@ class App extends WrapperApp {
         let componentName = menuItem && menuItem.label ? menuItem.label : false;
         if (componentName){
             appState.userData.mainData.currentComponent = componentName;
+        }
+    }
+
+    /**
+     * Handler for window focus event
+     *
+     * @return {undefined}
+     */
+    windowFocus () {
+        if (this.initialized){
+            _appWrapper.asyncMessage({instruction: 'updateMenuItem', data: {type: 'tray', menuItemIndex: '0', menuItemUpdates: {enabled: false}}});
+        }
+    }
+
+    /**
+     * Handler for window blur event
+     *
+     * @return {undefined}
+     */
+    windowBlur () {
+        if (this.initialized){
+            _appWrapper.asyncMessage({instruction: 'updateMenuItem', data: {type: 'tray', menuItemIndex: '0', menuItemUpdates: {enabled: true}}});
         }
     }
 

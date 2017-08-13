@@ -34,7 +34,7 @@
         "start": "nwkill.sh && nwjs .",
         "link": "npm link nw-skeleton nw-themes nw-app-test nw-tessel-components canvas-playground",
         "dev": "nwkill.sh && nwjs --load-extension=/Users/dino/prg/node/vue-devtools-3.1.0/shells/chrome .",
-        "doc": "rm -rf doc && jsdoc -c jsDocConfig.js",
+        "doc": "rm -rf doc && jsdoc --pedantic -c jsDocConfig.js",
         "dist": "build --tasks mac-x64 --mirror https://dl.nwjs.io/ ."
     },
     "repository": {

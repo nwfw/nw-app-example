@@ -61,6 +61,13 @@ exports.config = {
             alticon: 'node_modules/nw-skeleton/app-wrapper/images/tray-icon-alternate.png',
             menus: [
                 {
+                    label: 'Show window',
+                    tooltip: 'Show window',
+                    type: 'normal',
+                    method: 'windowManager.focusWindow',
+                    children: []
+                },
+                {
                     label: 'Edit configuration',
                     tooltip: 'Edit configuration',
                     type: 'normal',
@@ -109,45 +116,6 @@ exports.config = {
                         method: 'noop'
                     },
                     children: [
-                        {
-                            menuItem: {
-                                label: 'New',
-                                method: 'noop',
-                                shortcut: {
-                                    key: 'n',
-                                    modifiers: {
-                                        ctrl: true
-                                    }
-                                }
-                            },
-                            children: []
-                        },
-                        {
-                            menuItem: {
-                                label: 'Open',
-                                method: 'noop',
-                                shortcut: {
-                                    key: 'o',
-                                    modifiers: {
-                                        ctrl: true
-                                    }
-                                }
-                            },
-                            children: []
-                        },
-                        {
-                            menuItem: {
-                                label: 'Edit',
-                                method: 'noop',
-                                shortcut: {
-                                    key: 'e',
-                                    modifiers: {
-                                        ctrl: true
-                                    }
-                                }
-                            },
-                            children: []
-                        },
                         {
                             menuItem: {
                                 label: 'About app',
