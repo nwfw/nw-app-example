@@ -21,10 +21,10 @@
     },
     "dependencies": {
         "lodash": "^4.17.4",
-        "nw-skeleton": "^1.2.2",
-        "nw-themes": "^1.1.1",
-        "nw-canvas-playground": "^1.1.1",
-        "nw-app-test": "^1.1.1"
+        "nw-skeleton": "^1.2.3",
+        "nw-themes": "^1.1.2",
+        "nw-canvas-playground": "^1.1.2",
+        "nw-app-test": "^1.1.2"
     },
     "devDependencies": {
         "nwjs-builder-phoenix": "^1.14.3"
@@ -39,11 +39,11 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+ssh://git@github.com/jazziebgd/nw-app-example.git"
+        "url": "git+ssh://git@github.com/nwfw/nw-app-example.git"
     },
     "author": "Dino Ivankov <dinoivankov@gmail.com>",
     "license": "MIT",
-    "homepage": "https://github.com/jazziebgd/nw-app-example",
+    "homepage": "https://github.com/nwfw/nw-app-example",
     "build": {
         "nwVersion": "0.24.0",
         "nwFlavor": "sdk",
