@@ -30,12 +30,8 @@ exports.config = {
         },
         componentModules: {
             component: [
-                // {
-                //     moduleName: 'phoddit',
-                //     parentComponent: 'app-main'
-                // },
                 {
-                    moduleName: 'canvas-playground',
+                    moduleName: 'nw-canvas-playground',
                     parentComponent: 'app-main'
                 },
                 {

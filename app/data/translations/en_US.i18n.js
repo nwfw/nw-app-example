@@ -198,6 +198,10 @@ exports.data = {
         'notification': 'notification',
         'notifications': 'notifications',
         'seconds': 'seconds',
-        'visible messages out of': 'visible messages out of'
+        'visible messages out of': 'visible messages out of',
+        'Show window': '--Show window--',
+        'See messages info': '--See messages info--',
+        'See async messages info': '--See async messages info--',
+        'Show performance data': '--Show performance data--'
     }
 };

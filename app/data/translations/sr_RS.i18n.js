@@ -198,6 +198,10 @@ exports.data = {
         'notification': 'obaveštenje',
         'notifications': 'obaveštenja',
         'seconds': 'sekunde',
-        'visible messages out of': 'Vidljivih poruka od'
+        'visible messages out of': 'Vidljivih poruka od',
+        'Show window': '--Show window--',
+        'See messages info': '--See messages info--',
+        'See async messages info': '--See async messages info--',
+        'Show performance data': '--Show performance data--'
     }
 };
