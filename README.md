@@ -37,6 +37,8 @@ Each component has its own storage and config namespace. Also, __app-main__ comp
  - Execute `npm install`
  - Run with `nw .` (Mac/Linux) or `nw.exe .` (Windows)
 
+For more info, help and howto refer to [nw-skeleton wiki](https://github.com/nwfw/nw-skeleton/wiki "nw-skeleton wiki")
+
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Features ##
@@ -82,15 +84,17 @@ Each component has its own storage and config namespace. Also, __app-main__ comp
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Documentation ##
-To generate documentation, run `npm run doc` in application directory which will generate documentation in './doc'
+You can see online generated documentation for nw-skeleton framework [here](https://nwfw.github.io/nw-skeleton-documentation/ "nw-skeleton documentation") and online generated documentation for nw-app-example [here](https://nwfw.github.io/nw-app-example-documentation/ "nw-app-example documentation")
+
+To generate documentation locally, run `npm run doc` in application directory which will generate documentation in './doc'
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Components ##
 Vue.js components are organized in directories:
-  * global - for global components
-  * app - for "regular" components
-  * modal - for modal-dialog components
+  * __global__ - for global components
+  * __app__ - for "regular" components
+  * __modal__ - for modal-dialog components (those will also be registered as global)
 
 <div align="center">
 
@@ -131,9 +135,9 @@ Clipboard helper makes it easy to cut/copy/paste text without having to rely on 
 
 ## Base classes ##
 Base classes (all system objects extend them) contain all necessary methods and properties for easy coding such as translations, easy helper access, logging and notifying user whether through application or desktop notifications (enabled in nwjs.io by default). There are three of them:
-  * BaseClass - main base class that contains common methods for extended classes. This one should not be extended directly, instead one of the classes below are used when creating new classes.
-  * AppBaseClass - base class for application classes (i.e. ones that run in node/browser context)
-  * MainBaseClass - base class for main script classes (i.e. ones that run in main nwjs.io script context)
+  * [BaseClass](https://nwfw.github.io/nw-skeleton-documentation/appWrapper.BaseClass.html "BaseClass") - main base class that contains common methods for extended classes. This one should not be extended directly, instead one of the classes below are used when creating new classes.
+  * [AppBaseClass](https://nwfw.github.io/nw-skeleton-documentation/appWrapper.AppBaseClass.html "AppBaseClass") - base class for application classes (i.e. ones that run in node/browser context)
+  * [MainBaseClass](https://nwfw.github.io/nw-skeleton-documentation/mainScript.MainBaseClass.html "MainBaseClass") - base class for main script classes (i.e. ones that run in main nwjs.io script context)
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
@@ -209,11 +213,11 @@ Easily extendable and highly [configurable](#configuration), modal dialog compon
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Configuration ##
-Almost all application aspects can be controlled through configuration. Configuration variables are explained in [JSDoc documentation](#documentation).
-Example configuration file looks like:
+Almost all application aspects can be controlled through configuration. Configuration variables are explained in [JSDoc documentation](https://nwfw.github.io/nw-skeleton-documentation/global.html#AppWrapperConfig).
+Default configuration file looks like:
 ```javascript
 {
-    main : {
+    main: {
         debug: {
             enabled: true,
             debugToWindow: false,
@@ -225,7 +229,7 @@ Example configuration file looks like:
             debugLogFilename: './app/var/log/main-debug.log',
         },
     },
-    wrapper : {
+    wrapper: {
         appFile: './node_modules/nw-skeleton/app-wrapper/js/app',
 
         themeBaseDir: './node_modules/nw-skeleton/app-wrapper/css/themes',
@@ -253,7 +257,7 @@ Example configuration file looks like:
         translationsRoot: './app/data/translations/',
 
         componentMapping: {
-            'app-window' : {
+            'app-window': {
                 name: 'app-window',
                 components: {
                     'app-header': {
@@ -731,7 +735,7 @@ Example configuration file looks like:
 };
 ```
 
-Configuration is easily extendable and you can control which configuration values will be saved in localStorage and which ones won't.
+Configuration values can be easily changed by overriding them your app `config.js` file.
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
