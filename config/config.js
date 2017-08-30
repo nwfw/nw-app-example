@@ -186,8 +186,8 @@ exports.config = {
 
     appInstanceConfig: {},
 
-    currentLanguage: 'sr_RS',
-    currentLocale: 'sr-rs',
+    currentLanguage: 'sr-Latn-RS',
+    currentLocale: 'sr-Latn',
     allowLanguageChange: true,
     autoAddLabels: true,
 

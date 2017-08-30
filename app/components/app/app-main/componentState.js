@@ -5,7 +5,6 @@ exports.appState = {
                 null,
                 'app-test',
                 'canvas-playground',
-                // 'phoddit-main',
             ],
             currentComponent: null,
         },
