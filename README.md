@@ -1,4 +1,5 @@
 # nw-app-example #
+
 Example app for node-webkit (nwjs) framework [nwfw/nw-skeleton](https://github.com/nwfw/nw-skeleton "nw-skeleton")
 
 <table width="100%" align="center" border="0">
@@ -24,66 +25,72 @@ Example app for node-webkit (nwjs) framework [nwfw/nw-skeleton](https://github.c
 </table>
 
 ## Basic info ##
+
 This example application shows some of core framework functionalities such as local component overrides and components and/or themes as modules. It relies on themes from [nw-themes](https://github.com/nwfw/nw-themes "nw-themes") module. It has two 'main' components:
-  * [nw-app-test](https://github.com/nwfw/nw-app-test "nw-app-test") - A test component that allows you to experiment with built-in framework functionailties
-  * [nw-canvas-playground](https://github.com/nwfw/nw-canvas-playground "nw-canvas-playground") - An example _async_ component that renders a drawing in `<canvas>` HTML element and allows you to play around with it.
+
+* [nw-app-test](https://github.com/nwfw/nw-app-test "nw-app-test") - A test component that allows you to experiment with built-in framework functionailties
+* [nw-canvas-playground](https://github.com/nwfw/nw-canvas-playground "nw-canvas-playground") - An example _async_ component that renders a drawing in `<canvas>` HTML element and allows you to play around with it.
+
 Each component has its own storage and config namespace. Also, __app-main__ component from nw-skeleton is overriden here so it shows interface to pick between __nw-app-test__ and __nw-canvas-playground__ components.
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Usage ##
- - Install [git](https://git-scm.com/downloads "git"), [node.js](https://nodejs.org/en/download/ "node.js") and [nwjs.io](https://nwjs.io/downloads/ "nwjs.io") if you don't have those already installed
- - Clone [this repository](https://github.com/nwfw/nw-app-example "nw-app-example") - `git clone https://github.com/nwfw/nw-app-example.git`
- - Execute `npm install`
- - Run with `nw .` (Mac/Linux) or `nw.exe .` (Windows)
+
+* Install [git](https://git-scm.com/downloads "git"), [node.js](https://nodejs.org/en/download/ "node.js") and [nwjs.io](https://nwjs.io/downloads/ "nwjs.io") if you don't have those already installed
+* Clone [this repository](https://github.com/nwfw/nw-app-example "nw-app-example") - `git clone https://github.com/nwfw/nw-app-example.git`
+* Execute `npm install`
+* Run with `nw .` (Mac/Linux) or `nw.exe .` (Windows)
 
 For more info, help and howto refer to [nw-skeleton wiki](https://github.com/nwfw/nw-skeleton/wiki "nw-skeleton wiki")
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Features ##
-  * Main framework features:
-    * I18N (internationalization) with integrated translating and language editing system
-    * Mac/windows/linux support
-    * Transparent / frameless window support
-    * Integrated, overridable window controls and menus
-    * [Configurable](#configuration) keyboard shortcuts
-    * Desktop notifications
-    * Application notifications
-    * Cancellable application operations functionality with optional progress bar indicator
-    * [Configurable](#configuration) application tray icon and menus
-    * [Configurable](#configuration) application (window) menus
-    * User data saving in localStorage
-    * Persistent window position/width/height between sessions
-    * Custom icons/app info with [nwjs-builder-phoenix](https://github.com/evshiron/nwjs-builder-phoenix "nwjs-builder-phoenix") or nwjs building tool of your choice
-  * Frontend (UI) features:
-    * Built-in modal dialog functionality with callbacks
-    * Frontend application and Vue components structure completely [configurable](#configuration) through [config file](#configuration) with components-as-modules option and async component support.
-    * All framework Vue components can be overriden simply by creating dirs/files with same names in applications that use the framework.
-    * Support for [configurable](#configuration) Vue.js mixins, filters, directives etc.
-    * Theme support with live theme switching and optional themes as node modules
-    * [Configurable](#configuration) external css/js resource loading
-    * Optional separate debug window for maximum readability
-  * Other framework features:
-    * __ES2016__ ready (async/await, arrow functions, classes etc.)
-    * Most styles can be changed through CSS variables
-    * Optional CSS compiling (postcss)
-    * Optional live CSS reloading when debug is on
-    * Logging:
-      * Debug messages (with stack traces, [configurable](#configuration) message levels and grouping in console)
-      * Per-class [configurable](#configuration) debug output
-      * User messages  (with stack traces and [configurable](#configuration) message levels)
-      * Per-class [configurable](#configuration) user message output
-      * Exporting debug/user messages to JSON files for later analysis
-      * Log viewer for saved user/debug logs
-  * Planned framework features for the future:
-    * [ ] Remote (binary and non-binary) js loading
-    * [ ] Automatic updates
-    * [ ] [Configurable](#configuration) command-line parameters
+
+* Main framework features:
+  * I18N (internationalization) with integrated translating and language editing system
+  * Mac/windows/linux support
+  * Transparent / frameless window support
+  * Integrated, overridable window controls and menus
+  * [Configurable](#configuration) keyboard shortcuts
+  * Desktop notifications
+  * Application notifications
+  * Cancellable application operations functionality with optional progress bar indicator
+  * [Configurable](#configuration) application tray icon and menus
+  * [Configurable](#configuration) application (window) menus
+  * User data saving in localStorage
+  * Persistent window position/width/height between sessions
+  * Custom icons/app info with [nwjs-builder-phoenix](https://github.com/evshiron/nwjs-builder-phoenix "nwjs-builder-phoenix") or nwjs building tool of your choice
+* Frontend (UI) features:
+  * Built-in modal dialog functionality with callbacks
+  * Frontend application and Vue components structure completely [configurable](#configuration) through [config file](#configuration) with components-as-modules option and async component support.
+  * All framework Vue components can be overriden simply by creating dirs/files with same names in applications that use the framework.
+  * Support for [configurable](#configuration) Vue.js mixins, filters, directives etc.
+  * Theme support with live theme switching and optional themes as node modules
+  * [Configurable](#configuration) external css/js resource loading
+  * Optional separate debug window for maximum readability
+* Other framework features:
+  * __ES2016__ ready (async/await, arrow functions, classes etc.)
+  * Most styles can be changed through CSS variables
+  * Optional CSS compiling (postcss)
+  * Optional live CSS reloading when debug is on
+  * Logging:
+    * Debug messages (with stack traces, [configurable](#configuration) message levels and grouping in console)
+    * Per-class [configurable](#configuration) debug output
+    * User messages  (with stack traces and [configurable](#configuration) message levels)
+    * Per-class [configurable](#configuration) user message output
+    * Exporting debug/user messages to JSON files for later analysis
+    * Log viewer for saved user/debug logs
+* Planned framework features for the future:
+  * [ ] Remote (binary and non-binary) js loading
+  * [ ] Automatic updates
+  * [ ] [Configurable](#configuration) command-line parameters
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Documentation ##
+
 You can see online generated documentation for nw-skeleton framework [here](https://nwfw.github.io/nw-skeleton-documentation/ "nw-skeleton documentation") and online generated documentation for nw-app-example [here](https://nwfw.github.io/nw-app-example-documentation/ "nw-app-example documentation")
 
 To generate documentation locally, run `npm run doc` in application directory which will generate documentation in './doc'
@@ -91,10 +98,12 @@ To generate documentation locally, run `npm run doc` in application directory wh
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Components ##
+
 Vue.js components are organized in directories:
-  * __global__ - for global components
-  * __app__ - for "regular" components
-  * __modal__ - for modal-dialog components (those will also be registered as global)
+
+* __global__ - for global components
+* __app__ - for "regular" components
+* __modal__ - for modal-dialog components (those will also be registered as global)
 
 <div align="center">
 
@@ -109,54 +118,65 @@ Components can also be loaded as external npm modules. Each component can have i
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## App state ##
+
 All data for the app is stored under single appState object so components and other code can easily share data. Separate file for application data is provided since that data structure varies from app to app.
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## App data ##
+
 Stored in separate file, this object is to be used as temporary current app instance storage.
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## User data ##
+
 This object can easily be saved or loaded via localStorage helper in order to preserve data for next sessions
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Mixed context ##
+
 Using nwjs.io mixed node/browser context, you can easily work with filesystem, network, websockets or DOM from single Vue component or javascript class.
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Clipboard ##
+
 Clipboard helper makes it easy to cut/copy/paste text without having to rely on OS support - works same on all platforms (Win, Mac, Linux)
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Base classes ##
+
 Base classes (all system objects extend them) contain all necessary methods and properties for easy coding such as translations, easy helper access, logging and notifying user whether through application or desktop notifications (enabled in nwjs.io by default). There are three of them:
-  * [BaseClass](https://nwfw.github.io/nw-skeleton-documentation/appWrapper.BaseClass.html "BaseClass") - main base class that contains common methods for extended classes. This one should not be extended directly, instead one of the classes below are used when creating new classes.
-  * [AppBaseClass](https://nwfw.github.io/nw-skeleton-documentation/appWrapper.AppBaseClass.html "AppBaseClass") - base class for application classes (i.e. ones that run in node/browser context)
-  * [MainBaseClass](https://nwfw.github.io/nw-skeleton-documentation/mainScript.MainBaseClass.html "MainBaseClass") - base class for main script classes (i.e. ones that run in main nwjs.io script context)
+
+* [BaseClass](https://nwfw.github.io/nw-skeleton-documentation/appWrapper.BaseClass.html "BaseClass") - main base class that contains common methods for extended classes. This one should not be extended directly, instead one of the classes below are used when creating new classes.
+* [AppBaseClass](https://nwfw.github.io/nw-skeleton-documentation/appWrapper.AppBaseClass.html "AppBaseClass") - base class for application classes (i.e. ones that run in node/browser context)
+* [MainBaseClass](https://nwfw.github.io/nw-skeleton-documentation/mainScript.MainBaseClass.html "MainBaseClass") - base class for main script classes (i.e. ones that run in main nwjs.io script context)
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## CSS config files ##
+
 All themes as well as system itself contain config CSS files that declare CSS variables that can be used in all CSS files - changing appearance and UX is wasy as setting the CSS variable to desired value
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Easy extending ##
+
 Using configuration variable `appConfig.mainComponent`, you can easily configure what will be base view for your app. Since components themselves can extend configuration through their componentState file (or using separate config file for npm-module components) you can even override main component from component configuration itself.
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Internationalization ##
+
 Using simple JS objects for language definitions and internationalization, it is easy to adapt the app for all user needs. With auto-scan and auto-clear (auto-trim) functionality, adding new or removing unneeded translations and/or languages is easy and requires no coding or programming skills.
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Logging ##
+
 With [configurable](#configuration) message levels (defaults are debug, info, warning and error) debugging and filtering debug logs is easy. Logs can be saved in JSON format for later analysis, and each log message can contain stack trace for easier bug fixing.
 
 <div align="center">
@@ -172,18 +192,21 @@ Both user messages and debug logs can be configured to be automatically saved as
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Themes ##
+
 Each theme can contain config css file that overrides system css config. In addition, you can define your own css files that will be loaded beside system ones, override system css files set css file loading order etc. You can even set your own js files that will be included into application `<head>` tag if theme requires them.
 By setting a single flag `liveCss` in configuration file, you can enable live CSS reloading to make styling easier. Live CSS reload works with or without CSS compiling, but only when debug is enabled.
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Controlled initalization / shutdown ##
+
 Application will wait for certain flags in `appState` to be set before it presents its window to the user.
 Each of the main JS classes can have async `initialize` and `finalize` methods that will be called upon application initialization or finalization. In addition, they can also have async `shutdown` method that will be automatically called before application closes.
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Menus / Tray ##
+
 You can easily configure application menus using just [config file](#configuration) variables `hasAppMenu` and `menuData`.
 
 <div align="center">
@@ -213,8 +236,10 @@ Easily extendable and highly [configurable](#configuration), modal dialog compon
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Configuration ##
+
 Almost all application aspects can be controlled through configuration. Configuration variables are explained in [JSDoc documentation](https://nwfw.github.io/nw-skeleton-documentation/global.html#AppWrapperConfig).
 Default configuration file looks like:
+
 ```javascript
 {
     main: {
@@ -740,16 +765,18 @@ Configuration values can be easily changed by overriding them your app `config.j
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
 ## Resetting configuration and / or data ##
+
 There are three built-in command line parameters for cleaning up saved data:
-  - `resetConfig` - resets (deletes) saved configuration
-    - Command line
-      - `nw . resetConfig` (Mac/Linux)
-      - `nw.exe . resetConfig` (Windows)
-  - `resetData` - resets (deletes) saved user data
-    - Command line
-      - `nw . resetData` (Mac/Linux)
-      - `nw.exe . resetData` (Windows)
-  - `resetAll` - resets (deletes) both user data _and_ saved configuration
-    - Command line
-      - `nw . resetAll` (Mac/Linux)
-      - `nw.exe . resetAll` (Windows)
+
+* `resetConfig` - resets (deletes) saved Configuration
+  * Command line
+    * `nw . resetConfig` (Mac/Linux)
+    * `nw.exe . resetConfig` (Windows)
+* `resetData` - resets (deletes) saved user data
+  * Command line
+    * `nw . resetData` (Mac/Linux)
+    * `nw.exe . resetData` (Windows)
+* `resetAll` - resets (deletes) both user data _and_ saved configuration
+  * Command line
+    * `nw . resetAll` (Mac/Linux)
+    * `nw.exe . resetAll` (Windows)
