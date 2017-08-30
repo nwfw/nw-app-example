@@ -1,6 +1,6 @@
 {
     "name": "nw-app-example",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Example app for nw-skeleton framework",
     "mainTemplate": "node_modules/nw-skeleton/app-wrapper/template/index.html",
     "main": "",
