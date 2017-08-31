@@ -26,6 +26,8 @@ Example app for node-webkit (nwjs) framework [nwfw/nw-skeleton](https://github.c
 
 ## Basic info ##
 
+> __For more info, help and howto refer to [nw-skeleton wiki](https://github.com/nwfw/nw-skeleton/wiki "nw-skeleton wiki")__
+
 This example application shows some of core framework functionalities such as local component overrides and components and/or themes as modules. It relies on themes from [nw-themes](https://github.com/nwfw/nw-themes "nw-themes") module. It has two 'main' components:
 
 * [nw-app-test](https://github.com/nwfw/nw-app-test "nw-app-test") - A test component that allows you to experiment with built-in framework functionailties
@@ -41,8 +43,6 @@ Each component has its own storage and config namespace. Also, __app-main__ comp
 * Clone [this repository](https://github.com/nwfw/nw-app-example "nw-app-example") - `git clone https://github.com/nwfw/nw-app-example.git`
 * Execute `npm install`
 * Run with `nw .` (Mac/Linux) or `nw.exe .` (Windows)
-
-For more info, help and howto refer to [nw-skeleton wiki](https://github.com/nwfw/nw-skeleton/wiki "nw-skeleton wiki")
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 
