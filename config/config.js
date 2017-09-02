@@ -7,6 +7,16 @@ exports.config = {
         appFile: './app/js/app',
         appSubFiles: [],
         mainComponent: 'app-main',
+        tmpDataDir: './var/data',
+        logDir: './var/log',
+        dataDir: './data',
+        showInitializationStatus: true,
+        showInitializationProgress: true,
+
+        allowFullscreen: true,
+        hideFullscreenHeader: true,
+        hideFullscreenFooter: true,
+
         initCssFiles: [],
         cssFiles: [],
         overrideCssFiles: [],
@@ -184,12 +194,9 @@ exports.config = {
         ],
     },
 
-    appInstanceConfig: {},
-
+    currentLanguageNAME: 'Srpski',
     currentLanguage: 'sr-Latn-RS',
     currentLocale: 'sr-Latn',
-    allowLanguageChange: true,
-    autoAddLabels: true,
 
     configData: {
         vars: {
