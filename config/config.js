@@ -1,7 +1,7 @@
 exports.config = {
     appInfo: {
-        name: 'Fe app',
-        description: 'fe app',
+        name: 'NW app example',
+        description: 'NW app example',
     },
     appConfig: {
         appFile: './app/js/app',
@@ -62,7 +62,7 @@ exports.config = {
 
         hasTrayIcon: true,
         trayData: {
-            title: 'Fe app',
+            title: 'NW app example',
             icon: 'node_modules/nw-skeleton/app-wrapper/images/tray-icon.png',
             alticon: 'node_modules/nw-skeleton/app-wrapper/images/tray-icon-alternate.png',
             menus: [
