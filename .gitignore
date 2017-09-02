@@ -3,4 +3,5 @@
 /node_modules/*
 /app/var/*
 /var/*
+/dist/*
 !/app/var/README.MD
