@@ -1,7 +1,7 @@
 /**
  * @fileOverview subcomponent-info component state file
  * @author Dino Ivankov <dinoivankov@gmail.com>
- * @version 1.1.0
+ * @version 1.0.4
  * @memberOf components
  */
 

@@ -1,7 +1,7 @@
 /**
  * @fileOverview App class file
  * @author Dino Ivankov <dinoivankov@gmail.com>
- * @version 1.1.0
+ * @version 1.0.4
  */
 
 const WrapperApp = require('nw-skeleton').App;
