@@ -10,8 +10,8 @@ exports.config = {
         tmpDataDir: './var/data',
         logDir: './var/log',
         dataDir: './data',
-        showInitializationStatus: true,
-        showInitializationProgress: true,
+        showInitializationStatus: false,
+        showInitializationProgress: false,
 
         allowFullscreen: true,
         hideFullscreenHeader: true,

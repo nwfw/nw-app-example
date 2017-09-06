@@ -3,7 +3,12 @@ exports.data = {
     'code': 'sr-Cyrl-RS',
     'locale': 'sr-Cyrl',
     'translations': {
-        'Hide usage graphs': 'Сакриј графиконе',
+        'Duration: {1} seconds': 'Трајање: {1} секунди',
+        'Error finalizing app sub class "{1}" - "{2}"': 'Грешка у финализацији подкласе "{1}" - "{2}"',
+        'Error finalizing sub class': 'Грешка у финализацији подкласе',
+        'Error initializing app sub class "{1}" - "{2}"': 'Грешка у иницијализацији подкласе "{1}" - "{2}"',
+        'Error initializing sub class': 'Грешка у иницијализацији подкласе',
+        'Operation "{1}" completed.': 'Операција "{1}" завршена.',
         'Action prevented because modal is open': 'Акција спречена јер је модал отворен',
         'Additional data': 'Додатни подаци',
         'An unknown error occured.': 'Дошло је до грешке',
@@ -101,6 +106,7 @@ exports.data = {
         'Hide debug': 'Сакриј дебуг',
         'Hide dev tools': 'Сакриј дев алате',
         'Hide message call stacks': 'Сакриј call stack-ове за поруке',
+        'Hide usage graphs': 'Сакриј графиконе',
         'Hide user messages': 'Сакриј корисничке поруке',
         'Initialization time': 'Време иницијализације',
         'Initializing app sub class "{1}"': 'Иницијализација подкласа за апликацију "{1}"',
@@ -221,8 +227,6 @@ exports.data = {
         'notifications': 'обавештења',
         'second': 'секунда',
         'seconds': 'секунди',
-        'visible messages out of': 'Видљивих порука од',
-        'Duration: {1} seconds': '--Duration: {1} seconds--',
-        'Operation "{1}" completed.': '--Operation "{1}" completed.--'
+        'visible messages out of': 'Видљивих порука од'
     }
 };

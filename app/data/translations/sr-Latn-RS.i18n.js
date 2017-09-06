@@ -3,7 +3,12 @@ exports.data = {
     'code': 'sr-Latn-RS',
     'locale': 'sr-Latn',
     'translations': {
-        'Hide usage graphs': 'Sakrij grafikone',
+        'Duration: {1} seconds': 'Trajanje: {1} sekundi',
+        'Error finalizing app sub class "{1}" - "{2}"': 'Greška u finalizaciji podklase "{1}" - "{2}"',
+        'Error finalizing sub class': 'Greška u finalizaciji podklase',
+        'Error initializing app sub class "{1}" - "{2}"': 'Greška u inicijalizaciji podklase "{1}" - "{2}"',
+        'Error initializing sub class': 'Greška u inicijalizaciji podklase',
+        'Operation "{1}" completed.': 'Operacija "{1}" završena.',
         'Action prevented because modal is open': 'Akcija sprečena jer je modal otvoren',
         'Additional data': 'Dodatni podaci',
         'An unknown error occured.': 'Došlo je do greške',
@@ -101,6 +106,7 @@ exports.data = {
         'Hide debug': 'Sakrij debug',
         'Hide dev tools': 'Sakrij dev alate',
         'Hide message call stacks': 'Sakrij call stack-ove za poruke',
+        'Hide usage graphs': 'Sakrij grafikone',
         'Hide user messages': 'Sakrij korisničke poruke',
         'Initialization time': 'Vreme inicijalizacije',
         'Initializing app sub class "{1}"': 'Inicijalizacija podklasa za aplikaciju "{1}"',
@@ -221,8 +227,6 @@ exports.data = {
         'notifications': 'obaveštenja',
         'second': 'sekunda',
         'seconds': 'sekunde',
-        'visible messages out of': 'Vidljivih poruka od',
-        'Duration: {1} seconds': '--Duration: {1} seconds--',
-        'Operation "{1}" completed.': '--Operation "{1}" completed.--'
+        'visible messages out of': 'Vidljivih poruka od'
     }
 };

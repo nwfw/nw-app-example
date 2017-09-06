@@ -3,7 +3,12 @@ exports.data = {
     'code': 'en-US',
     'locale': 'en',
     'translations': {
-        'Hide usage graphs': 'Hide usage graphs',
+        'Duration: {1} seconds': 'Duration: {1} seconds',
+        'Error finalizing app sub class "{1}" - "{2}"': 'Error finalizing app sub class "{1}" - "{2}"',
+        'Error finalizing sub class': 'Error finalizing sub class',
+        'Error initializing app sub class "{1}" - "{2}"': 'Error initializing app sub class "{1}" - "{2}"',
+        'Error initializing sub class': 'Error initializing sub class',
+        'Operation "{1}" completed.': 'Operation "{1}" completed.',
         'Action prevented because modal is open': 'Action prevented because modal is open',
         'Additional data': 'Additional data',
         'An unknown error occured.': 'An unknown error occured.',
@@ -101,6 +106,7 @@ exports.data = {
         'Hide debug': 'Hide debug',
         'Hide dev tools': 'Hide dev tools',
         'Hide message call stacks': 'Hide message call stacks',
+        'Hide usage graphs': 'Hide usage graphs',
         'Hide user messages': 'Hide user messages',
         'Initialization time': 'Initialization time',
         'Initializing app sub class "{1}"': 'Initializing app sub class "{1}"',
@@ -221,8 +227,6 @@ exports.data = {
         'notifications': 'notifications',
         'second': 'second',
         'seconds': 'seconds',
-        'visible messages out of': 'visible messages out of',
-        'Duration: {1} seconds': '--Duration: {1} seconds--',
-        'Operation "{1}" completed.': '--Operation "{1}" completed.--'
+        'visible messages out of': 'visible messages out of'
     }
 };
