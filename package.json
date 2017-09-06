@@ -33,6 +33,7 @@
         "start": "nwjs .",
         "link": "npm link nw-skeleton nw-themes nw-app-test nw-canvas-playground",
         "dev": "nwkill.sh && nwjs .",
+        "vuedev": "nwkill.sh && nwjs . --load-extension=/Users/dino/prg/node/vue-devtools-3.0.8_0",
         "doc": "rm -rf doc && jsdoc --pedantic -c jsDocConfig.js",
         "dist": "(build --tasks mac-x64 --mirror https://dl.nwjs.io/ .) && cp config/config.js dist/",
         "dist-win": "build --tasks win-x64 --mirror https://dl.nwjs.io/ ."
