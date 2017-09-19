@@ -1,14 +1,19 @@
 {
     "name": "nw-app-example",
+    "product_string": "NW app example",
+    "domain": "",
     "version": "1.0.4",
     "description": "Example app for nw-skeleton framework",
-    "mainTemplate": "node_modules/nw-skeleton/app-wrapper/template/index.html",
     "main": "",
     "bg-script": "./node_modules/nw-skeleton/app-wrapper/js/main.js",
     "chromium-args": "--mixed-context",
     "_chromium-args": "--mixed-context --enable-logging=stderr",
+    "webkit": {
+        "double_tap_to_zoom_enabled": false,
+        "plugin": true
+    },
     "window": {
-        "title": "Nw example app",
+        "title": "NW example app",
         "position": "center",
         "icon": "node_modules/nw-skeleton/app-wrapper/images/tray-icon.png",
         "transparent": true,
@@ -16,8 +21,14 @@
         "kiosk": false,
         "frame": false,
         "fullscreen": false,
+        "resizable": true,
+        "show_in_taskbar": true,
+        "visible_on_all_workspaces": false,
+        "always_on_top": false,
         "width": 700,
-        "height": 400
+        "height": 400,
+        "min_width": 500,
+        "min_height": 300
     },
     "dependencies": {
         "lodash": "^4.17.4",
