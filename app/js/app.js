@@ -5,6 +5,7 @@
  */
 
 const WrapperApp = require('nw-skeleton').App;
+const _ = require('lodash');
 
 var _appWrapper;
 var appState;
@@ -109,13 +110,24 @@ class App extends WrapperApp {
     /**
      * Handler for menu item that sets subcomponent view
      *
-     * @param {Object} menuItem Menuitem that triggered the handler
+     * @param {(Object|String)} menuItem Menuitem that triggered the handler or string component name
      * @return {undefined}
      */
-    setMainView (menuItem){
-        let componentName = menuItem && menuItem.label ? menuItem.label : false;
+    setSubcomponent (menuItem){
+        let componentName;
+        if (menuItem){
+            if (_.isString(menuItem)){
+                componentName = menuItem;
+            } else if (_.isObject(menuItem) && menuItem.value){
+                componentName = menuItem.value;
+            }
+        }
         if (componentName){
-            appState.userData.mainData.currentComponent = componentName;
+            if (_.includes(this.getHelper('component').componentNames, componentName)){
+                appState.userData.mainData.currentComponent = componentName;
+            } else {
+                this.log('Can not set component "{1}", component name not recognized.', 'warning', [componentName]);
+            }
         }
     }
 

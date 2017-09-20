@@ -6,6 +6,14 @@ exports.config = {
     appConfig: {
         appFile: './app/js/app',
         appSubFiles: [],
+        commandParamsMap: [
+            {
+                name: '--component',
+                method: 'setSubcomponent',
+                value: true,
+                description: 'Sets component main view to parameter value'
+            }
+        ],
         mainComponent: 'app-main',
         tmpDataDir: './var/data',
         logDir: './var/log',
@@ -147,14 +155,14 @@ exports.config = {
                             children: [
                                 {
                                     menuItem: {
-                                        label: 'app-test',
-                                        method: 'app.setMainView'
+                                        label: 'App test',
+                                        method: 'app.setSubcomponent:app-test'
                                     },
                                 },
                                 {
                                     menuItem: {
-                                        label: 'canvas-playground',
-                                        method: 'app.setMainView'
+                                        label: 'Canvas playground',
+                                        method: 'app.setSubcomponent:canvas-playground'
                                     },
                                 }
                             ]
@@ -192,7 +200,7 @@ exports.config = {
         ],
     },
 
-    currentLanguageNAME: 'Srpski',
+    currentLanguageName: 'Srpski',
     currentLanguage: 'sr-Latn-RS',
     currentLocale: 'sr-Latn',
 
