@@ -59,6 +59,7 @@ Each component has its own storage and config namespace. Also, __app-main__ comp
   * Cancellable application operations functionality with optional progress bar indicator
   * [Configurable](#configuration) application tray icon and menus
   * [Configurable](#configuration) application (window) menus
+  * [Configurable](#configuration) command-line parameters
   * User data saving in localStorage
   * Persistent window position/width/height between sessions
   * Custom icons/app info with [nwjs-builder-phoenix](https://github.com/evshiron/nwjs-builder-phoenix "nwjs-builder-phoenix") or nwjs building tool of your choice
@@ -85,7 +86,6 @@ Each component has its own storage and config namespace. Also, __app-main__ comp
 * Planned framework features for the future:
   * [ ] Remote (binary and non-binary) js loading
   * [ ] Automatic updates
-  * [ ] [Configurable](#configuration) command-line parameters
 
 <div align="right"><a href="#nw-app-example">▲ top</a></div>
 

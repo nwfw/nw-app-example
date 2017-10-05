@@ -55,7 +55,11 @@ exports.config = {
                     parentComponent: 'app-main'
                 }
             ],
-            globalComponent: [],
+            globalComponent: [
+                {
+                    moduleName: 'nw-ui'
+                }
+            ],
             modalComponent: [
                 {
                     moduleName: 'nw-app-test'
