@@ -2,7 +2,7 @@
     "name": "nw-app-example",
     "product_string": "NW app example",
     "domain": "",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Example app for nw-skeleton framework",
     "main": "",
     "bg-script": "./node_modules/nw-skeleton/app-wrapper/js/main.js",
