@@ -32,11 +32,11 @@
     },
     "dependencies": {
         "lodash": "^4.17.4",
-        "nw-app-test": "^1.1.4",
+        "nw-app-test": "^1.1.5",
         "nw-canvas-playground": "^1.1.2",
-        "nw-skeleton": "^1.3.3",
+        "nw-skeleton": "^1.3.4",
         "nw-themes": "^1.1.3",
-        "nw-ui": "0.0.2"
+        "nw-ui": "0.1.0"
     },
     "devDependencies": {
         "nwjs-builder-phoenix": "^1.14.3"
